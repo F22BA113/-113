@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+ 
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易電卓</title>
+    <style>
+        #kigou {
+            width: 50px;
+        }
+        #poteto_c {
+            width: 15px;
+        }
+        #misomanju_c {
+            width: 15px;
+        }
+        #yakitori_c {
+            width: 15px;
+        }
+        #gyuukushi_c {
+            width: 15px;
+        }
+    </style>
+    <script>
+        //電卓
+        function pushuButton() {
+            //　左の数字 ↓文字列
+            let num1 = document.getElementById("num1").value;
+            //　左の数字を数値に変換
+            num1 = parseInt(num1, 10);
+
+            //　右の数字 ↓文字列
+            let num2 = document.getElementById("num2").value;
+            //　右の数字を数値に変換
+            num2 = parseInt(num2, 10);
+
+            // 記号を取得　(+ - / *)
+            let kigou = document.getElementById("kigou").value;
+
+            // 結果表示用
+            let result = 0;
+
+            switch(kigou) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    result = num1 / num2;
+                    break;
+                default:
+                    result = "ERROR"
+            }
+
+            // 結果の表示
+            document.getElementById("result").value = result;
+        }
+
+        var Result3 = 0; var Count1 = 0; var Count2 = 0; var Count3 = 0; var Count4 = 0;
+        //屋台
+        function pushuButton2(aObject) {
+            let id = aObject.id;
+            switch(id) {
+                case "poteto":
+                    Result3 += 200;
+                    Count1 += 1;
+                    document.getElementById("poteto_c").value = Count1;
+                    break;
+                case "misomanju":
+                    Result3 += 200;
+                    Count2 += 1;
+                    document.getElementById("misomanju_c").value = Count2;
+                    break;
+                case "yakitori":
+                    Result3 += 200;
+                    Count3 += 1;
+                    document.getElementById("yakitori_c").value = Count3;
+                    break;
+                case "gyuukushi":
+                    Result3 += 500;
+                    Count4 += 1;
+                    document.getElementById("gyuukushi_c").value = Count4;
+                    break;
+            }
+            document.getElementById("result3").value = Result3;
+
+        }
+        //リセットボタン
+        function reset1() {
+            var Result1 = ""; var kigou = ""; var Result3 = "";
+            document.getElementById("num1").value = Result1;
+            document.getElementById("kigou").value = kigou;
+            document.getElementById("num2").value = Result1;
+            document.getElementById("result").value = Result3;
+        }
+        function reset2() {
+            Result3 = 0; Count1 = 0; Count2 = 0; Count3 = 0; Count4 = 0;
+            document.getElementById("result3").value = Result3;
+            document.getElementById("poteto_c").value = Count1;
+            document.getElementById("misomanju_c").value = Count2;
+            document.getElementById("yakitori_c").value = Count3;
+            document.getElementById("gyuukushi_c").value = Count4;
+        }
+    </script>
+
+<body>
+    <h1>簡易計算電卓</h1>
+    <input id="num1" type="text" value="">
+    <input id="kigou" type="text" value="">
+    <input id="num2" type="text" value="">
+    <button onclick="pushuButton()">＝</button>
+    <input id="result" type="text">
+    <!--リセットボタン-->
+    <input id="reset" type="button" value="AC" onclick="reset1(this)">
+    <p>      　　　　　　　　　　　　記号</p>
+    <br>
+    <br>
+    <br>
+    <h1>お会計簡易計算 (屋台ver)</h1>
+    <input id = "poteto" type="button" value="ポテト" onclick="pushuButton2(this)">
+    <input id="poteto_c" type="text" value="0">
+    <input id = "misomanju" type="button" value="焼きまんじゅう" onclick="pushuButton2(this)">
+    <input id="misomanju_c" type="text" value="0">
+    <input id = "yakitori" type="button" value="焼き鳥" onclick="pushuButton2(this)">
+    <input id="yakitori_c" type="text" value="0">
+    <input id = "gyuukushi" type="button" value="牛串" onclick="pushuButton2(this)">
+    <input id="gyuukushi_c" type="text" value="0">
+    <br>
+    <p>合計金額</p>
+    <input id="result3" type="text" value="0">
+    <!--リセットボタン-->
+    <input id="reset" type="button" value="リセット" onclick="reset2(this)">
+
+    
+</body>
+
+</html>
