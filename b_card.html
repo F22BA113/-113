@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ビーンゴ</title>
+    <script>
+
+        function input_close() {
+            // 入力フォームを閉じる
+            var objID = document.getElementById('input_layer');
+            objID.style.display = 'none';
+            objID.className = 'cheack_close';
+            var name_value = document.getElementById('name_in').value;
+
+            // ビンゴカードを表示
+            objID = document.getElementById('bingo_layer');
+            objID.style.display = 'block';// blockを当てることで出力している
+            objID.className = 'cheack_open';
+            document.getElementById('name_out').value = name_value
+        }
+
+        // ビンゴカードに数を割り振る関数
+        function makebin() {
+
+            //1行目の配列を生成
+            bingo1 = [0, 0, 0, 0, 0];
+            var letu = 0;
+            var count = 0;
+
+            while (letu <= 4) {
+                while (bingo1[letu] == 0) {
+                    var random = Math.floor(Math.random() * 15 + 1);
+                    if (bingo1[0] != random & bingo1[1] != random & bingo1[2] != random & bingo1[3] != random & bingo1[4] != random) {
+                        bingo1[count] = random;
+                        count++;
+                    }
+                }
+                letu++;
+            }
+            // ボタンに値を格納
+            document.getElementById("00").value = bingo1[0];
+            document.getElementById("01").value = bingo1[1];
+            document.getElementById("02").value = bingo1[2];
+            document.getElementById("03").value = bingo1[3];
+            document.getElementById("04").value = bingo1[4];
+
+
+            //2行目の配列を生成
+            bingo2 = [0, 0, 0, 0, 0];
+            var letu = 0;
+            var count = 0;
+
+            while (letu <= 4) {
+                while (bingo2[letu] == 0) {
+                    var random = Math.floor(Math.random() * 15 + 16);
+                    if (bingo2[0] != random & bingo2[1] != random & bingo2[2] != random & bingo2[3] != random & bingo2[4] != random) {
+                        bingo2[count] = random;
+                        count++;
+                    }
+                }
+                letu++;
+            }
+            // ボタンに値を格納
+            document.getElementById("10").value = bingo2[0];
+            document.getElementById("11").value = bingo2[1];
+            document.getElementById("12").value = bingo2[2];
+            document.getElementById("13").value = bingo2[3];
+            document.getElementById("14").value = bingo2[4];
+
+
+            //3行目の配列を生成
+            bingo3 = [0, 0, 0, 0];
+            var letu = 0;
+            var count = 0;
+
+            while (letu <= 3) {
+                while (bingo3[letu] == 0) {
+                    var random = Math.floor(Math.random() * 15 + 31);
+                    if (bingo3[0] != random & bingo3[1] != random & bingo3[2] != random & bingo3[3] != random & bingo3[4] != random) {
+                        bingo3[count] = random;
+                        count++;
+                    }
+                }
+                letu++;
+            }
+            //ボタンに値を格納
+            document.getElementById("20").value = bingo3[0];
+            document.getElementById("21").value = bingo3[1];
+            document.getElementById("23").value = bingo3[2];
+            document.getElementById("24").value = bingo3[3];
+
+
+
+            //4行目の配列を生成
+            bingo4 = [0, 0, 0, 0, 0];
+            var letu = 0;
+            var count = 0;
+
+            while (letu <= 4) {
+                while (bingo4[letu] == 0) {
+                    var random = Math.floor(Math.random() * 15 + 46);
+                    if (bingo4[0] != random & bingo4[1] != random & bingo4[2] != random & bingo4[3] != random & bingo4[4] != random) {
+                        bingo4[count] = random;
+                        count++;
+                    }
+                }
+                letu++;
+            }
+            //ボタンに値を格納
+            document.getElementById("30").value = bingo4[0];
+            document.getElementById("31").value = bingo4[1];
+            document.getElementById("32").value = bingo4[2];
+            document.getElementById("33").value = bingo4[3];
+            document.getElementById("34").value = bingo4[4];
+
+
+
+            //5行目の配列を生成
+            bingo5 = [0, 0, 0, 0, 0];
+            var letu = 0;
+            var count = 0;
+
+            while (letu <= 4) {
+                while (bingo5[letu] == 0) {
+                    var random = Math.floor(Math.random() * 15 + 61);
+                    if (bingo5[0] != random & bingo5[1] != random & bingo5[2] != random & bingo5[3] != random & bingo5[4] != random) {
+                        bingo5[count] = random;
+                        count++;
+                    }
+                }
+                letu++;
+            }
+            //ボタンに値を格納
+            document.getElementById("40").value = bingo5[0];
+            document.getElementById("41").value = bingo5[1];
+            document.getElementById("42").value = bingo5[2];
+            document.getElementById("43").value = bingo5[3];
+            document.getElementById("44").value = bingo5[4];
+
+            /*要らなくなった
+            // CSSをリセット
+            document.getElementById("00").className = "c_in";
+            document.getElementById("01").className = "c_in";
+            document.getElementById("02").className = "c_in";
+            document.getElementById("03").className = "c_in";
+            document.getElementById("04").className = "c_in";
+            document.getElementById("10").className = "c_in";
+            document.getElementById("11").className = "c_in";
+            document.getElementById("12").className = "c_in";
+            document.getElementById("13").className = "c_in";
+            document.getElementById("14").className = "c_in";
+            document.getElementById("20").className = "c_in";
+            document.getElementById("21").className = "c_in";
+            document.getElementById("22").className = "mid_in";
+            document.getElementById("23").className = "c_in";
+            document.getElementById("24").className = "c_in";
+            document.getElementById("30").className = "c_in";
+            document.getElementById("31").className = "c_in";
+            document.getElementById("32").className = "c_in";
+            document.getElementById("33").className = "c_in";
+            document.getElementById("34").className = "c_in";
+            document.getElementById("40").className = "c_in";
+            document.getElementById("41").className = "c_in";
+            document.getElementById("42").className = "c_in";
+            document.getElementById("43").className = "c_in";
+            document.getElementById("44").className = "c_in";*/
+
+            //更新日時
+            var date = new Date();
+            document.getElementById("date_out").value = date.toLocaleString("ja");
+        }
+
+        // クリックされたボタンの情報を記憶するグローバル変数
+        var CLS; var ID;
+        // クリックされたら色が変わる関数
+        function change(aObject) {
+            // 引数に.idでIDが取れる
+            var id = aObject.id;
+            ID = aObject.id;
+
+            // 引数に.classNameでクラス名が取れる
+            var cls = aObject.className;
+
+            if (cls == "c_in") {
+                document.getElementById(id).className = "c_out";
+                CLS = "c_out";
+            }
+            else if (cls == "c_out") {
+                document.getElementById(id).className = "c_in";
+            }
+            else if (cls == "mid_in") {
+                document.getElementById(id).className = "mid_out";
+                CLS = "mid_out";
+            }
+
+
+            // ビンゴかどうかの判断をする関数を呼び出す
+            cheack_bingo(id);
+        }
+
+
+        // 確認レイヤー表示を表示する関数
+        function cheack_show() {
+            // chack_layerのＩＤを取得
+            var objID = document.getElementById('chack_layer');
+
+            // layerのクラス名がcheack_closeなら表示
+            if (objID.className == 'cheack_close') {
+                objID.style.display = 'block';// blockを当てることで出力している
+                objID.className = 'cheack_open';
+            } else {
+                cheack_close();
+            }
+        }
+
+
+        //　確認レイヤーを閉じる関数
+        function cheack_close() {
+            var objID = document.getElementById('chack_layer');
+
+            if (CLS == "c_out") {
+                document.getElementById(ID).className = "c_in";
+            }
+            else if (CLS == "mid_out") {
+                document.getElementById(ID).className = "mid_in";
+            }
+            objID.style.display = 'none';
+            objID.className = 'cheack_close';
+        }
+
+
+        // QRレイヤー表示を表示する関数
+        function qr_show() {
+            // 確認レイヤーを閉じる
+            var objID = document.getElementById('chack_layer');
+            objID.style.display = 'none';
+            objID.className = 'cheack_close';
+
+            // qr_layerとボタンのＩＤを取得
+            var objID = document.getElementById('qr_layer');
+
+            // layerのクラス名がcheack_closeなら表示
+            if (objID.className == 'qr_close') {
+                objID.style.display = 'block';// blockを当てることで出力している
+                objID.className = 'qr_open';
+            } else {
+                qr_close();
+            }
+        }
+
+        //　QRレイヤーを閉じる関数
+        function qr_close() {
+            var objID = document.getElementById('qr_layer');
+
+            objID.style.display = 'none';
+            objID.className = 'qr_close';
+        }
+
+
+        // ビンゴかどうかの判断をする関数
+        function cheack_bingo(aId) {
+            switch (aId) {
+                // 1行目
+                case "00":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
+                        document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
+                        cheack_show(); // レイヤー表示を表示する関数を呼び出す
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
+                        document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "01":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
+                        document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "02":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
+                        document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "03":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
+                        document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                        cheack_();
+                    }
+                    break;
+
+                case "04":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
+                        document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
+                        document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                // 2行目
+                case "10":
+                    if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
+                        document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
+                        document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "11":
+                    if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
+                        document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                        break;
+                    }
+                case "12":
+                    if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
+                        document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
+                        cheack_();
+                    }
+                    break;
+
+                case "13":
+                    if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
+                        document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "14":
+                    if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
+                        document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
+                        document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                // 3行目
+                case "20":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
+                        document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "21":
+                    if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
+                        cheack_show();
+                    }
+                case "22":
+                    if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "23":
+                    if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "24":
+                    if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
+                        document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                // 4行目
+                case "30":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
+                        document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "31":
+                    if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "32":
+                    if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "33":
+                    if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "34":
+                    if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
+                        document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                // 5行目
+                case "40":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
+                        document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
+                        document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "41":
+                    if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
+                        document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "42":
+                    if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
+                        document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "43":
+                    if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
+                        document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+
+                case "44":
+                    if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
+                        document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
+                        document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        cheack_show();
+                    }
+                    break;
+            }
+        }
+
+
+    </script>
+    <style>
+        /*入力フォームCSS*/
+        #input {
+            height: 805px;
+            width: 700px;
+            text-align: center;
+        }
+
+        .input_h1 {
+            font-size: 80px;
+            color: rgb(242, 241, 236);
+            text-align: center;
+
+        }
+
+        .input_h3 {
+            color: rgb(255, 255, 255);
+            text-align: center;
+        }
+
+        .input_h4 {
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .input_button {
+            width: 5px;
+        }
+
+        /*ビンゴカードCSS*/
+        table,
+        td,
+        th {
+            border: 1px solid #595959;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            padding: 3px;
+            width: 30px;
+            height: 25px;
+        }
+
+        th {
+            background: #f0e6cc;
+        }
+
+        .even {
+            background: #fbf8f0;
+        }
+
+        .odd {
+            background: #fefcf9;
+        }
+
+        /*ボタンCSS*/
+        .c_in {
+            color: #fff;
+            background-color: #eb6100;
+
+            border-radius: 50%;
+            line-height: 50px;
+            width: 50px;
+            height: 50px;
+            padding: 0;
+        }
+
+        .c_in:hover {
+            color: rgb(255, 255, 255);
+            background: #eb6100;
+        }
+
+        .c_in::shadow {
+            -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .c_out {
+            color: rgb(33, 33, 33);
+            background-color: #d3d3d3;
+
+            border-radius: 50%;
+            line-height: 50px;
+            width: 50px;
+            height: 50px;
+            padding: 0;
+        }
+
+        .mid_in {
+            color: #fff;
+            background-color: #eb6100;
+
+            border-radius: 50%;
+            line-height: 50px;
+            width: 50px;
+            height: 50px;
+            padding: 0;
+        }
+
+        c_mid .mid_in:hover {
+            color: #fff;
+            background: #f56500;
+        }
+
+        .mid_in::shadow {
+            -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .mid_out {
+            color: rgb(255, 255, 255);
+            background-color: #ffffff;
+
+            border-radius: 50%;
+            line-height: 50px;
+            width: 50px;
+            height: 50px;
+            padding: 0;
+        }
+
+        /*確認フォームCSS*/
+        #cheack {
+            height: 505px;
+            width: 500px;
+        }
+
+        .btn_next {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body onload="makebin()">
+
+    <!--レイヤー１　入力フォーム-->
+    <div id="input_layer" style="DISPLAY: block;POSITION:absolute;LEFT: 100px;TOP:40;" class="input_show">
+        <table id="input" border="1" bgcolor=#89b4fa cellspacing=0 cellpadding=4>
+            <tr>
+                <td>
+                    <h1 class="input_h1">B I N G O</h1>
+                    <h2 class="input_h2">ニックネームを入力してね！</h2>
+                    <!--枠の中に透かしで｛ニックネーム｝って入れたらかわいいかも-->
+                    <input id="name_in" type="text" value="ニックネーム">
+                    <input type="button" id="input_button" value="決定" onclick="input_close()">
+
+                    <h3 class="input_h3">※注意事項※</h3>
+                    <h4 class="input_h4">・ニックネームは投影される可能性があるよ！
+                        <br>・画面の更新はしないでね！
+                        <br>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!--透かし文字-->
+    <script type="text/javascript">
+        var textbox = document.getElementById('name_in');
+
+        // 入力フォーカスを得たときの処理
+        textbox.onfocus = function () {
+            if (this.value == this.defaultValue) {
+                this.value = '';
+                this.style.color = '';
+            }
+        }
+
+        // 入力フォーカスを失ったときの処理
+        textbox.onblur = function () {
+            if (this.value == '') {
+                this.value = this.defaultValue;
+                this.style.color = 'gray';
+            }
+        }
+
+        // 透かし文字をdefaultValueプロパティで保持する
+        textbox.defaultValue = textbox.value;
+        textbox.value = '';
+
+        textbox.onblur();
+        //-->
+    </script>
+
+    <!--レイヤー2　ビンゴカード-->
+
+    <div id="bingo_layer" style="DISPLAY: none;POSITION:absolute;LEFT:80;TOP:40;" class="bingo_close">
+        <table border="1" bgcolor="#f56500" cellspacing=0 cellpadding=4>
+
+            <input id="date_out" type="text"> <input id="name_out" type="text" style="text-align: right;">
+
+            <h1 style="text-align: center;">BINGO!</h1>
+            <tbody>
+                <tr height="100px" width="60px">
+                    <td><input id="00" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="10" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="20" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="30" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="40" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+
+                <tr height="100px" width="60px">
+                    <td><input id="01" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="11" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="21" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="31" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="41" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+                <tr height="100px" width="60px">
+                    <td><input id="02" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="12" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="22" class="mid_in" type="button" onclick="change(this)" value="☆"></td>
+                    <td><input id="32" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="42" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+                <tr height="100px" width="60px">
+                    <td><input id="03" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="13" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="23" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="33" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="43" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+                <tr height="100px" width="60px">
+                    <td><input id="04" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="14" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="24" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="34" class="c_in" type="button" onclick="change(this)"></td>
+                    <td><input id="44" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!--レイヤー3　確認フォーム-->
+
+
+    <div id="chack_layer" style="DISPLAY: none; POSITION:absolute;LEFT: 50px; TOP: 120px;" class="cheack_close">
+
+        <table id="cheack" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
+            <tr>
+                <td>
+                    <h2>BINGO!!<br>おめでとうございます！</h2>
+                    <p>
+                        　　　　　　　　　　　　　　　　QPコード生成はこちら→
+                        <input type="button" id="btn_next" value="次へ" class="" onclick="qr_show()">
+                        <br><br><br>
+                        <input type="button" id="btn_back" value="戻る" class="" onclick="cheack_show()">
+                        ←間違えてしまった場合はこちら
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</body>
