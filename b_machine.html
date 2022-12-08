@@ -24,47 +24,26 @@
         // タイマー関連
         var TimerId;
 
+        //Enterキーが押された時の処理
         function keypress_ivent(E) {
             if (E.code === 'Enter') {
-                //Enterキーが押された時の処理
 
                 // ボックスを表示して、タイマーを開始
                 document.getElementById("gif_layer").style.display = "block"; // ボックスを表示
-                TimerId = setTimeout( closeBox , 2000 ); // タイマーを開始
+                TimerId = setTimeout( closeGif , 2000 ); // タイマーを開始
                 //document.getElementById("btnShowBox").disabled = true; // 表示用ボタンを無効化
                 
-
-                //ビンゴマシーン
-                if (Number.length == 0) {
-                    // ???????????????????????
-                    document.getElementById("result").value = "終了";
-                }
-
-                /*var random = Math.floor(Math.random() * Number.length);
-                var result_id = String(Count);
-                //結果の値をを配列に格納
-                Bingo.push(Number[random]);
-                //テキストボックスに値を格納
-                document.getElementById("result").value = Number[random];
-                //結果の値のCSSを変更
-                document.getElementById(result_id).className = "c_out";
-                //結果の値を出力
-                document.getElementById(result_id).value = Number[random];
-                //出力された結果を配列から削除
-                Number.splice(random, 1);
-                // 格納するID番号を増やす
-                Count += 1;*/
             }
             return false;
         
         }
 
-        function closeBox() {
-                document.getElementById("gif_layer").style.display = "none"; // ボックスを消す
-                //clearTimeout( timerId ); // タイマーを終了
-                //document.getElementById("btnShowBox").disabled = false; // 表示用ボタンを有効化
-                //document.getElementById("btnKeepBox").disabled = false; // 維持用ボタンを有効化
+        // gifを閉じる時の処理
+        function closeGif() {
+                // ボックスを消す
+                document.getElementById("gif_layer").style.display = "none";
 
+                // 乱数表示
                 var random = Math.floor(Math.random() * Number.length);
                 var result_id = String(Count);
                 //結果の値をを配列に格納
@@ -80,7 +59,14 @@
                 // 格納するID番号を増やす
                 Count += 1;
 
-                clearTimeout( timerId ); // タイマーを終了
+                //ビンゴマシーン
+                if (Number.length == 0) {
+                    // ???????????????????????
+                    document.getElementById("result").value = "終了";
+                }
+
+                // タイマーを終了
+                clearTimeout( timerId );
             }
 
 
@@ -91,7 +77,7 @@
         table,
         td,
         /*th {
-            border: 1px solid #595959;
+            border: 1px solid #595959; テーブルの線
             border-collapse: collapse;
         }*/
 
@@ -277,7 +263,7 @@
         </tbody>
     </table>
 
-    <div id="gif_layer" style="DISPLAY: none;POSITION:absolute;LEFT: 1050px;TOP: 30px;" class="close">
+    <div id="gif_layer" style="DISPLAY: none;POSITION:absolute;LEFT: 1073px;TOP: 30px;" class="close">
         <table id="gif_table" border="1" bgcolor="#ffffff" cellspacing=0 cellpadding=4>
             <tr>
                 <td>
