@@ -967,8 +967,17 @@
         .btn_next {
             text-align: right;
         }
+        
 
         /*QRフォーム*/
+        #qr {
+            height: 605px;
+            width: 420px;
+            text-align: center;
+        }
+        .img-qr {
+            color: #fff;
+        }
         #td_qr {
             background-color: #fff;
         }
@@ -1032,7 +1041,7 @@
 
     <!--レイヤー2　ビンゴカード-->
 
-    <div id="bingo_layer" style="DISPLAY:none;POSITION:absolute;LEFT: 25px;TOP:0;" class="bingo_close">
+    <div id="bingo_layer" style="DISPLAY:none;POSITION:absolute;LEFT: 30px;TOP:0;" class="bingo_close">
         <table bgcolor="#ff8731">
 
             <input id="date_out" type="text"> <!--<input id="name_out" type="text" style="text-align: right;">-->
@@ -1127,12 +1136,12 @@
 
         <table id="qr" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
             <tr>
-                <td id = "td_qr"><div id="img-qr"></div></td>
+                <td id = "td_qr"><div id="img-qr"><canvas width="200" height="200"></canvas></div></td>
             </tr>
             <tr>
                 <td>
                     <input type="button" id="btn_back" value="戻る" class="" onclick="qr_close()">
-                    ←間違えてしまった場合はこちら
+                    ←戻るならこちら
                     </p>
                 </td>
             </tr>
