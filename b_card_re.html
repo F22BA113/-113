@@ -798,8 +798,8 @@
     <style>
         /*入力フォームCSS*/
         #input {
-            height: 705px;
-            width: 720px;
+            height: 605px;
+            width: 420px;
             text-align: center;
         }
 
@@ -832,7 +832,7 @@
             border: 1px solid #595959;
             border-collapse: collapse;
 
-            height: 90px;
+            height: 95px;
             width: 350px;
 
             border-top: none;
@@ -984,6 +984,7 @@
             background-color: #fff;
         }
 
+
         /* 基本スタイル（PC向けスタイル） */
         @media screen and (max-width:1024px) {
             /* タブレット向けスタイル　*/
@@ -1007,6 +1008,7 @@
         <table id="input" border="1" bgcolor=#89b4fa cellspacing=0 cellpadding=4>
             <tr>
                 <td>
+                    <center>
                     <p class="input_p">B I N G O</p>
 
                     <!--<h3 class="input_h3">ニックネームを入力してね！</h3>-->
@@ -1021,6 +1023,7 @@
                     </h5>
 
                     <input type="button" id="input_button" value="確認しました" onclick="input_close()">
+                </center>
                 </td>
             </tr>
         </table>
@@ -1128,8 +1131,8 @@
 
     <!--レイヤー3　確認フォーム-->
 
-
-    <div id="chack_layer" style="DISPLAY: none; POSITION:absolute;LEFT: 0px; TOP: 0px;" class="cheack_close">
+    <center>
+    <div id="chack_layer" style="DISPLAY: none;" class="cheack_close">
 
         <table id="cheack" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
             <tr>
@@ -1147,11 +1150,12 @@
         </table>
 
     </div>
-
+</center>
 
     <!--レイヤー4　QRフォーム-->
 
-    <div id="qr_layer" style="DISPLAY: none; POSITION:absolute;LEFT: 0px; TOP: 0px;" class="qr_close">
+    <center>
+    <div id="qr_layer" style="DISPLAY: none;" class="qr_close">
 
         <table id="qr" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
             <tr>
@@ -1169,4 +1173,5 @@
         </table>
 
     </div>
+</center>
 </body>
