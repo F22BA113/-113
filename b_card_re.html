@@ -798,8 +798,8 @@
     <style>
         /*入力フォームCSS*/
         #input {
-            height: 505px;
-            width: 420px;
+            height: 705px;
+            width: 720px;
             text-align: center;
         }
 
@@ -998,10 +998,12 @@
 
 <body onload="makebin()">
 
-    <meta name=”viewport” content=”initial-scale=1.0, user-scalable=no”>
+    <!--レスポンシブ対応-->
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0, user-scalable=no”>
 
-    <!--レイヤー１　入力フォーム-->
-    <div id="input_layer" style="DISPLAY: block;POSITION:absolute;LEFT: 0px;TOP:0;" class="input_show">
+    <!--レイヤー１　入力フォームstyle="DISPLAY: block;POSITION:absolute;LEFT: 0px;TOP:0;-->
+    <center>
+    <div id="input_layer" class="input_show">
         <table id="input" border="1" bgcolor=#89b4fa cellspacing=0 cellpadding=4>
             <tr>
                 <td>
@@ -1023,6 +1025,7 @@
             </tr>
         </table>
     </div>
+</center>
 
     <!--透かし文字-->
     <script type="text/javascript">
@@ -1055,10 +1058,11 @@
 
     <!--レイヤー2　ビンゴカードPOSITION:absolute;LEFT: 30px;TOP:0;-->
 
-    <div id="bingo_layer" style="DISPLAY:none; text-align: center;" class="bingo_close">
+    <center>
+    <div id="bingo_layer" style="DISPLAY:none;" class="bingo_close">
         <table bgcolor="#ff8731">
 
-            <input id="date_out" type="text"> <!--<input id="name_out" type="text" style="text-align: right;">-->
+            <input id="date_out" type="text" style="POSITION:absolute;LEFT: 30px;TOP:0;"> <!--<input id="name_out" type="text" style="text-align: right;">-->
 
             <!--<h1 style="text-align: center;"></h1>-->
             <tbody>
@@ -1118,6 +1122,7 @@
             </tbody>
         </table>
     </div>
+</center>
 
 
 
