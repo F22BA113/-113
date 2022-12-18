@@ -967,7 +967,7 @@
         .btn_next {
             text-align: right;
         }
-        
+
 
         /*QRフォーム*/
         #qr {
@@ -975,16 +975,30 @@
             width: 420px;
             text-align: center;
         }
+
         .img-qr {
             color: #fff;
         }
+
         #td_qr {
             background-color: #fff;
+        }
+
+        /* 基本スタイル（PC向けスタイル） */
+        @media screen and (max-width:1024px) {
+            /* タブレット向けスタイル　*/
+        }
+
+        @media screen and (max-width: 540px) {
+            /* モバイル向けスタイル */
+            /*pcファースト*/
         }
     </style>
 </head>
 
 <body onload="makebin()">
+
+    <meta name=”viewport” content=”initial-scale=1.0, user-scalable=no”>
 
     <!--レイヤー１　入力フォーム-->
     <div id="input_layer" style="DISPLAY: block;POSITION:absolute;LEFT: 0px;TOP:0;" class="input_show">
@@ -1039,9 +1053,9 @@
 
     </script>
 
-    <!--レイヤー2　ビンゴカード-->
+    <!--レイヤー2　ビンゴカードPOSITION:absolute;LEFT: 30px;TOP:0;-->
 
-    <div id="bingo_layer" style="DISPLAY:none;POSITION:absolute;LEFT: 30px;TOP:0;" class="bingo_close">
+    <div id="bingo_layer" style="DISPLAY:none; text-align: center;" class="bingo_close">
         <table bgcolor="#ff8731">
 
             <input id="date_out" type="text"> <!--<input id="name_out" type="text" style="text-align: right;">-->
@@ -1136,7 +1150,9 @@
 
         <table id="qr" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
             <tr>
-                <td id = "td_qr"><div id="img-qr"><canvas width="200" height="200"></canvas></div></td>
+                <td id="td_qr">
+                    <div id="img-qr"></div>
+                </td>
             </tr>
             <tr>
                 <td>
