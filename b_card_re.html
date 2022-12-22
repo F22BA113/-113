@@ -10,20 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
     <script type="text/JavaScript">
 
-        function input_close() {
-            // 入力フォームを閉じる
-            var objID = document.getElementById('input_layer');
-            objID.style.display = 'none';
-            objID.className = 'cheack_close';
-            //var name_value = document.getElementById('name_in').value;
-
-            // ビンゴカードを表示
-            objID = document.getElementById('bingo_layer');
-            objID.style.display = 'block';// blockを当てることで出力している
-            objID.className = 'cheack_open';
-            //document.getElementById('name_out').value = name_value
-        }
-
         // ビンゴカードに数を割り振る関数
         function makebin() {
 
@@ -204,6 +190,20 @@
             cheack_bingo(id);
         }
 
+        // 入力フォームを閉じる関数
+        function input_close() {
+            var objID = document.getElementById('input_layer');
+            objID.style.display = 'none';
+            objID.className = 'cheack_close';
+            //var name_value = document.getElementById('name_in').value;
+
+            // ビンゴカードを表示
+            objID = document.getElementById('bingo_layer');
+            objID.style.display = 'block';// blockを当てることで出力している
+            objID.className = 'bingo_open';
+            //document.getElementById('name_out').value = name_value
+        }
+
 
         // 確認レイヤー表示を表示する関数
         function cheack_show() {
@@ -214,9 +214,30 @@
             if (objID.className == 'cheack_close') {
                 objID.style.display = 'block';// blockを当てることで出力している
                 objID.className = 'cheack_open';
-            } else {
+                bingo_close(); // ビンゴカードを閉じる
+
+            }else if (objID.className == 'cheack_open') {
+                // 確認レイヤーを閉じる
                 cheack_close();
+                // ビンゴカードを表示する
+                bingo_open();
             }
+        }
+
+        // ビンゴレイヤーを表示する関数
+        function bingo_open() {
+            var objID = document.getElementById('bingo_layer');
+
+            objID.style.display = 'block';
+            objID.className = 'bingo_open';
+        }
+
+        // ビンゴレイヤーを閉じる関数
+        function bingo_close() {
+            var objID = document.getElementById('bingo_layer');
+
+            objID.style.display = 'none';
+            objID.className = 'bingo_close';
         }
 
 
@@ -387,15 +408,8 @@
         let size = 160;
         $("#img-qr").html("");
         $("#img-qr").qrcode({width:size,height:size,text:utf8qrtext}); 
-           };
-
-        // ビンゴレイヤーを閉じる関数
-        function bingo_close() {
-            var objID = document.getElementById('bingo_layer');
-
-            objID.style.display = 'none';
-            objID.className = 'qr_close';
-        } 
+        };
+ 
 
         
         // ビンゴかどうかの判断をする関数
@@ -823,6 +837,7 @@
             width: 5px;
         }
 
+
         /*ビンゴカードCSS*/
         table,
         td,
@@ -910,9 +925,9 @@
             background-color: #ffffff;
 
             border-radius: 50%;
-            line-height: 40px;
-            width: 40px;
-            height: 40px;
+            line-height: 45px;
+            width: 45px;
+            height: 45px;
             padding: 0;
 
         }
@@ -922,9 +937,9 @@
             background-color: #ff8731;
 
             border-radius: 50%;
-            line-height: 45px;
-            width: 45px;
-            height: 45px;
+            line-height: 40px;
+            width: 40px;
+            height: 40px;
             padding: 0;
 
         }
@@ -944,18 +959,19 @@
             background-color: #ffffff;
 
             border-radius: 50%;
-            line-height: 50px;
-            width: 50px;
-            height: 50px;
+            line-height: 45px;
+            width: 45px;
+            height: 45px;
             padding: 0;
 
         }
+
 
         /*確認フォームCSS*/
         #cheack {
             height: 640px;
             width: 360px;
-            text-align: center;
+            text-align:center;
         }
 
         .chack_h2 {
@@ -1017,7 +1033,7 @@
 
     <!--レイヤー１　入力フォームstyle="DISPLAY: block;POSITION:absolute;LEFT: 0px;TOP:0;-->
     <center>
-    <div id="input_layer" class="input_show" style="DISPLAY:block;">
+    <div id="input_layer" class="input_open" style="DISPLAY:block;">
         <table id="input" border="1" bgcolor=#89b4fa cellspacing=0 cellpadding=4>
             <tr>
                 <td>
