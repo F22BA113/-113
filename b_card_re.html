@@ -992,6 +992,21 @@
             /* モバイル向けスタイル */
             /*pcファースト*/
         }
+
+        #nanika {
+            width: 5%;
+            height: 5%;
+        }
+
+        #td_qr {
+            width: 90%;
+            height: 90%;
+        }
+
+        #back_btn {
+            width: 5%;
+            height: 5%;
+        }
     </style>
 </head>
 
@@ -1062,7 +1077,7 @@
     <div id="bingo_layer" style="DISPLAY:none;" class="bingo_close">
         <table bgcolor="#ff8731">
 
-            <input id="date_out" type="text" > <!--<input id="name_out" type="text" style="text-align: right;">-->
+            <!--<input id="name_out" type="text" style="text-align: right;">-->
 
             <!--<h1 style="text-align: center;"></h1>-->
             <tbody>
@@ -1125,7 +1140,6 @@
 </center>
 
 
-
     <!--レイヤー3　確認フォーム POSITION:absolute;LEFT: 0px;TOP:0;-->
 
     <div id="chack_layer" style="DISPLAY: none; POSITION:absolute;LEFT: 0px;TOP:0;" class="cheack_close">
@@ -1153,16 +1167,18 @@
     <div id="qr_layer" style="DISPLAY: none;" class="qr_close">
 
         <table id="qr" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
+            <tr id="time">
+                    <input id="date_out" type="text">
+            </tr>
             <tr>
                 <td id="td_qr">
                     <div id="img-qr"></div>
                 </td>
             </tr>
-            <tr>
+            <tr id="back_btn">
                 <td>
                     <input type="button" id="btn_back" value="戻る" class="" onclick="qr_close()">
                     ←戻るならこちら
-                    </p>
                 </td>
             </tr>
         </table>
