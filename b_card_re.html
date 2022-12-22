@@ -973,7 +973,7 @@
         #cheack {
             height: 640px;
             width: 360px;
-            text-align:center;
+            text-align: center;
         }
 
         .chack_h2 {
@@ -985,10 +985,12 @@
         }
 
 
+
         /*QRフォーム*/
         #qr {
-            height: 640px;
             width: 360px;
+            height: 640px;
+
             text-align: center;
         }
 
@@ -997,6 +999,14 @@
         }
 
         #td_qr {
+            background-color: #fff;
+            width: 90%;
+            height: 90%;
+        }
+        #td_time {
+            width: 10%;
+            height: 10%;
+            text-align: left;
             background-color: #fff;
         }
 
@@ -1010,21 +1020,6 @@
             /* モバイル向けスタイル */
             /*pcファースト*/
         }
-
-        #nanika {
-            width: 5%;
-            height: 5%;
-        }
-
-        #td_qr {
-            width: 90%;
-            height: 90%;
-        }
-
-        #back_btn {
-            width: 5%;
-            height: 5%;
-        }
     </style>
 </head>
 
@@ -1035,32 +1030,32 @@
 
     <!--レイヤー１　入力フォームstyle="DISPLAY: block;POSITION:absolute;LEFT: 0px;TOP:0;-->
     <center>
-    <div id="input_layer" class="input_open" style="DISPLAY:block;">
-        <table id="input" border="1" bgcolor=#89b4fa cellspacing=0 cellpadding=4>
-            <tr>
-                <td>
-                    <center>
-                    <p class="input_p">B I N G O</p>
+        <div id="input_layer" class="input_open" style="DISPLAY:block;">
+            <table id="input" border="1" bgcolor=#89b4fa cellspacing=0 cellpadding=4>
+                <tr>
+                    <td>
+                        <center>
+                            <p class="input_p">B I N G O</p>
 
-                    <!--<h3 class="input_h3">ニックネームを入力してね！</h3>-->
-                    <!--枠の中に透かしで｛ニックネーム｝って入れたらかわいいかも-->
-                    <!--<input id="name_in" type="text" valuse="ニックネーム">-->
+                            <!--<h3 class="input_h3">ニックネームを入力してね！</h3>-->
+                            <!--枠の中に透かしで｛ニックネーム｝って入れたらかわいいかも-->
+                            <!--<input id="name_in" type="text" valuse="ニックネーム">-->
 
-                    <h4 class="input_h4">※注意事項※</h4>
+                            <h4 class="input_h4">※注意事項※</h4>
 
-                    <h5 class="input_h5">
-                        ・画面の更新はしないでね！<br>
-                        ・ダブルビンゴなどは無効だよ！
-                        <br>
-                    </h5>
+                            <h5 class="input_h5">
+                                ・画面の更新はしないでね！<br>
+                                ・ダブルビンゴなどは無効だよ！
+                                <br>
+                            </h5>
 
-                    <input type="button" id="input_button" value="確認しました" onclick="input_close()">
-                    </center>
-                </td>
-            </tr>
-        </table>
-    </div>
-</center>
+                            <input type="button" id="input_button" value="確認しました" onclick="input_close()">
+                        </center>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
 
     <!--透かし文字-->
     <script type="text/javascript">
@@ -1093,117 +1088,114 @@
 
     <!--レイヤー2　ビンゴカードstyle="POSITION:absolute;LEFT: 30px;TOP:0;"-->
     <center>
-    <div id="bingo_layer" style="DISPLAY:none;" class="bingo_close">
-        <table bgcolor="#ff8731">
+        <div id="bingo_layer" style="DISPLAY:none;" class="bingo_close">
+            <table bgcolor="#ff8731">
 
-            <!--<input id="name_out" type="text" style="text-align: right;">-->
+                <!--<input id="name_out" type="text" style="text-align: right;">-->
 
-            <!--<h1 style="text-align: center;"></h1>-->
-            <tbody>
-                <tr id="bingo">
-                    <td>
-                        <h2 class="bingo_h2">B</h2>
-                    </td>
-                    <td>
-                        <h2 class="bingo_h2">I</h2>
-                    </td>
-                    <td>
-                        <h2 class="bingo_h2">N</h2>
-                    </td>
-                    <td>
-                        <h2 class="bingo_h2">G</h2>
-                    </td>
-                    <td>
-                        <h2 class="bingo_h2">O</h2>
-                    </td>
-                </tr>
-                <tr id="num">
-                    <td><input id="00" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="10" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="20" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="30" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="40" class="c_in" type="button" onclick="change(this)"></td>
-                </tr>
+                <!--<h1 style="text-align: center;"></h1>-->
+                <tbody>
+                    <tr id="bingo">
+                        <td>
+                            <h2 class="bingo_h2">B</h2>
+                        </td>
+                        <td>
+                            <h2 class="bingo_h2">I</h2>
+                        </td>
+                        <td>
+                            <h2 class="bingo_h2">N</h2>
+                        </td>
+                        <td>
+                            <h2 class="bingo_h2">G</h2>
+                        </td>
+                        <td>
+                            <h2 class="bingo_h2">O</h2>
+                        </td>
+                    </tr>
+                    <tr id="num">
+                        <td><input id="00" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="10" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="20" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="30" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="40" class="c_in" type="button" onclick="change(this)"></td>
+                    </tr>
 
-                <tr id="num">
-                    <td><input id="01" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="11" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="21" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="31" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="41" class="c_in" type="button" onclick="change(this)"></td>
-                </tr>
-                <tr id="num">
-                    <td><input id="02" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="12" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="22" class="mid_in" type="button" onclick="change(this)" value="☆"></td>
-                    <td><input id="32" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="42" class="c_in" type="button" onclick="change(this)"></td>
-                </tr>
-                <tr id="num">
-                    <td><input id="03" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="13" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="23" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="33" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="43" class="c_in" type="button" onclick="change(this)"></td>
-                </tr>
-                <tr id="num">
-                    <td><input id="04" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="14" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="24" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="34" class="c_in" type="button" onclick="change(this)"></td>
-                    <td><input id="44" class="c_in" type="button" onclick="change(this)"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</center>
+                    <tr id="num">
+                        <td><input id="01" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="11" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="21" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="31" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="41" class="c_in" type="button" onclick="change(this)"></td>
+                    </tr>
+                    <tr id="num">
+                        <td><input id="02" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="12" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="22" class="mid_in" type="button" onclick="change(this)" value="☆"></td>
+                        <td><input id="32" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="42" class="c_in" type="button" onclick="change(this)"></td>
+                    </tr>
+                    <tr id="num">
+                        <td><input id="03" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="13" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="23" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="33" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="43" class="c_in" type="button" onclick="change(this)"></td>
+                    </tr>
+                    <tr id="num">
+                        <td><input id="04" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="14" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="24" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="34" class="c_in" type="button" onclick="change(this)"></td>
+                        <td><input id="44" class="c_in" type="button" onclick="change(this)"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </center>
 
 
     <!--レイヤー3　確認フォーム POSITION:absolute;LEFT: 0px;TOP:0;-->
-<center>
-    <div id="chack_layer" style="DISPLAY: none;" class="cheack_close">
+    <center>
+        <div id="chack_layer" style="DISPLAY: none;" class="cheack_close">
 
-        <table id="cheack" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
-            <tr>
-                <td>
-                    <h2 class="chack_h2">BINGO!!<br>おめでとうございます！</h2>
-                    <p>
-                        QPコード生成はこちら→
-                        <input type="button" id="btn_next" value="次へ" class="" onclick="qr_show()">
-                        <br><br><br>
-                        <input type="button" id="btn_back" value="戻る" class="" onclick="cheack_show()">
-                        ←間違えてしまった場合はこちら
-                    </p>
-                </td>
-            </tr>
-        </table>
+            <table id="cheack" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
+                <tr>
+                    <td>
+                        <h2 class="chack_h2">BINGO!!<br>おめでとうございます！</h2>
+                        <p>
+                            QPコード生成はこちら→
+                            <input type="button" id="btn_next" value="次へ" class="" onclick="qr_show()">
+                            <br><br><br>
+                            <input type="button" id="btn_back" value="戻る" class="" onclick="cheack_show()">
+                            ←間違えてしまった場合はこちら
+                        </p>
+                    </td>
+                </tr>
+            </table>
 
-    </div>
-</center>
+        </div>
+    </center>
 
     <!--レイヤー4　QRフォーム POSITION:absolute;LEFT: 0px;TOP:0;-->
 
-<center>
-    <div id="qr_layer" style="DISPLAY: none;" class="qr_close">
+    <center>
+        <div id="qr_layer" style="DISPLAY: none;" class="qr_close">
+            <table id="qr" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
+                <tr>
+                    <td id="td_time">
+                        <input id="date_out" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td id="td_qr">
+                        <div id="img-qr"></div>
+                        <p><input type="button" id="btn_back" value="戻る" class="" onclick="qr_close()">←戻るならこちら</p>
 
-        <table id="qr" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
-            <tr id="time">
-                    <input id="date_out" type="text">
-            </tr>
-            <tr>
-                <td id="td_qr">
-                    <div id="img-qr"></div>
-                </td>
-            </tr>
-            <tr id="back_btn">
-                <td>
-                    <input type="button" id="btn_back" value="戻る" class="" onclick="qr_close()">
-                    ←戻るならこちら
-                </td>
-            </tr>
-        </table>
 
-    </div>
-</center>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
 
 </body>
