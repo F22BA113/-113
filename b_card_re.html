@@ -201,6 +201,11 @@
             objID = document.getElementById('bingo_layer');
             objID.style.display = 'block';// blockを当てることで出力している
             objID.className = 'bingo_open';
+            // 画像表示
+            imgID = document.getElementById('img');
+            imgID.style.display = 'block';// blockを当てることで出力している
+            //imgID.className = 'bingo_open';
+
             //document.getElementById('name_out').value = name_value
         }
 
@@ -219,6 +224,7 @@
             }else if (objID.className == 'cheack_open') {
                 // 確認レイヤーを閉じる
                 cheack_close();
+                img_close();
                 // ビンゴカードを表示する
                 bingo_open();
             }
@@ -238,6 +244,12 @@
 
             objID.style.display = 'none';
             objID.className = 'bingo_close';
+        }
+        function img_close(params) {
+            var imgID = document.getElementById('img');
+
+            imgID.style.display = 'none';
+            //imgID.className = 'bingo_close';
         }
 
 
@@ -407,7 +419,8 @@
                 }
             }
         let utf8qrtext = unescape(encodeURIComponent(Result));
-        let size = 160;
+        // QRの大きさ
+        let size = 200;
         $("#img-qr").html("");
         $("#img-qr").qrcode({width:size,height:size,text:utf8qrtext}); 
         };
@@ -848,7 +861,7 @@
             border-collapse: collapse;
 
             height: 95px;
-            width: 350px;
+            width: 360px;
 
             border-top: none;
             border-bottom: none;
@@ -892,13 +905,11 @@
             text-align: center;
         }
 
-        #num {
-            text-align: center;
-        }
+
 
         .c_in {
-            color: #fff;
-            background-color: #ff8731;
+            color: #000;
+            background-color: #c1fffd;
 
             /*font-size: 25px;
             font-weight: normal;*/
@@ -908,6 +919,8 @@
             width: 44px;
             height: 44px;
             padding: 0;
+
+            border:none
         }
 
         /*hoverとは、指定したHTML要素にカーソルが乗ったときにCSSを実行できる擬似クラス*/
@@ -932,6 +945,7 @@
             height: 44px;
             padding: 0;
 
+            border:none
         }
 
         .mid_in {
@@ -944,6 +958,7 @@
             height: 44px;
             padding: 0;
 
+            border:none
         }
 
         .mid_in:hover {
@@ -966,6 +981,16 @@
             height: 44px;
             padding: 0;
 
+            border:none
+        }
+        #num {
+            text-align: center;
+        }
+
+        .bingo_open {
+            /*background: url(イラスト12　正規版２.png) no-repeat;*/
+            margin-top: -485px;
+            margin-left: 27px;
         }
 
 
@@ -1031,7 +1056,7 @@
     <!--レイヤー１　入力フォームstyle="DISPLAY: block;POSITION:absolute;LEFT: 0px;TOP:0;-->
     <center>
         <div id="input_layer" class="input_open" style="DISPLAY:block;">
-            <table id="input" border="1" bgcolor=#89b4fa cellspacing=0 cellpadding=4>
+            <table id="input" border="1" bgcolor=#89b4fa  cellspacing=0 cellpadding=4>
                 <tr>
                     <td>
                         <center>
@@ -1088,15 +1113,16 @@
 
     <!--レイヤー2　ビンゴカードstyle="POSITION:absolute;LEFT: 30px;TOP:0;"-->
     <center>
+        <img id="img" style="DISPLAY:none;" src="イラスト12　正規版２.png">
         <div id="bingo_layer" style="DISPLAY:none;" class="bingo_close">
-            <table bgcolor="#ff8731">
+            <table><!--bgcolor="#ff8731"-->
 
                 <!--<input id="name_out" type="text" style="text-align: right;">-->
 
                 <!--<h1 style="text-align: center;"></h1>-->
                 <tbody>
                     <tr id="bingo">
-                        <td>
+                        <!--<td>
                             <h2 class="bingo_h2">B</h2>
                         </td>
                         <td>
@@ -1110,9 +1136,9 @@
                         </td>
                         <td>
                             <h2 class="bingo_h2">O</h2>
-                        </td>
+                        </td>-->
                     </tr>
-                    <tr id="num">
+                    <tr id="num1">
                         <td><input id="00" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="10" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="20" class="c_in" type="button" onclick="change(this)"></td>
@@ -1120,28 +1146,28 @@
                         <td><input id="40" class="c_in" type="button" onclick="change(this)"></td>
                     </tr>
 
-                    <tr id="num">
+                    <tr id="num2">
                         <td><input id="01" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="11" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="21" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="31" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="41" class="c_in" type="button" onclick="change(this)"></td>
                     </tr>
-                    <tr id="num">
+                    <tr id="num3">
                         <td><input id="02" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="12" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="22" class="mid_in" type="button" onclick="change(this)" value="☆"></td>
                         <td><input id="32" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="42" class="c_in" type="button" onclick="change(this)"></td>
                     </tr>
-                    <tr id="num">
+                    <tr id="num4">
                         <td><input id="03" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="13" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="23" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="33" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="43" class="c_in" type="button" onclick="change(this)"></td>
                     </tr>
-                    <tr id="num">
+                    <tr id="num5">
                         <td><input id="04" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="14" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="24" class="c_in" type="button" onclick="change(this)"></td>
@@ -1151,6 +1177,7 @@
                 </tbody>
             </table>
         </div>
+        
     </center>
 
 
@@ -1189,6 +1216,8 @@
                 <tr>
                     <td id="td_qr">
                         <div id="img-qr"></div>
+                        <br>
+                        <br>
                         <p><input type="button" id="btn_back" value="戻る" class="" onclick="qr_close()">←戻るならこちら</p>
 
 
