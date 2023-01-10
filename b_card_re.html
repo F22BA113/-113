@@ -222,7 +222,7 @@
             objID.style.display = 'block';// blockを当てることで出力している
             objID.className = 'bingo_open';
             // 画像表示
-            imgID = document.getElementById('img');
+            var imgID = document.getElementById('img');
             imgID.style.display = 'block';// blockを当てることで出力している
             //imgID.className = 'bingo_open';
 
@@ -239,14 +239,16 @@
             if (objID.className == 'cheack_close') {
                 objID.style.display = 'block';// blockを当てることで出力している
                 objID.className = 'cheack_open';
+                img_close(); // 画像を閉じる
                 bingo_close(); // ビンゴカードを閉じる
 
             }else if (objID.className == 'cheack_open') {
                 // 確認レイヤーを閉じる
                 cheack_close();
-                img_close();
                 // ビンゴカードを表示する
                 bingo_open();
+                // 画像を表示する
+                img_open();
             }
         }
 
@@ -257,6 +259,12 @@
             objID.style.display = 'block';
             objID.className = 'bingo_open';
         }
+        // 画像を閉じる関数
+        function img_open() {
+            var imgID = document.getElementById('img');
+            imgID.style.display = 'block';
+            //imgID.className = 'bingo_close';
+        }
 
         // ビンゴレイヤーを閉じる関数
         function bingo_close() {
@@ -265,9 +273,9 @@
             objID.style.display = 'none';
             objID.className = 'bingo_close';
         }
-        function img_close(params) {
+        // 画像を閉じる関数
+        function img_close() {
             var imgID = document.getElementById('img');
-
             imgID.style.display = 'none';
             //imgID.className = 'bingo_close';
         }
