@@ -163,51 +163,44 @@
 
         // クリックされたボタンの情報を記憶するグローバル変数
         var CLS; var ID;
+        // ビンゴが重複しないためのやつ
+        SAVE_BINGO = false;
 
         // クリックされたら色が変わる関数
         function change(aObject) {
-            // 引数に.idでIDが取れる
-            var id = aObject.id;
-            ID = aObject.id;
+            
+            // ビンゴになったいなかったら、実行する
+            if (SAVE_BINGO == false) {
+                // 引数に.idでIDが取れる
+                var id = aObject.id;
+                ID = aObject.id;
 
-            // 引数に.classNameでクラス名が取れる
-            var cls = aObject.className;
+                // 引数に.classNameでクラス名が取れる
+                var cls = aObject.className;
 
-            if (cls == "c_in") {
-                document.getElementById(id).className = "c_out";
-                document.getElementById(id).style = "backgroundcolor: #000000";
-                CLS = "c_out";
+                if (cls == "c_in" ) {
+                    document.getElementById(id).className = "c_out";
+                    CLS = "c_out";
+                }
+                else if (cls == "c_out") {
+                    document.getElementById(id).className = "c_in";
+
+                }
+                else if (cls == "mid_in") {
+                    document.getElementById(id).className = "mid_out";
+                    document.getElementById(id).style = "backgroundcolor: #000000";
+                    CLS = "mid_out";
+                }
+
+
+                // ビンゴかどうかの判断をする関数を呼び出す
+                cheack_bingo(id);
             }
-            else if (cls == "c_out") {
-                document.getElementById(id).className = "c_in";
-
-                /*switch (id) {
-                    case 00:
-                    case 10:
-                    case 20:
-                    case 30:
-                    case 40:
-                        document.getElementById(id).style = "background: linear-gradient(#c1fffd, #87DFA0)";
-                        break;
-                    case 01:
-                    case 11:
-                    case 21:
-                    case 31:
-                    case 41:
-                        document.getElementById(id).style = "background: linear-gradient(##70E49A, ##79E6AD)";
-                        default:
-                        break;
-                }*/
+            /*if (SAVE_BINGO == ture) {
+                return
             }
-            else if (cls == "mid_in") {
-                document.getElementById(id).className = "mid_out";
-                document.getElementById(id).style = "backgroundcolor: #000000";
-                CLS = "mid_out";
-            }
-
-
-            // ビンゴかどうかの判断をする関数を呼び出す
-            cheack_bingo(id);
+            にして、*/
+            
         }
 
         // 入力フォームを閉じる関数
@@ -230,6 +223,7 @@
         }
 
 
+
         // 確認レイヤー表示を表示する関数
         function cheack_show() {
             // chack_layerのＩＤを取得
@@ -237,19 +231,22 @@
 
             // layerのクラス名がcheack_closeなら表示
             if (objID.className == 'cheack_close') {
-                objID.style.display = 'block';// blockを当てることで出力している
-                objID.className = 'cheack_open';
-                img_close(); // 画像を閉じる
-                bingo_close(); // ビンゴカードを閉じる
+            objID.style.display = 'block';// blockを当てることで出力している
+            objID.className = 'cheack_open';
+    
+            //img_close(); // 画像を閉じる
+            //bingo_close(); // ビンゴカードを閉じる
 
             }else if (objID.className == 'cheack_open') {
-                // 確認レイヤーを閉じる
-                cheack_close();
-                // ビンゴカードを表示する
-                bingo_open();
-                // 画像を表示する
-                img_open();
+            // 確認レイヤーを閉じる
+            cheack_close();
+            // ビンゴカードを表示する
+            bingo_open();
+            // 画像を表示する
+            img_open();
+            SAVE_BINGO = false
             }
+            
         }
 
         // ビンゴレイヤーを表示する関数
@@ -286,6 +283,7 @@
         function cheack_close() {
             var objID = document.getElementById('chack_layer');
 
+            // 戻った時に押したボタンが戻っている
             if (CLS == "c_out") {
                 document.getElementById(ID).className = "c_in";
             }
@@ -310,6 +308,8 @@
             // layerのクラス名がcheack_closeなら表示
             if (objID.className == 'qr_close') {
                 objID.style.display = 'block';// blockを当てることで出力している
+                img_close(); // 画像を閉じる
+                bingo_close(); // ビンゴカードを閉じる
                 objID.className = 'qr_open';
             } else {
                 qr_close();
@@ -325,6 +325,8 @@
 
             objID.style.display = 'none';
             objID.className = 'qr_close';
+            SAVE_BINGO = false;
+
 
             bingo_open();
             img_open();
@@ -464,46 +466,53 @@
                 case "00":
                     if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
                         document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
-                        cheack_show(); // レイヤー表示を表示する関数を呼び出す
+                        setTimeout(cheack_show, 500);// レイヤー表示を表示する関数を呼び出す
                         input_bingo0004(); // bingoになった数字を格納する関数を呼び出す
+                        SAVE_BINGO = true;
+                        
 
                     }
                     else if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
                         document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0040();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0044();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "01":
                     if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
                         document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0004();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
                         document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0141();
-
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "02":
                     if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
                         document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0004();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0242();
+                        SAVE_BINGO = true;
 
                     }
                     break;
@@ -511,31 +520,36 @@
                 case "03":
                     if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
                         document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
-                        cheack_show();
+                            setTimeout(cheack_show, 500);
                         input_bingo0004();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
-                        cheack_show();
-                        input_bingo0343();
+                            setTimeout(cheack_show, 500);
+                            input_bingo0343();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "04":
                     if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
                         document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0004();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
                         document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0444();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0441();
+                        SAVE_BINGO = true;
                     }
                     break;
 
@@ -543,75 +557,87 @@
                 case "10":
                     if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
                         document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo1014()
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
                         document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
-                        cheack_show();
-                        input_bingo0040();
+                        setTimeout(cheack_show, 500);
+                        input_bingo0004();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "11":
                     if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
                         document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo1014();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
                         document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0141();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0044();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "12":
                     if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
                         document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo1014();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0242();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "13":
                     if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
                         document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo1014();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0343();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0441();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "14":
                     if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
                         document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo1014();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
                         document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0444();
+                        SAVE_BINGO = true;
                     }
                     break;
 
@@ -619,75 +645,87 @@
                 case "20":
                     if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
                         document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0040();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo2024();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "21":
                     if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo2024();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
                         document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0141();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "22":
                     if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo2024();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0242();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0044();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0441();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "23":
                     if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo2024();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0343();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "24":
                     if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo2024();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
                         document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0444();
+                        SAVE_BINGO = true;
                     }
                     break;
 
@@ -695,75 +733,87 @@
                 case "30":
                     if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
                         document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0040();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo3034();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "31":
                     if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo3034();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
                         document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0141();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0441();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "32":
                     if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo3034();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0242();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "33":
                     if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo3034();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0343();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0044();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "34":
                     if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo3034();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
                         document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0444();
+                        SAVE_BINGO = true;
                     }
                     break;
 
@@ -771,80 +821,92 @@
                 case "40":
                     if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
                         document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
-                        cheack_show();
-                    }
+                        setTimeout(cheack_show, 500);
+                        input_bingo0040();
+                        SAVE_BINGO = true;
+                        }
                     else if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
                         document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo4044();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0441();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "41":
                     if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
                         document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo4044();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
                         document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0141();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "42":
                     if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
                         document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo4044();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0242();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "43":
                     if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
                         document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo4044();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0343();
+                        SAVE_BINGO = true;
                     }
                     break;
 
                 case "44":
                     if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
                         document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo4044();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
                         document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0444();
+                        SAVE_BINGO = true;
                     }
                     else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
                         document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
-                        cheack_show();
+                        setTimeout(cheack_show, 500);
                         input_bingo0044();
+                        SAVE_BINGO = true;
                     }
                     break;
             }
         }
 
-        
 
     </script>
     <style>
@@ -862,7 +924,8 @@
 
         .input_p {
             font-size: 60px;
-            color: rgb(242, 241, 236);
+            font-weight: bold;
+            color: rgb(24, 78, 255);
             text-align: center;
             top: 40px;
 
@@ -875,7 +938,7 @@
 
         .input_h5 {
             border-radius: 20px;
-            text-align: center;
+            text-align: left;
             font-size: 70%;
         }
 
@@ -945,12 +1008,12 @@
             font-weight: normal;*/
 
             border-radius: 50%;
-            line-height: 44px;
-            width: 44px;
-            height: 44px;
+            line-height: 46px;
+            width: 46px;
+            height: 46px;
             padding: 0;
 
-            border:none
+            border: none
         }
 
         /*hoverとは、指定したHTML要素にカーソルが乗ったときにCSSを実行できる擬似クラス
@@ -970,13 +1033,12 @@
             background-color: #ffffff;
 
             border-radius: 50%;
-            line-height: 44px;
-            width: 44px;
-            height: 44px;
+            line-height: 46px;
+            width: 46px;
+            height: 46px;
             padding: 0;
 
-            border:none
-
+            border: none
         }
 
         .mid_in {
@@ -984,14 +1046,14 @@
             background-color: #b9b9b9;
 
             border-radius: 50%;
-            line-height: 44px;
-            width: 44px;
-            height: 44px;
+            line-height: 46px;
+            width: 46px;
+            height: 46px;
             padding: 0;
 
-            border:none
-
+            border: none
         }
+
         /*
         .mid_in:hover {
             color: rgb(0, 0, 0);
@@ -1008,14 +1070,14 @@
             background-color: #ffffff;
 
             border-radius: 50%;
-            line-height: 44px;
-            width: 44px;
-            height: 44px;
+            line-height: 46px;
+            width: 46px;
+            height: 46px;
             padding: 0;
 
-            border:none
-
+            border: none
         }
+
         #num {
             text-align: center;
         }
@@ -1023,23 +1085,55 @@
         .bingo_open {
             /*background: url(イラスト12　正規版２.png) no-repeat;*/
             margin-top: -485px;
-            margin-left: 27px;
+            margin-left: 25px;
         }
 
 
         /*確認フォームCSS*/
-        #cheack {
+        #chack_layer {
+            margin-top: -586px;
+            background-color: rgba(0, 0, 0, 0.556);
             height: 640px;
             width: 360px;
-            text-align: center;
+            z-index: 10;
+            position: relative;
         }
+
 
         .chack_h2 {
             text-align: center;
         }
 
-        .btn_next {
-            text-align: right;
+        #btn_next {
+            height: 40px;
+            width: 30px;
+        }
+
+        #btn_back {
+            height: 40px;
+            width: 30px;
+        }
+
+        #gif {
+            height: 80%;
+            width: 100%;
+            /*background-color: rgba(0, 0, 0, 0.348);*/
+        }
+        #chack_table {
+            height: 640px;
+            width: 360px;
+        }
+        #chack_td_img {
+            width: 100%;
+        }
+        #chack_tr1 {
+            height: 70%;
+        }
+        #chack_td_left {
+            width: 20%;
+        }
+        #chack_td_right {
+            width: 20%;
         }
 
 
@@ -1061,6 +1155,7 @@
             width: 90%;
             height: 90%;
         }
+
         #td_time {
             width: 10%;
             height: 10%;
@@ -1089,7 +1184,7 @@
     <!--レイヤー１　入力フォームstyle="DISPLAY: block;POSITION:absolute;LEFT: 0px;TOP:0;-->
     <center>
         <div id="input_layer" class="input_open" style="DISPLAY:block;">
-            <table id="input" border="1" bgcolor=#89b4fa  cellspacing=0 cellpadding=4>
+            <table id="input" border="1" bgcolor=#89b4fa cellspacing=0 cellpadding=4>
                 <tr>
                     <td>
                         <center>
@@ -1106,10 +1201,10 @@
 
                             <h5 class="input_h5">
                                 <!--左寄せにしたいね-->
-                                ・画面の更新はしないでね！<br>
-                                ・ダブルビンゴなどは無効だよ！<br>
-                                ・間違えても、もう一度押せば取り消せるよ<br>
-                                ・以上の注意事項守らない場合、bingoが取り消しになる可能性があります
+                                　・画面の更新はしないでね！<br>
+                                　・ダブルビンゴなどは無効だよ！<br>
+                                　・間違えても、もう一度押せば取り消せるよ<br>
+                                　・注意事項守らない場合、ビンゴが取り消しになります
                                 <br>
                             </h5>
                             <br>
@@ -1154,7 +1249,7 @@
 
     <!--レイヤー2　ビンゴカードstyle="POSITION:absolute;LEFT: 30px;TOP:0;"-->
     <center>
-        <img id="img" style="DISPLAY:none;" src="irast12_ver２.png">
+        <img id="img" style="DISPLAY:none;" src="S__23822341.jpg">
         <div id="bingo_layer" style="DISPLAY:none;" class="bingo_close">
             <table><!--bgcolor="#ff8731"-->
 
@@ -1181,7 +1276,7 @@
                     </tr>
                     <tr id="num1"><!-- style="background: linear-gradient(#7BE690, #87E99B)"-->
                         <td><input id="00" class="c_in" type="button" onclick="change(this)"></td>
-                        <td><input id="10" class="c_in" type="button" onclick="change(this)"</td>
+                        <td><input id="10" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="20" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="30" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="40" class="c_in" type="button" onclick="change(this)"></td>
@@ -1218,29 +1313,31 @@
                 </tbody>
             </table>
         </div>
-        
+
     </center>
 
 
-    <!--レイヤー3　確認フォーム POSITION:absolute;LEFT: 0px;TOP:0;-->
-    <center>
-        <div id="chack_layer" style="DISPLAY: none;" class="cheack_close">
+    <!--レイヤー3　確認フォーム POSITION:absolute;LEFT: 0px;TOP:0; bgcolor="#80E0E0" style="background-color: rgba(0, 0, 0, 0.348);"-->
+    <center style="background-color: rgba(0, 0, 0, 0.348);">
+        <div id="chack_layer" style="DISPLAY: none; background-color:rgba(0, 0, 0, 0.348);" bgcolor="#80E0E0" class="cheack_close">
+            <table id="chack_table">
+                <tr id="chack_tr1">
+                    <td id="chack_td_img">
+                        <img id="gif" src="S__bingo.gif">
+                        <!--<h2 class="chack_h2">BINGO!!<br>おめでとうございます！</h2>-->
+                    </td>
+                </tr>
+                <tr id="chack_tr2">
+                    <td id="chack_td_left">
+                        <input type="button" id="btn_back" value="戻る" class="" onclick="cheack_show()">
 
-            <table id="cheack" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
-                <tr>
-                    <td>
-                        <h2 class="chack_h2">BINGO!!<br>おめでとうございます！</h2>
-                        <p>
-                            QRコード生成はこちら→
-                            <input type="button" id="btn_next" value="次へ" class="" onclick="qr_show()">
-                            <br><br><br>
-                            <input type="button" id="btn_back" value="戻る" class="" onclick="cheack_show()">
-                            ←間違えてしまった場合はこちら
-                        </p>
+                    </td>
+                    <td id="chack_td"></td>
+                    <td id="chack_td_right">
+                        <input type="button" id="btn_next" value="QR" class="" onclick="qr_show()">
                     </td>
                 </tr>
             </table>
-
         </div>
     </center>
 
