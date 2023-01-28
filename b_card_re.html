@@ -1008,10 +1008,12 @@
             font-weight: normal;*/
 
             border-radius: 50%;
-            line-height: 44px;
-            width: 44px;
-            height: 44px;
+            line-height: 46px;
+            width: 46px;
+            height: 46px;
             padding: 0;
+            z-index: 0;
+            position: relative;
 
             border: none
         }
@@ -1090,13 +1092,20 @@
 
 
         /*確認フォームCSS*/
-        #chack_layer {
-            margin-top: -586px;
+        #chack_center {
             background-color: rgba(0, 0, 0, 0.556);
-            height: 640px;
-            width: 360px;
             z-index: 10;
             position: relative;
+        }
+        #chack_layer {
+            margin-top: -586px;
+            height: 640px;
+            width: 360px;
+
+            /* ビンゴカードだけ透過させたいとき
+            background-color: rgba(0, 0, 0, 0.556);
+            z-index: 10;
+            position: relative;*/
         }
 
 
@@ -1249,14 +1258,14 @@
 
     <!--レイヤー2　ビンゴカードstyle="POSITION:absolute;LEFT: 30px;TOP:0;"-->
     <center>
-        <img id="img" style="DISPLAY:none;" src="S__23822341.jpg">
+        <img id="img" style="DISPLAY:none;" src="S__S24027146.jpg">
         <div id="bingo_layer" style="DISPLAY:none;" class="bingo_close">
-            <table><!--bgcolor="#ff8731"-->
+            <table><!--bgcolor="#ff8731" ココのテーブルがずれている-->
 
                 <!--<input id="name_out" type="text" style="text-align: right;">-->
 
                 <!--<h1 style="text-align: center;"></h1>-->
-                <tbody>
+                
                     <tr id="bingo">
                         <!--<td>
                             <h2 class="bingo_h2">B</h2>
@@ -1310,7 +1319,7 @@
                         <td><input id="34" class="c_in" type="button" onclick="change(this)"></td>
                         <td><input id="44" class="c_in" type="button" onclick="change(this)"></td>
                     </tr>
-                </tbody>
+                
             </table>
         </div>
 
@@ -1318,8 +1327,8 @@
 
 
     <!--レイヤー3　確認フォーム POSITION:absolute;LEFT: 0px;TOP:0; bgcolor="#80E0E0" style="background-color: rgba(0, 0, 0, 0.348);"-->
-    <center style="background-color: rgba(0, 0, 0, 0.348);">
-        <div id="chack_layer" style="DISPLAY: none; background-color:rgba(0, 0, 0, 0.348);" bgcolor="#80E0E0" class="cheack_close">
+    <center id="chack_center">
+        <div id="chack_layer" style="DISPLAY: none;" bgcolor="#80E0E0" class="cheack_close">
             <table id="chack_table">
                 <tr id="chack_tr1">
                     <td id="chack_td_img">
