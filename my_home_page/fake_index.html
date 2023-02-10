@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ビンゴゲーム</title>
+</head>
+<style>
+    /*ヘッダーCSS*/
+    #header {
+        width: 100%;
+        /*移動させない*/
+        position: fixed;
+        background-color: aquamarine;
+
+    }
+
+    #header_div {
+        background-color: aquamarine;
+    }
+
+    #header_h3 {
+        color: black;
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+
+    #header_nav {
+        background-color: rgb(175, 255, 228);
+        margin-top: 0;
+    }
+
+    #header_ul {
+        /*縦並びを横並びに*/
+        /*
+        display: flex;
+        width: 85%;
+        justify-content: center;
+        list-style: none;
+        margin: 0;*/
+        list-style: none;
+        margin: -5px auto 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #header_li {
+        padding: -4cm;
+        border-left: 1px solid black;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .main {
+        text-decoration: none;
+        color: rgba(255, 0, 0, 0.645);
+        border-bottom: 3px solid rgba(255, 0, 0, 0.645);
+    }
+
+    .sub {
+        text-decoration: none;
+        color: black;
+    }
+
+    .sub:hover {
+        color: rgba(255, 0, 0, 0.645);
+        /*text-decorationプロパティは、アンダーラインの位置や太さの変更ができない
+            text-decoration: underline;*/
+        border-bottom: 3px solid rgba(255, 0, 0, 0.645);
+    }
+</style>
+<script>
+
+</script>
+
+</html>
+
+<body style="margin: 0;">
+    <header id="header">
+        <div id="header_div">
+            <h3 id="header_h3">f22ba113のホームページ</h3>
+        </div>
+        <nav>
+            <ul id="header_ul">
+                <li id="header_li"><a id="header_a" href="fake_index.html" class="main">ホーム🏠</a></li>
+                <li id="header_li" style="text-align: center;"><a id="header_a" href="bingo_explain.html" class="sub">ビンゴカード</a></li>
+                <li id="header_li" style="border-right: 1px solid black;"><a id="header_a" href="bj_explain.html" class="sub">ブラックジャック</a></li>
+            </ul>
+        </nav>
+
+
+    </header>
+    <!--f22ba113をもう少し右に
+    タブを真ん中に-->
+</body>
+
+</html>

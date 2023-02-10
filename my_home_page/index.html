@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホームページ</title>
+</head>
+<style>
+    /*ヘッダーCSS*/
+    #header {
+        width: 100%;
+        top: -10px;
+        background-color: aquamarine;
+        position: relative;
+        z-index: 10;
+        /*移動させない*/
+        /* position: fixed; */
+
+
+    }
+
+    #header_div {
+        background-color: aquamarine;
+    }
+
+    #header_h3 {
+        color: black;
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+
+    #header_nav {
+        background-color: aquamarine;
+        margin-top: 0;
+    }
+
+    #header_ul {
+        /*縦並びを横並びに*/
+        /*
+        display: flex;
+        width: 85%;
+        justify-content: center;
+        list-style: none;
+        margin: 0;*/
+        list-style: none;
+        margin: -5px auto 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 4px;
+        /*下に少し線を入れて*/
+        border-bottom: solid aquamarine;
+    }
+
+    #header_li {
+        padding: -4cm;
+        border-left: 1px solid black;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    #header_a {
+        text-decoration: none;
+        color: black;
+    }
+
+    #header_a:hover {
+        color: rgba(255, 0, 0, 0.645);
+        /*text-decorationプロパティは、アンダーラインの位置や太さの変更ができない
+            text-decoration: underline;*/
+        border-bottom: 3px solid rgba(255, 0, 0, 0.645);
+    }
+
+    /*自己紹介CSS*/
+    .explain {
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+
+    #table_explain {}
+
+    #kaigyou {
+        width: 0;
+    }
+
+    #face {
+        height: 50%;
+        width: 50%;
+    }
+
+    td_img {
+        width: 30%;
+    }
+
+    #td_expain {
+        text-align: left;
+    }
+    #daimei {
+        border-top: 1px solid #595959;
+    }
+    /*#shousai {
+        border-bottom: 1px solid #595959;
+    }*/
+</style>
+<script>
+
+</script>
+
+</html>
+
+<body style="margin: 0;">
+    <header id="header">
+        <div id="header_div">
+            <h3 id="header_h3">f22ba113のホームページ</h3>
+        </div>
+        <div>
+            <nav>
+                <ul id="header_ul">
+                    <li id="header_li"><a id="header_a" href="https://f22ba113.github.io/-113/my_home_page/index.html">ホーム🏠</a></li>
+                    <li id="header_li" style="text-align: center;"><a id="header_a" href="https://f22ba113.github.io/-113/my_home_page/bingo_explain.html">ビンゴカード</a>
+                    </li>
+                    <li id="header_li" style="border-right: 1px solid black;"><a id="header_a"
+                            href="https://f22ba113.github.io/-113/my_home_page/bj_explain.html">ブラックジャック</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="div explain">
+        <table id="table_explain">
+            <tbody>
+                <tr>
+                    <td id="td_img" style="width: 50%;"><img id="face" src="game_tetsuya_man.png"></td>
+                    <td id="kaigyou">&nbsp;</td>
+                    <td id="td_expain">
+                        <table style="width: 100%;" border="0" cellpadding="0">
+                            <tr>
+                                <td width="0" align="left" valign="top">&nbsp;</td>
+                                <td id="daimei">
+                                    <h3 id="shousai">名前</h3>
+                                    <p  >木村　柊　　　　　　　　　　　　　　　　　</p>
+
+                                </td>
+                            </tr>
+                        </table>
+                        <!--横の幅を統一する方法がわからない-->
+                        <table style="width: 100%;" border="0" cellpadding="0">
+                            <tr>
+                                <td width="0" align="left" valign="top">&nbsp;</td>
+                                <td id="daimei">
+                                    <h3 id="shousai">生年月日</h3>
+                                    <p>7月18日生まれ　　　　　　　</p>
+
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width: 100%;" border="0" cellpadding="0">
+                            <tr>
+                                <td width="0" align="left" valign="top">&nbsp;</td>
+                                <td id="daimei">
+                                    <a href="#shumi" style="text-decoration: none; color: black;"><h3 id="shousai">趣味</h3></a>
+                                    <p>ゲーム、アニメ、YouTube</p>
+
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width: 100%;" border="0" cellpadding="0">
+                            <tr>
+                                <td width="0" align="left" valign="top">&nbsp;</td>
+                                <td id="daimei">
+                                    <h3 id="shousai">血液型</h3>
+                                    <p style="border-bottom: 1px solid #595959;">A型　　　　　　　　　　　　</p>
+
+                                </td>
+                            </tr>
+                        </table>
+            </tbody>
+
+        </table>
+        <!--<td align="left" valign="top"><strong>・ドラマ</strong></td>-->
+     
+        
+        趣味をクリックしてみてね
+
+
+            一日の生活ルーティーン
+            趣味
+            名前、血液型、などの簡単な情報
+            <br>
+            <br>
+            <br><br><br><br><br>
+            <br>
+            <br>
+            <br><br><br><br><br>
+            <br>
+            <br>
+            <br><br><br><br><br>
+            <br>
+            <br>
+            <br><br><br><br><br>
+            <br>
+            <br>
+            <br><br><br><br><br>
+            <br>
+            <br>
+            <br><br><br><br><br>
+            <a id="shumi">ゲームは主にスマホでできるものを好んでいて、FGO、ドッカンバトルをやっています</a>
+            <p>アニメはtop3があって、  <a href="https://www.kyotoanimation.co.jp/kotenbu/">氷菓</a>  <a href="http://steinsgate0-anime.com/">STEINS;GATE</a><a href="https://mushokutensei.jp/">無職転生</a>が大好きです！！！！
+                <br>
+                YouTubeはアニメ.ゲーム関係をよく見ていて、最近は解禁されたダンガンロンパの実況が大好きです
+                <br>
+                本当はもっと語りたいんですけど、時間がないのでこれくらいにしておきます
+            </p>
+    </div>
+    <!--f22ba113をもう少し右に
+    タブを真ん中に
+画像が上に行ってします-->
+</body>
+
+</html>

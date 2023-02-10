@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホームページ</title>
+</head>
+<style>
+    /*ヘッダーCSS*/
+    #header {
+        width: 100%;
+        top: -10px;
+        background-color: aquamarine;
+        position: relative;
+        z-index: 10;
+        /*移動させない*/
+        /* position: fixed; */
+
+
+    }
+
+    #header_div {
+        background-color: aquamarine;
+    }
+
+    #header_h3 {
+        color: black;
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+
+    #header_nav {
+        background-color: aquamarine;
+        margin-top: 0;
+    }
+
+    #header_ul {
+        /*縦並びを横並びに*/
+        /*
+        display: flex;
+        width: 85%;
+        justify-content: center;
+        list-style: none;
+        margin: 0;*/
+        list-style: none;
+        margin: -5px auto 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 4px;
+        /*下に少し線を入れて*/
+        border-bottom: solid aquamarine;
+    }
+
+    #header_li {
+        padding: -4cm;
+        border-left: 1px solid black;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    #header_a {
+        text-decoration: none;
+        color: black;
+    }
+
+    #header_a:hover {
+        color: rgba(255, 0, 0, 0.645);
+        /*text-decorationプロパティは、アンダーラインの位置や太さの変更ができない
+            text-decoration: underline;*/
+        border-bottom: 3px solid rgba(255, 0, 0, 0.645);
+    }
+
+    /*自己紹介CSS*/
+    .explain {
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+
+    #table_explain {}
+
+    #kaigyou {
+        width: 0;
+    }
+
+    #face {
+        height: 50%;
+        width: 50%;
+    }
+
+    td_img {
+        width: 30%;
+    }
+
+    #td_expain {
+        text-align: left;
+    }
+    #daimei {
+        border-top: 1px solid #595959;
+    }
+    /*#shousai {
+        border-bottom: 1px solid #595959;
+    }*/
+</style>
+<script>
+
+</script>
+
+</html>
+
+<body style="margin: 0;">
+    <header id="header">
+        <div id="header_div">
+            <h3 id="header_h3">f22ba113のホームページ</h3>
+        </div>
+        <div>
+            <nav>
+                <ul id="header_ul">
+                    <li id="header_li"><a id="header_a" href="https://f22ba113.github.io/-113/my_home_page/index.html">ホーム🏠</a></li>
+                    <li id="header_li" style="text-align: center;"><a id="header_a" href="https://f22ba113.github.io/-113/my_home_page/bingo_explain.html">ビンゴカード</a>
+                    </li>
+                    <li id="header_li" style="border-right: 1px solid black;"><a id="header_a"
+                            href="https://f22ba113.github.io/-113/my_home_page/bj_explain.html">ブラックジャック</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <a href="https://f22ba113.github.io/-113/bingo_game/b_card_re.html">びんごかーど</a>
+    <br>
+    <a href="https://f22ba113.github.io/-113/bingo_game/b_machine.html">ビンゴマシン</a>
+
+    ビンゴマシンの確認テキストはカンマ区切り（,）であたった数字を入力して確認ボタンを押せば、checkできます
+
+        ビンゴゲームについては非レスポンシブ対応
+        
+
+    <!--f22ba113をもう少し右に
+    タブを真ん中に-->
+</body>
+
+</html>
