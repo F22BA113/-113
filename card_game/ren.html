@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>れｎ</title>
+    <style>
+        /*CPU側のcss*/
+        #cpu_layer {
+            text-align: right;
+        }
+
+        #cpu {
+            height: 200px;
+            width: 300;
+            text-align: right;
+        }
+
+        .card_no1_cpu {
+            height: 200px;
+            width: 136px;
+        }
+
+        .card_back {
+            height: 200px;
+            width: 136px;
+        }
+
+        #card_sum_cpu {
+            height: 50px;
+            width: 50px;
+            font-size: large;
+            text-align: center;
+        }
+
+        /*プレイヤー側のcss*/
+        #mokuzi {
+            text-align: center;
+        }
+
+        #data_div {
+            margin-bottom: 30px;
+        }
+
+        #game_count {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        #bet {
+            text-align: right;
+        }
+
+        /*.card_no_ply {
+            height: 200px;
+            width: 136px;
+        }*/
+
+        /*#bet_momey {
+            
+        }*/
+        #card_sum_ply {
+            height: 50px;
+            width: 50px;
+            font-size: large;
+            text-align: center;
+        }
+
+        .img_tip {
+            width: 10%;
+            height: 10%;
+        }
+
+        /*プレイヤー側トランプcss*/
+        .card_no1_ply {
+            height: 200px;
+            width: 136px;
+            position: relative;
+            z-index: 0;
+        }
+
+        .card_no2_ply {
+            height: 200px;
+            width: 136px;
+            position: relative;
+            z-index: 1;
+            left: -10%;
+        }
+
+        .card_no3_ply {
+            height: 200px;
+            width: 136px;
+            position: relative;
+            z-index: 2;
+            left: -20%;
+        }
+
+        .card_no4_ply {
+            height: 200px;
+            width: 136px;
+            position: relative;
+            z-index: 3;
+            left: -30%;
+        }
+
+        .card_no5_ply {
+            height: 200px;
+            width: 136px;
+            position: relative;
+            z-index: 4;
+            left: -40%;
+        }
+
+        .card_no6_ply {
+            height: 200px;
+            width: 136px;
+            position: relative;
+            z-index: 5;
+            right: 10%;
+        }
+
+        /*バーストレイヤー*/
+        #bust_layer {
+            background-color: blue;
+            width: 60%;
+            height: 20%;
+            line-height: 200px;
+            margin-top: -375px;
+            z-index: 10;
+            position: relative
+        }
+
+        #bust_strong {
+            font-size: large;
+            color: red;
+        }
+
+        /*win レイヤー*/
+        #win_layer {
+            width: 60%;
+            height: 20%;
+            background-color: aquamarine;
+            line-height: 200px;
+            margin-top: -375px;
+            z-index: 10;
+            position: relative
+        }
+
+        /*lose レイヤー*/
+        #lose_layer {
+            width: 60%;
+            height: 20%;
+            background-color: aquamarine;
+            line-height: 200px;
+            margin-top: -375px;
+            z-index: 10;
+            position: relative
+        }
+
+        /*equal レイヤー*/
+        #equal_layer {
+            width: 60%;
+            height: 20%;
+            background-color: aquamarine;
+            line-height: 200px;
+
+            margin-top: -428px;
+            z-index: 10;
+            position: relative
+        }
+
+        #win_layer {
+            width: 60%;
+            height: 20%;
+            background-color: aquamarine;
+            line-height: 200px;
+
+            margin-top: -428px;
+            z-index: 10;
+            position: relative
+        }
+
+        #lose_layer {
+            width: 60%;
+            height: 20%;
+            background-color: aquamarine;
+            line-height: 200px;
+
+            margin-top: -428px;
+            z-index: 10;
+            position: relative
+        }
+
+        /*スコア表示*/
+        #end_layer {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script>
+        // クリック規則
+        var CHACK_button = true;
+        // チップの音
+        const music_bet = new Audio('bet.mp3');
+        // 失敗の音
+        const music_miss = new Audio('miss.mp3');
+        // めくる音
+        const music_card_open = new Audio('card_open.mp3');
+        // 爆発音
+        const music_explosion= new Audio('explosion1.mp3');
+
+        /* ずっと流れているBGM
+        const music_always = new Audio('always.mp3');
+        music_always.loop = true;
+        music_always.volume = 0.2;
+        music_always.play();*/
+
+        // トランプ配列
+        //var TORANP = ["d.01", "d.02", "d.03", "d.04", "d.05", "d.06", "d.07", "d.08", "d.09", "d.10", "d.11", "d.12", "d.13", "h.01", "h.02", "h.03", "h.04", "h.05", "h.06", "h.07", "h.08", "h.09", "h.10", "h.11", "h.12", "h.13", "k.01", "k.02", "k.03", "k.04", "k.05", "k.06", "k.07", "k.08", "k.09", "k.10", "k.11", "k.12", "k.13", "s.01", "s.02", "s.03", "s.04", "s.05", "s.06", "s.07", "s.08", "s.09", "s.10", "s.11", "s.12", "s.13"];
+        var TORANP = ["d.01","d.10", "d.11", "d.12", "d.13", "h.01", "h.10", "h.11", "h.12", "h.13", "k.01", "k.10", "k.11", "k.12", "k.13", "s.01", "s.10", "s.11", "s.12", "s.13"];
+
+        // ゲーム数カウント
+        var GAME_count = 1;
+
+        // トータル金額を数値で取得
+        function get_bet_num() {
+            let bet_momey = document.getElementById("bet_momey").value;
+            let bet_momey_array = bet_momey.split('$');
+            let bet_num = parseInt(bet_momey_array[0], 10);
+            return bet_num;
+        }
+
+        // ベット金額を数値で取得
+        function get_total_num() {
+            let total_momey = document.getElementById("total_momey").value;
+            let total_momey_array = total_momey.split('$');
+            let total_num = parseInt(total_momey_array[0], 10);
+            return total_num;
+        }
+
+        // ベッドしたときに呼び出される
+        function bet_money(aObject) {
+            // ベッドぼたん出現させる
+            document.getElementById('btn_bet').style.display = 'block';
+
+            // 所持＆ベッド金額計算
+            var id = aObject.id;
+
+            // トータル金額を持ってくる
+            let total_num = get_total_num();
+            //　ベット金額を持ってくる
+            let bet_num = get_bet_num();
+
+
+            switch (id) {
+                /*case "5$":
+                    total_num -= 5;
+                    bet_num += 5;
+                    break;*/
+                case "10$":
+                    total_num -= 10;
+                    bet_num += 10;
+                    break;
+                /*case "25$":
+                    total_num -= 25;
+                    bet_num += 25;
+                    break;*/
+                case "50$":
+                    total_num -= 50;
+                    bet_num += 50;
+                    break;
+                case "100$":
+                    total_num -= 100;
+                    bet_num += 100;
+                    break;
+                default:
+                    alert("aaa");
+                    break;
+            }
+            // トータル金額がマイナス or 掛け金が上限を超えたときのとき 　要らない　掛け金が１０の倍数じゃないとき  || bet_num % 10 != 0 　掛け金が0のとき || bet_num == 0
+            if (total_num < 0 || bet_num > 150) {
+                // 失敗の音鳴らす
+                music_miss.play();
+                return;
+            }
+            // ベッドする音
+            music_bet.volume = 1.0;
+            music_bet.play();
+
+            document.getElementById("total_momey").value = total_num + '$';
+            document.getElementById("bet_momey").value = bet_num + '$';
+
+
+        }
+
+        // ベッドするところを消す、カード配分の開始
+        function dollar_layer_close() {
+
+            // 掛け金選択画面を消す
+            document.getElementById('btn_bet').style.display = 'none';
+            document.getElementById('dollar_layer').style.display = 'none';
+
+            // カードの合計表示(cpu)
+            open_card_sum_cpu();
+
+            // カードの合計表示(ply)
+            var imgID = document.getElementById('card_ply');
+            imgID.style.display = 'block';
+            // ぼたんの表示
+            setTimeout(open_div_btn,651);
+
+            // カード配分の開始
+            card_distribute();
+
+        }
+        function open_div_btn() {
+            var imgID = document.getElementById('div_btn');
+            imgID.style.display = 'block';
+        }
+
+        var CARD_no_ply = 1;
+        // カードを配る
+        function card_distribute() {
+            // 2回音を鳴らてカードを配りたい(player)
+            hit();
+            setTimeout(hit, 650);
+
+            // カードの表示(cpu)
+            card_open_cpu();
+
+        }
+        // ボタンを押させなくする
+        function block_btn() {
+            document.getElementById("hit_btn").disabled = true;
+            document.getElementById("stand_btn").disabled = true;
+            document.getElementById("double_btn").disabled = true;
+        }
+        // ボタンを押せるように
+        function open_btn() {
+            document.getElementById("hit_btn").disabled = false;
+            document.getElementById("stand_btn").disabled = false;
+            document.getElementById("double_btn").disabled = false;
+        }
+
+        function hit() {
+            // クリック制限
+            block_btn();
+
+            // カードをオープンしたBGM
+            music_card_open.play();
+
+            // divタグの生成
+            var divTag = document.getElementById("card_ply");
+            var div2Tag = document.createElement("div");
+            div2Tag.id = "ply_f";
+            divTag.appendChild(div2Tag)
+
+            divTag = document.getElementById("ply_f");
+            // ランダムで画像を表示する
+            var random = Math.floor(Math.random() * TORANP.length);
+            var card = TORANP[random];
+            var card_img = card + ".png";
+
+            let imgTag = document.createElement("img");
+            imgTag.src = card_img;
+            imgTag.id = "img_ply";
+            imgTag.className = "card_no" + CARD_no_ply + "_ply";
+            divTag.appendChild(imgTag);
+
+            // カードの合計計算
+            var name = "ply";
+            card_num_colc(card_img, name);
+
+            // 出たトランプを配列から削除
+            TORANP.splice(random, 1);
+            // カードの名前
+            CARD_no_ply += 1;
+
+            // クリック規則解除
+            //open_btn();
+            //setTimeout(open_btn,1000);
+
+        }
+
+        // プレイヤー側のトランプの合計
+        var CARD_sum_ply = 0;
+        // ブラックジャックの可能性があるか
+        var BJ_chance_ply = false;
+        var BJ_chance_cpu = false;
+        // エースの出現管理
+        var ACE_count_ply = 0;
+        var ACE_count_cpu = 0;
+
+        // 出たカードの合計表示
+        function card_num_colc(Acard_img, Aname) {
+            // トランプの数字化
+            var card_array_ply = Acard_img.split(".")
+            var card_num_ply = card_array_ply[1];
+            var card_num_ply = parseInt(card_num_ply, 10);
+
+            // CPUの時
+            if (Aname == "cpu") {
+                // 一枚目で絵札が来た時、ブラックジャックの可能性を付ける
+                if (card_num_ply > 10 && CARD_no_cpu == 1) {
+                    CARD_sum_cpu += 10;
+                    BJ_chance_cpu = true;
+
+                }
+                // 一枚目にエースが来ていて、二枚目に絵札が来た場合　ブラックジャック確定演出
+                else if (card_num_ply > 10 && CARD_no_cpu == 2 && CARD_sum_cpu == 11) {
+                    CARD_sum_cpu += 10;
+                    setTimeout(show_lose_layer, 1000);
+                }
+                // 絵札なら10に
+                else if (card_num_ply > 10) {
+                    CARD_sum_cpu += 10;
+
+                }
+                // ♠なら1or11orブラックジャックかどうかを確認
+                else if (card_num_ply == 1) {
+                    chack_bj_cpu(card_num_ply);
+
+                }
+                else {
+                    CARD_sum_cpu += card_num_ply;
+                }
+                // cpuのの合計表示
+                document.getElementById("card_sum_cpu").value = CARD_sum_cpu;
+                // バーストしているかチェック(ply)
+                var name = "cpu";
+                bust_check(name);
+
+            } else {
+                // PLYの時
+                // 一枚目で絵札が来た時、ブラックジャックの可能性(ply)
+                if (card_num_ply > 10 && CARD_no_ply == 1) {
+                    CARD_sum_ply += 10;
+                    BJ_chance_ply = true;
+
+                }
+                // 一枚目にエースが来ていて、二枚目に絵札が来た場合　ブラックジャック確定演出
+                else if (card_num_ply > 10 && CARD_no_ply == 2 && CARD_sum_ply == 11) {
+                    CARD_sum_ply += 10;
+                    setTimeout(show_bj_layer, 1000);
+                    // クリック規則
+                    block_btn();
+
+                }
+                // 絵札なら10に
+                else if (card_num_ply > 10) {
+                    CARD_sum_ply += 10;
+
+                }
+                // ♠なら1or11orブラックジャックかどうかを確認
+                else if (card_num_ply == 1) {
+                    chack_bj_ply(card_num_ply);
+
+                }
+                else {
+                    CARD_sum_ply += card_num_ply;
+                }
+                // plyのの合計表示
+                document.getElementById("card_sum_ply").value = CARD_sum_ply;
+
+                // バーストしているかチェック(ply)
+                var name = "ply";
+                bust_check(name);
+            }
+
+        }
+
+        // 1or11orブラックジャック(ply)
+        function chack_bj_ply(Acard_num_ply) {
+            // エースが出たとこをカウント
+            ACE_count_ply += 1;
+            // 11が入るか確認
+            CARD_sum_ply += 11;
+            // ブラックジャックの時
+            if (CARD_sum_ply == 21 && BJ_chance_ply == true) {
+                // クリック規則
+                block_btn();
+                setTimeout(show_bj_layer, 1000);
+
+            }// 11でバーストするなら1に
+            else if (CARD_sum_ply > 21) {
+                CARD_sum_ply -= 10;
+                ACE_count_ply -= 1;
+                
+            }// バーストしなければ11を 
+            else {
+            }
+
+        }
+        // 1or11orブラックジャック(cpu)
+        function chack_bj_cpu(Acard_num_cpu) {
+            // エースが出たとこをカウント
+            ACE_count_cpu += 1;
+            // 11が入るか確認
+            CARD_sum_cpu += 11;
+            // ブラックジャックの時
+            if (CARD_sum_cpu == 21 && BJ_chance_cpu == true) {
+                setTimeout(show_lose_layer, 1000);
+
+            }// 11でバーストするなら1に
+            else if (CARD_sum_cpu > 21) {
+                CARD_sum_cpu -= 10;
+                ACE_count_cpu -= 1;
+                // バーストしなければ11を足す
+            } else {
+            }
+
+        }
+
+        // バーストしているかチェック
+        function bust_check(Aname) {
+            // プレイヤー側からの呼び出しの時
+            if (Aname == "ply") {
+                // バーストしている時
+                if (CARD_sum_ply > 21) {
+                    // バーストしてて、♠があるとき
+                    if (ACE_count_ply == 1) {
+                        // ♠を11から１に変更
+                        CARD_sum_ply -= 10;
+                        ACE_count_ply -= 1;
+                        // トランプの合計表示
+                        document.getElementById("card_sum_ply").value = CARD_sum_ply;
+                        // 入力規則を戻す
+                        open_btn();
+                    }
+                    // 単純にバーストしている時
+                    else {
+                        BUST_check = true;
+                        // クリック規則
+                        block_btn();
+                        // バーストレイヤーを出力
+                        setTimeout(open_bast_layer,1000);
+
+                        // 場面をリセットする
+                        setTimeout(reset_game, 3000);
+                    }
+                // ブラックジャックの時
+                }else if (CARD_sum_ply == 21) {
+                    return;
+                }
+                // バーストしていないとき
+                else {
+                    // バーストしていなかったらボタンを元に戻す
+                    open_btn();
+                }
+            }// cpu側からの呼び出しの時
+            else if (Aname == "cpu") {
+                // バーストしている時
+                if (CARD_sum_cpu > 21) {
+                    // バーストしてて、♠があるとき
+                    if (ACE_count_cpu == 1) {
+                        // バーストしてて、♠があるとき
+                        if (ACE_count_cpu == 1) {
+                            // ♠を11から１に変更
+                            CARD_sum_cpu -= 10;
+                            ACE_count_cpu -= 1;
+                            // トランプの合計表示
+                            document.getElementById("card_sum_cpu").value = CARD_sum_cpu;
+                        }
+                    }// 単純にバーストしている時
+                    else {
+                        // クリック規則
+                        block_btn();
+
+                    }
+                }
+            } else {
+                // バーストしていなかったらボタンを元に戻す
+                open_btn();
+            }
+        }
+        /* バーストしてて、♠が2枚あるとき
+                    else if (ACE_count_ply >= 2) {
+                        // ♠の一枚目をを11から１に変更
+                        CARD_sum_ply -= 10;
+                        // 一枚変更してもバーストしている時
+                        if (CARD_sum_ply > 21) {
+                            // 二枚目も１に変更
+                            CARD_sum_ply -= 10;
+                        }
+                        // トランプの合計表示
+                        document.getElementById("card_sum_ply").value = CARD_sum_ply;
+
+                    }*/
+
+        // バーストレイヤーを出力
+        function open_bast_layer() {
+            document.getElementById("bust_layer").style.display = 'block';
+            BUST_check = true;
+        }
+        function bj_equal_layer() {
+
+        }
+
+        var CARD_no_cpu = 1;
+        // カードの表示(cpu)
+        function card_open_cpu() {
+
+            // divタグの生成
+            var divTag = document.getElementById("cpu_layer");
+            var div2Tag = document.createElement("div");
+            div2Tag.id = "cpu_f";
+            divTag.appendChild(div2Tag);
+
+            // カードをオープンしたBGM
+            music_card_open.play();
+            var divTag = document.getElementById("cpu_f");
+            if (CARD_no_cpu == 1) {
+                // ランダムで画像を表示する
+                draw_card_cpu();
+
+                // 裏面カードの表示
+                setTimeout(back_card_open, 650);
+
+
+            } else if (CARD_no_cpu == 2) {
+                // 裏面に画像を表示する
+                var imgTag = document.getElementById("card_back");
+                var random = Math.floor(Math.random() * TORANP.length);
+                var card = TORANP[random];
+                var card_img = card + ".png";
+
+                imgTag.className = "card_no" + CARD_no_cpu + "_ply";
+                imgTag.src = card_img;
+
+                // トランプの合計計算(cpu)
+                var name = "cpu";
+                card_num_colc(card_img, name);
+            } else {
+                // ランダムで画像を表示する
+                draw_card_cpu();
+
+            }
+            // 出たトランプを配列から削除
+            TORANP.splice(random, 1);
+
+            // トランプの合計表示
+            document.getElementById("card_sum_cpu").value = CARD_sum_cpu;
+            // トランプのclass名のための変数(cpu)
+            CARD_no_cpu++;
+        }
+        // ランダムで画像を表示する(cpu)
+        function draw_card_cpu(Achil_card_cpu) {
+            var divTag = document.getElementById("cpu_f");
+
+            var random = Math.floor(Math.random() * TORANP.length);
+            var card = TORANP[random];
+            var card_img = card + ".png";
+
+            var imgTag = document.createElement("img");
+            imgTag.src = card_img;
+            imgTag.className = "card_no" + CARD_no_cpu + "_ply";
+            imgTag.id = "card_no" + CARD_no_cpu + "_ply";
+            divTag.appendChild(imgTag);
+
+            // カードの合計計算
+            var name = "cpu";
+            card_num_colc(card_img, name);
+        }
+        // 裏面のカードの出力
+        function back_card_open() {
+
+            var random = Math.floor(Math.random() * TORANP.length);
+            var card = TORANP[random];
+
+            var divTag = document.getElementById("cpu_f");
+            var imgTag = document.createElement("img");
+            imgTag.src = "card_back.png";
+            imgTag.id = "card_back";
+            imgTag.className = "card_back";
+            divTag.appendChild(imgTag);
+            // 出たトランプを配列から削除
+            TORANP.splice(random, 1);
+            // カードをオープンしたBGM
+            music_card_open.play()
+
+            // ここが安心だと思った
+            open_btn();
+        }
+
+        // 場面をリセットしたとき
+        function reset_game(Abust_check) {
+            // バーストレイヤー、プレイエリア,winレイヤー、loseレイヤーequalレイヤーを非表示
+            document.getElementById("bust_layer").style.display = "none";
+            document.getElementById("card_ply").style.display = "none";
+            document.getElementById("div_btn").style.display = "none";
+            document.getElementById("win_layer").style.display = "none";
+            document.getElementById("equal_layer").style.display = "none";
+            document.getElementById("lose_layer").style.display = "none";
+            document.getElementById("bj_layer").style.display = "none";
+
+
+            // ベット金額リセット
+            document.getElementById("bet_momey").value = '0$';
+            // トランプの合計リセット
+            document.getElementById("card_sum_ply").value = '0';
+            CARD_sum_ply = 0;
+            // トランプの合計リセット(cpu)
+            document.getElementById("card_sum_cpu").value = '0';
+            CARD_sum_cpu = 0;
+            // ブラックジャックチャンスリセット
+            BJ_chance_ply = false;
+            BJ_chance_cpu = false;
+            // エースの存在リセット
+            ACE_count_ply = 0;
+            ACE_count_cpu = 0;
+
+
+            // 全てのトランプ削除
+            var card_ply = document.getElementById("ply_f");
+            if (card_ply != null) {
+                card_ply.remove();
+            }
+            var cpu_layer = document.getElementById("cpu_f");
+            if (cpu_layer != null) {
+                cpu_layer.remove();
+            }
+            /*if (Abust_check == "bust") {
+                cpu_layer.removeChild(document.getElementById('card_back'));
+                //document.getElementById("card_sum_cpu").value = '0';
+            }*/
+
+            // 掛け金選択画面を表示
+            document.getElementById("dollar_layer").style.display = 'block';
+
+            // トランプの変数リセット
+            CARD_no_cpu = 1;
+            CARD_no_ply = 1;
+
+            // カードの合計表示を消す(cpu)
+            close_card_sum_cpu();
+
+            // クリック規則解除
+            //setTimeout(open_btn,1000);
+            open_btn();
+
+            // ゲームが終わりかどうかチェック
+            if (GAME_count == 5) {
+                end_game();
+            }
+            // ゲーム数カウントして表示
+            GAME_count += 1;
+            document.getElementById("game_count").value = "第 " + GAME_count + "ゲーム";
+
+            // バーストのリセット
+            BUST_check = false;
+
+            // ゲームオーバー可動化の判断
+            let total_num = get_total_num();
+            if(total_num <= 0) {
+                //爆発音と、ゲームオーバーレイヤーを表示
+                // 爆発音
+                music_explosion.play()
+            }
+
+        }
+
+        // スコア画面を表示(終わらせる)
+        function end_game() {
+            document.getElementById("ply_layer").remove();
+            document.getElementById("end_layer").style.display = "block";
+        }
+        var CARD_sum_cpu = 0;
+        // cpuのカード表示
+        function stand() {
+            // クリック規則
+            block_btn();
+            // cpuのトランプをめくる
+            card_open_cpu();
+
+            if (CARD_sum_cpu < 17) {
+                /*if (ACE_chack_cpu == true) {
+                    CARD_sum_cpu -= 10;
+
+                }*/
+                setTimeout(stand, 1000);
+            } else {
+                isBattleStatus();
+            }
+        }
+
+        function isBattleStatus() {
+            // cpuのの合計表示
+            document.getElementById("card_sum_cpu").value = CARD_sum_cpu;
+
+            // 勝ち負け判定関数
+            // cpuのブラックジャック
+            if (CARD_sum_cpu == 21) {
+                setTimeout(show_lose_layer, 1000);
+
+                // cpuがバーストしたとき
+            } else if (CARD_sum_cpu > 21) {
+                setTimeout(show_win_layer, 1000);
+
+                // 引き分け
+            } else if (CARD_sum_cpu == CARD_sum_ply) {
+                setTimeout(show_equal_layer, 1000);
+
+                // cpuの勝ち
+            } else if (CARD_sum_cpu > CARD_sum_ply) {
+                setTimeout(show_lose_layer, 1000);
+
+                // cpuの負け
+            } else if (CARD_sum_cpu < CARD_sum_ply) {
+                setTimeout(show_win_layer, 1000);
+
+            } else {
+                alert('エラー1')
+            }
+            CARD_sum_cpu = 0;
+        }
+
+
+        var BUST_check = false;
+        function show_win_layer() {
+            document.getElementById("win_layer").style.display = 'block';
+            // 勝ち計算
+            win_calc();
+            //BUST_check = false;// 必要？
+            setTimeout(reset_game, 3000);
+        }
+        function show_lose_layer() {
+            document.getElementById("lose_layer").style.display = 'block';
+            // 負け計算
+            lose_calc();
+            //BUST_check = false;
+            setTimeout(reset_game, 3000);
+        }
+        function show_equal_layer() {
+            document.getElementById("equal_layer").style.display = 'block';
+            //BUST_check = false;
+            // 引き分け計算
+            equal_calc();
+            setTimeout(reset_game, 3000);
+        }
+        function show_bj_layer() {
+            document.getElementById("bj_layer").style.display = 'block';
+          //  BUST_check = false;
+            // ブラックジャック計算
+            bj_calc();
+            setTimeout(reset_game, 3000);
+        }
+
+        // 勝った時の処理
+        function win_calc() {
+            let bet_num = get_bet_num();
+            bet_num *= 2;
+            let total_num = get_total_num();
+            total_num += bet_num;
+
+            document.getElementById("total_momey").value = total_num + '$';
+
+        }
+        // 負けた時の処理
+        function lose_calc() {
+            let bet_num = get_bet_num();
+            let total_num = get_total_num();
+            total_num -= bet_num;
+
+            document.getElementById("total_momey").value = total_num + '$';
+        }
+        // 引き分けの時の処理
+        function equal_calc() {
+            let bet_num = get_bet_num();
+            let total_num = get_total_num();
+            total_num += bet_num;
+
+            document.getElementById("total_momey").value = total_num + '$';
+        }
+        // ブラックジャックの時の処理
+        function bj_calc() {
+            let bet_num = get_bet_num();
+            bet_num *= 2.5;
+            let total_num = get_total_num();
+            total_num += bet_num;
+
+            document.getElementById("total_momey").value = total_num + '$';
+        }
+
+        // ベット金額を表示
+        function out_bet_num(Abet_momey) {
+            var bet_momey_value = Abet_momey + "$";
+            document.getElementById("bet_momey").value = bet_momey_value;
+        }
+        // トータル金額を表示
+        function out_total_num(Atotal_momey) {
+            var total_momey_value = Atotal_momey + "$";
+            document.getElementById("bet_momey").value = total_momey_value;
+        }
+
+        // ロードしたとき
+        function onload() {
+        }
+        // カードの合計表示(cpu)
+        function open_card_sum_cpu() {
+            document.getElementById("card_sum_cpu").style.visibility = "visible";
+        }
+        // カードの合計表示を消す(cpu)
+        function close_card_sum_cpu() {
+            document.getElementById("card_sum_cpu").style.visibility = "hidden";
+        }
+
+        // ダブル
+        function double() {
+            // クリック規則
+            block_btn();
+            // 掛け金を倍に
+            var get_num = get_bet_num();
+            get_num *= 2;
+            // トータル金額
+            let total_num = get_total_num();
+            // 掛け金を超えていたとき 　　要らない 掛け金が0のとき || get_num == 0
+            if(get_num > total_num) {
+                // 失敗の音鳴らす
+                music_miss.play();
+
+                open_btn();
+                return;
+            }
+            // 掛け金出力
+            out_bet_num(get_num);
+
+            // ダブル専用の動き
+            double_move();
+        }
+        function double_move() {
+            // double用のhit    
+            hit();
+
+            if (BUST_check == true) {
+                setTimeout(lose_calc, 1000);
+                setTimeout(reset_game, 1000);
+                return;
+            } else {
+                setTimeout(stand, 1000);
+            }
+
+        }
+    </script>
+
+</head>
+
+<body onload="onload()">
+    <div id="start_layer" style="display: none;"><!--ゲームが完成してから-->
+        <h1>ブラックジャック</h1>
+        <button>スタート</button>
+    </div>
+    <div id="ply_layer">
+        <div style="float: right; width: 40%;">
+            <div id="cpu_layer">
+                <input id="card_sum_cpu" type="text" style="visibility: hidden;" readonly>
+                <img id="cpu" src="IMG_0134.jpg">
+                <div id="cpu_f"></div>
+            </div>
+        </div>
+
+
+        <div style="float: left; width: 60%;">
+            <input id="game_count" type="text" value="第 1ゲーム" style="border: none; outline: none;" readonly>
+            <div id="data_div" style="display:table; width:60%;" </div><!--style="display:table;"-->
+                <div style="display:table-cell; width:30%;"><!--style="display:table-cell;"-->
+                    <p>トータル金額</p>
+                    <input id="total_momey" type="text" value="500$" readonly>
+                </div>
+                <div id="bet" style="display:table-cell; width:30%;">
+                    <p>ベット金額</p>
+                    <input id="bet_momey" type="text" value="0$" readonly>
+                </div>
+            </div>
+
+            <div id="dollar_layer" style="display: block; background-color: rgb(56, 255, 255);">
+
+                <h3 id="mokuzi">掛け金を選択してください</h3>
+
+                <!--<img id="5$" src="5$.jpg" class="img_tip" onclick="bet_money(this)">-->
+                <img id="10$" src="10$.jpg" class="img_tip" onclick="bet_money(this)">
+                <!--<img id="25$" src="25$.jpg" class="img_tip" onclick="bet_money(this)">-->
+                <img id="50$" src="50$.jpg" class="img_tip" onclick="bet_money(this)">
+                <img id="100$" src="100$.jpg" class="img_tip" onclick="bet_money(this)">
+
+                <input id="btn_bet" type="button" value="決定" style="display: none;" onclick="dollar_layer_close()">
+            </div>
+
+            <div id="card_ply" style="display: none;">
+                <p>カードの合計</p>
+                <input id="card_sum_ply" type="text" value="0" readonly>
+                <div id="ply_f">
+
+                </div>
+            </div>
+            <div id="div_btn" style="display: none;">
+                <input id="hit_btn" type="button" value="ヒット" onclick="hit()">
+                <input id="stand_btn" type="button" value="スタンド" onclick="stand()">
+                <input id="double_btn" type="button" value="ダブル" onclick="double()">
+            </div>
+
+            <center>
+                <div id="bust_layer" style="display: none;">
+                    <strong id="bust_strong">Bust</strong>
+                </div>
+
+                <div id="win_layer" style="display: none;">
+                    <strong id="win_strong">WIN</strong>
+                </div>
+
+                <div id="lose_layer" style="display: none;">
+                    <strong id="lose_strong">LOSE</strong>
+                </div>
+
+                <div id="equal_layer" style="display: none;">
+                    <strong id="equal_strong">引き分け</strong>
+                </div>
+
+                <div id="bj_layer" style="display: none;">
+                    <strong id="equal_strong">ブラックジャック！</strong>
+                </div>
+
+
+        </div>
+        </center>
+    </div>
+
+    <div id="end_layer" style="display: none;">
+        asfhl
+    </div>
+</body>
+<!--メモ
+    チーとぼたんの作成忘れずに
+レイアウトの相談
+音が鳴らなくなる理由
+スタンドで関数は反応しているのに、３秒待ってくれない　どこ？
+なぜかリセット関数よりも先に規則が解除されてします
+ダブルの入力規則が遅い
+
+
+先生のやつ
+自動で表示させるやつ（CID）、どんな関数を組んでいるの？
+土っとゲームは画像はフリー？HBバーはどうやっているの
+テーブルの装飾がどうしている
+攻略サイトはどのようにしてレスポンシブ対応を実電させているのか
+
+こうしたほうがいい
+もっとお金の流れを分かりやすく-->
+
+</html>
