@@ -1139,8 +1139,9 @@
             open_btn();
 
             // ゲームが終わりかどうかチェック
-            if (GAME_count == 5) {
+            if (GAME_count == 1) {
                 result_game();
+                out_total_score();
             }
             // ゲーム数カウントして表示
             GAME_count += 1;
@@ -1179,6 +1180,11 @@
                 music_explosion.play()
             }
 
+        }
+
+        function out_total_score() {
+            var total_num = get_total_num();
+            document.getElementById("text_result").style.display = total_num;
         }
 
         function reset_splitting_game() {
