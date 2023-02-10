@@ -481,12 +481,9 @@
             let total_num = get_total_num();
             //　ベット金額を持ってくる
             let bet_num = get_bet_num();
-            if (total_num <= 0) {
+            if (total_num < 5) {
                 return;
             }
-
-            // ベッドぼたん出現させる
-            document.getElementById('btn_bet').style.display = 'block';
 
 
 
@@ -521,6 +518,9 @@
                 music_miss.play();
                 return;
             }
+            // ベッドぼたん出現させる
+            document.getElementById('btn_bet').style.display = 'block';
+            
             // ベッドする音
             music_bet.volume = 1.0;
             music_bet.play();
@@ -533,6 +533,16 @@
 
         // ベッドするところを消す、カード配分の開始
         function dollar_layer_close() {
+            // トータル金額を持ってくる
+            let total_num = get_total_num();
+            //　ベット金額を持ってくる
+            let bet_num = get_bet_num();
+
+            if (bet_num == 0) {
+                // 失敗の音鳴らす
+                music_miss.play();
+                return;
+            }
 
             // 掛け金選択画面を消す
             document.getElementById('btn_bet').style.display = 'none';
