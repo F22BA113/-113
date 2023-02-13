@@ -408,6 +408,7 @@
         // ブラックジャックの可能性があるか
         var BJ_chance_ply = false;
         var BJ_chance_cpu = false;
+        var BJ_cpu = false;
         // エースの出現管理
         var ACE_count_ply = 0;
         var ACE_count_cpu = 0;
@@ -426,8 +427,7 @@
 
         // インシュランス関係一覧
         // インシュランスボタンを押す
-        var INSURANCE = false;
-        var INSURANCE_num = 0;
+        var INSURANCE = false
         // インシュランスボタンを押させるか
         var INSURANCE_chack = false;
         var INSURANCE_splitting2 = false;
@@ -446,6 +446,11 @@
         var CARD_sum_ply2 = 0;
         // スプリットの一枚目のトランプの勝敗
         var SPLITTING_battle1 = "";
+
+        // カードをひく必要があるかの判定
+        var CHACK_open_card1 = true;
+        var CHACK_open_card2 = true;
+
 
 
         // ベット金額を数値で取得
@@ -520,7 +525,7 @@
             }
             // ベッドぼたん出現させる
             document.getElementById('btn_bet').style.display = 'block';
-            
+
             // ベッドする音
             music_bet.volume = 1.0;
             music_bet.play();
@@ -693,6 +698,7 @@
                 // 一枚目にエースが来ていて、二枚目に絵札が来た場合　ブラックジャック確定演出
                 else if (card_num_ply > 10 && CARD_no_cpu == 2 && CARD_sum_cpu == 11) {
                     CARD_sum_cpu += 10;
+                    BJ_cpu = true;
                     //二回表示するとこになりそう setTimeout(show_lose_layer, 1000);
                 }
                 // 絵札なら10に
@@ -718,7 +724,6 @@
                 // 一枚目で絵札が来た時、ブラックジャックの可能性(ply)
                 if (card_num_ply > 10 && CARD_no_ply2 == 1) {
                     CARD_sum_ply2 += 10;
-                    BJ_chance_ply = true;
                     /*まずここ*/
 
                 }
@@ -727,7 +732,7 @@
                     CARD_sum_ply2 += 10;
                     BJ_2 = true;
                     // ブラックジャックレイヤーを出力
-                    setTimeout(splitting_isBattleStatus, 1000);
+                    setTimeout(splitting_isBattleStatus, 900);
                     // ここで終わり
 
                 }
@@ -748,7 +753,7 @@
                 // ply2のの合計表示
                 document.getElementById("card_sum_ply2").value = CARD_sum_ply2;
 
-                // バーストしているかチェック(ply)
+                // バーストしているかチェック(SPLITTING)
                 var name = "SPLITTING";
                 bust_check(name);
             } else {
@@ -764,6 +769,7 @@
                 else if (card_num_ply > 10 && CARD_no_ply == 2 && CARD_sum_ply == 11) {
                     CARD_sum_ply += 10;
                     BJ_1 = true;
+                    CHACK_open_card1 = false;
                     setTimeout(show_bj_layer, 1000);
                     /* クリック規則
                     block_btn();*/
@@ -809,6 +815,7 @@
                 /* クリック規則
                 block_btn();*/
                 BJ_1 == true;
+                CHACK_open_card1 = false;
                 setTimeout(show_bj_layer, 1000);
 
             }// 11でバーストするなら1に
@@ -830,7 +837,7 @@
             CARD_sum_cpu += 11;
             // ブラックジャックの時
             if (CARD_sum_cpu == 21 && BJ_chance_cpu == true) {
-                // することなし
+                BJ_cpu = true;
             }// 11でバーストするなら1に
             else if (CARD_sum_cpu > 21) {
                 CARD_sum_cpu -= 10;
@@ -851,12 +858,12 @@
             // 11が入るか確認
             CARD_sum_ply2 += 11;
             // ブラックジャックの時
-            if (CARD_sum_ply2 == 21 && BJ_chance_ply == true) {
+            if (CARD_sum_ply2 == 21 && SPLITTING_bj_chance == true) {
                 /* クリック規則
                 block_btn();*/
-                BJ_2 == true;
+                BJ_2 = true;
                 // ブラックジャックレイヤーを出力
-                setTimeout(splitting_isBattleStatus, 800);
+                setTimeout(splitting_isBattleStatus, 900);
                 // ここで終わり
 
             }// 11でバーストするなら1に
@@ -894,7 +901,7 @@
                         // クリック規則　要らなく根
                         block_btn();
                         // バーストレイヤーを出力
-                        setTimeout(splitting_isBattleStatus, 1000);
+                        setTimeout(splitting_isBattleStatus, 900);
 
                     }
 
@@ -924,6 +931,8 @@
                     }
                     // 単純にバーストしている時
                     else {
+                        // 一枚目はカードを引いて、戦う必要無し
+                        CHACK_open_card1 = false;
                         BUST_check1 = true;
                         // クリック規則　要らなく根
                         block_btn();
@@ -939,6 +948,8 @@
                     }
                     // ブラックジャックの時
                 } else if (CARD_sum_ply == 21 && BJ_1 == true) {
+                    // 一枚目はカードを引いて、戦う必要無し
+                    CHACK_open_card1 = false;
                     return;
                 }
                 // バーストしていないとき
@@ -968,9 +979,10 @@
 
                     }
                 }
-            } else {
-                // バーストしていなかったらボタンを元に戻す
-                open_btn();
+                else {
+                    // バーストしていなかったらボタンを元に戻す
+                    open_btn();
+                }
             }
         }
         /* バーストしてて、♠が2枚あるとき
@@ -1115,6 +1127,7 @@
             // ブラックジャックチャンスリセット
             BJ_chance_ply = false;
             BJ_chance_cpu = false;
+            BJ_cpu = false;
             // エースの存在リセット
             ACE_count_ply = 0;
             ACE_count_cpu = 0;
@@ -1149,9 +1162,10 @@
             open_btn();
 
             // ゲームが終わりかどうかチェック
-            if (GAME_count == 1) {
-                result_game();
+            if (GAME_count == 5) {
                 out_total_score();
+                result_game();
+                return
             }
             // ゲーム数カウントして表示
             GAME_count += 1;
@@ -1169,6 +1183,7 @@
 
             INSURANCE == false;
             INSURANCE_chack = false;
+            INSURANCE_splitting2 = false;
 
             // スプリット関係の初期化
             CARD_no_ply2 = 1
@@ -1179,10 +1194,13 @@
             SPLITTING_card_num = 0;
             CARD_sum_ply2 = 0;
             SPLITTING_battle1 = "";
+            // カードをひく必要があるかの判定
+            var CHACK_open_card1 = true;
+            var CHACK_open_card2 = true;
 
 
             // ゲームオーバー可動化の判断
-            let total_num = get_total_num();
+            var total_num = get_total_num();
             if (total_num < 5) {
                 //爆発音と、ゲームオーバーレイヤーを表示
                 result_game();
@@ -1194,7 +1212,7 @@
 
         function out_total_score() {
             var total_num = get_total_num();
-            document.getElementById("text_result").style.display = total_num;
+            document.getElementById("text_result").value = total_num + "$";
         }
 
         function reset_splitting_game() {
@@ -1214,7 +1232,7 @@
             ACE_count_ply = 0;
             ACE_count_cpu = 0;
 
-            // 二枚目に移行
+            // 二枚目にcssを移行
             var main_divTag = document.getElementById("ply_f");
             main_divTag.className = "splitting_ply_of";
             var sub_divTag = document.getElementById("ply_f2");
@@ -1236,11 +1254,6 @@
                 ACE_count_ply = 1;
             }
 
-            // 一枚目で絵札が来た時、ブラックジャックの可能性(ply)
-            if (SPLITTING_bj_chance == true) {
-                BJ_chance_ply == true
-            }
-
             // サレンダーボタン復活
             document.getElementById("surrender_btn").disabled = false;
 
@@ -1260,6 +1273,7 @@
                 reset_splitting_game();
                 return;
             }
+
             // クリック規則
             block_btn();
             // cpuのトランプをめくる
@@ -1273,8 +1287,8 @@
             } else {
                 if (SPLITTING_count == 2) {
                     //CARD_sum_cpu -= 10;　意味わからん
-                    splitting_isBattleStatus();
-                    SPLITTING_count = 1;
+                    setTimeout(splitting_isBattleStatus, 900);
+                    // SPLITTING_count = 1; 消してみた、おそらくこれのせいで意図せずにリセットしている
                 } else if (SPLITTING_count == 3) {
                     return
                 }
@@ -1293,45 +1307,45 @@
             // スプリットの場合
             if (SPLITTING == true) {
                 // スプリットの一枚目の処理
-                if (SPLITTING_count == 1) {
+                if (SPLITTING_count == 1 || SPLITTING_count == 3) {
                     // cpuのブラックジャック
                     if (CARD_sum_cpu == 21) {
                         if (INSURANCE == true) {
-                            SPLITTING_battle1 = "show_inshranceWin_lose_layer";
+                            SPLITTING_battle1 = "1";
                         } else {
-                            SPLITTING_battle1 = "show_lose_layer"
+                            SPLITTING_battle1 = "2"
                         }
 
                         // cpuがバーストしたとき
                     } else if (CARD_sum_cpu > 21) {
                         if (INSURANCE == true) {
-                            SPLITTING_battle1 = "show_inshranceLOSE_win_layer";
+                            SPLITTING_battle1 = "3";
                         } else {
-                            SPLITTING_battle1 = "show_win_layer";
+                            SPLITTING_battle1 = "4";
                         }
 
                         // 引き分け
                     } else if (CARD_sum_cpu == CARD_sum_ply) {
                         if (INSURANCE == true) {
-                            SPLITTING_battle1 = "show_inshranceLOSE_equal_layer";
+                            SPLITTING_battle1 = "5";
                         } else {
-                            SPLITTING_battle1 = "show_equal_layer";
+                            SPLITTING_battle1 = "6";
                         }
 
                         // cpuの勝ち
                     } else if (CARD_sum_cpu > CARD_sum_ply) {
                         if (INSURANCE == true) {
-                            SPLITTING_battle1 = "show_inshranceLOSE_lose_layer";
+                            SPLITTING_battle1 = "7";
                         } else {
-                            SPLITTING_battle1 = "show_lose_layer"
+                            SPLITTING_battle1 = "2"
                         }
 
                         // cpuの負け
                     } else if (CARD_sum_cpu < CARD_sum_ply) {
                         if (INSURANCE == true) {
-                            SPLITTING_battle1 = "show_inshranceLOSE_win_layer";
+                            SPLITTING_battle1 = "3";
                         } else {
-                            SPLITTING_battle1 = "show_win_layer";
+                            SPLITTING_battle1 = "4";
                         }
 
                     } else {
@@ -1403,7 +1417,7 @@
             // スプリット二枚目以外のなら処理してok、二枚目なら上記の処理のみ
             if (SPLITTING_count != 2) {
                 // 場面をリセットする
-                setTimeout(reset_game, 3000);
+                setTimeout(reset_game, 1500);
             }
         }
         function show_lose_layer() {
@@ -1415,7 +1429,7 @@
             // スプリット二枚目以外のなら処理してok、二枚目なら上記の処理のみ
             if (SPLITTING_count != 2) {
                 // 場面をリセットする
-                setTimeout(reset_game, 3000);
+                setTimeout(reset_game, 1500);
             }
 
         }
@@ -1428,7 +1442,7 @@
             // スプリット二枚目以外のなら処理してok、二枚目なら上記の処理のみ
             if (SPLITTING_count != 2) {
                 // 場面をリセットする
-                setTimeout(reset_game, 3000);
+                setTimeout(reset_game, 1500);
             }
 
         }
@@ -1442,12 +1456,12 @@
             if (SPLITTING_count == 1) {
                 // ブラックジャック計算
                 bj_calc();
-                setTimeout(reset_splitting_game, 3000);
+                setTimeout(reset_splitting_game, 1500);
             } else {
                 // ブラックジャック計算
                 bj_calc();
                 // 場面をリセットする
-                setTimeout(reset_game, 3000);
+                setTimeout(reset_game, 1500);
             }
 
         }
@@ -1458,7 +1472,7 @@
             // スプリット二枚目以外のなら処理してok、二枚目なら上記の処理のみ
             if (SPLITTING_count != 2) {
                 // 場面をリセットする
-                setTimeout(reset_game, 3000);
+                setTimeout(reset_game, 1500);
             }
 
         }
@@ -1471,7 +1485,7 @@
             // スプリット二枚目以外のなら処理してok、二枚目なら上記の処理のみ
             if (SPLITTING_count != 2) {
                 // 場面をリセットする
-                setTimeout(reset_game, 3000);
+                setTimeout(reset_game, 1500);
             }
 
         }
@@ -1484,7 +1498,7 @@
             // スプリット二枚目以外のなら処理してok、二枚目なら上記の処理のみ
             if (SPLITTING_count != 2) {
                 // 場面をリセットする
-                setTimeout(reset_game, 3000);
+                setTimeout(reset_game, 1500);
             }
 
         }
@@ -1497,7 +1511,7 @@
             // スプリット二枚目以外のなら処理してok、二枚目なら上記の処理のみ
             if (SPLITTING_count != 2) {
                 // 場面をリセットする
-                setTimeout(reset_game, 3000);
+                setTimeout(reset_game, 1500);
             }
 
         }
@@ -1508,12 +1522,17 @@
             surrender_calc();
             // 場面をリセットする
             // スプリット1枚目以外なら処理してok、1枚目なら別処理
-            if (SPLITTING_count != 1) {
-                // 場面をリセットする
-                setTimeout(reset_game, 3000);
+            if (SPLITTING == true) {
+                if (SPLITTING_count == 1) {
+                    setTimeout(reset_splitting_game, 1500);
+                } else {
+                    setTimeout(move_battle_to_f1, 1500);
+                }
             } else {
-                setTimeout(reset_splitting_game, 3000);
+                // 場面をリセットする
+                setTimeout(reset_game, 1500);
             }
+
         }
 
 
@@ -1673,6 +1692,10 @@
             var bet_momey_value = Abet_momey + "$";
             document.getElementById("bet_momey").value = bet_momey_value;
         }
+        function out_bet_num2(Abet_momey2) {
+            var bet_momey_value = Abet_momey2 + "$";
+            document.getElementById("bet_momey2").value = bet_momey_value;
+        }
         // トータル金額を表示
         function out_total_num(Atotal_momey) {
             var total_momey_value = Atotal_momey + "$";
@@ -1704,10 +1727,10 @@
 
             if (SPLITTING_count == 2) {
                 // 掛け金を持ってくる
-                var get_num = get_bet_num2();
+                var get_num2 = get_bet_num2();
 
                 //  同額分残っていなれば× 　　要らない 掛け金が0のとき || get_num == 0
-                if (get_num > total_num) {
+                if (get_num2 > total_num) {
                     // 失敗の音鳴らす
                     music_miss.play();
 
@@ -1715,8 +1738,9 @@
                     return;
                 }
                 // 掛け金出力
-                out_bet_num(get_num);
-                total_num -= get_num;
+                out_bet_num2(get_num2 * 2);
+                total_num -= get_num2;
+                CHACK_open_card2 == false;
             } else {
                 // 掛け金を持ってくる
                 var get_num = get_bet_num();
@@ -1732,6 +1756,7 @@
                 // 掛け金出力
                 out_bet_num(get_num * 2);
                 total_num -= get_num;
+                CHACK_open_card1 == false;
             }
 
             // トータル金額出力
@@ -1745,11 +1770,17 @@
             hit();
 
             // バーストしていたらこの時点で終わり
-            if (BUST_check1 == true) {
-                return;
-            } else if (BUST_check2 == true) {
-                return;
+            
+            if (SPLITTING_count == 2) {
+                if (BUST_check2 == true || BJ_2 == true) {
+                    return;
+                }
+            }else{
+                if (BUST_check1 == true || BJ_1 == true) {
+                    return;
+                }
             }
+
 
             // クリック規則　これで治った
             block_btn();
@@ -1792,6 +1823,11 @@
 
         // サレンダー
         function surrender() {
+            if (SPLITTING_count == 2) {
+                CHACK_open_card2 = false;
+            } else {
+                CHACK_open_card1 = false;
+            }
             music_surrender.play();
 
             block_btn();
@@ -1957,23 +1993,24 @@
         function splitting_isBattleStatus() {
             // 二枚目でブラックジャックしていて、
             if (BJ_2 == true) {
+                // 二枚目はカードを引いて、戦う必要無し
+                CHACK_open_card2 = false;
                 // 一枚目でブラックジャックorバーストしていたら自動的に終わらせてok
                 if (BJ_1 == true || BUST_check1 == true) {
                     show_bj_layer();
+                    setTimeout(reset_game, 1200);
                     return
                 }// 一枚目でブラックジャックしてなければ、結果判定へ
-                else if (BJ_1 == false) {
+                else if (BJ_1 == false || BUST_check1 == false) {
                     // ブラックジャックの時の音
                     music_blackjack.play();
                     music_crap.play();
-
                     document.getElementById("bj_layer").style.display = 'block';
 
                     // ブラックジャック計算
                     bj_calc();
 
-                    setTimeout(move_battle_to_f1, 1900);
-
+                    setTimeout(move_battle_to_f1, 1200);
                     return
 
                 }
@@ -1984,15 +2021,17 @@
 
             // 二枚目でバストしていて、
             if (BUST_check2 == true) {
+                // 二枚目はカードを引いて、戦う必要無し
+                CHACK_open_card2 = false;
                 // 一枚目でバストしていたら自動的に終わらせてok
                 if (BUST_check1 == true || BJ_1 == true) {
                     show_bast_layer();
                     // 場面をリセットする
-                    setTimeout(reset_game, 3000);
+                    reset_game();
                     return
                 }
                 // 一枚目でブラックジャックorバストしていなければ、結果判定へ
-                else if (BUST_check1 == false) {
+                else if (BUST_check1 == false || BUST_check1 == false) {
                     show_bast_layer();
 
                     setTimeout(move_battle_to_f1, 900);
@@ -2008,41 +2047,41 @@
             // cpuのブラックジャック
             if (CARD_sum_cpu == 21) {
                 if (INSURANCE_splitting2 == true) {
-                    setTimeout(show_inshranceWin_lose_layer, 1000);
+                    show_inshranceWin_lose_layer();
                 } else {
-                    setTimeout(show_lose_layer, 1000);
+                    show_lose_layer();
                 }
 
                 // cpuがバーストしたとき
             } else if (CARD_sum_cpu > 21) {
                 if (INSURANCE_splitting2 == true) {
-                    setTimeout(show_inshranceLOSE_win_layer, 1000);
+                    show_inshranceLOSE_win_layer();
                 } else {
-                    setTimeout(show_win_layer, 1000);
+                    show_win_layer();
                 }
 
                 // 引き分け
             } else if (CARD_sum_cpu == CARD_sum_ply2) {
                 if (INSURANCE_splitting2 == true) {
-                    setTimeout(show_inshranceLOSE_equal_layer, 1000);
+                    show_inshranceLOSE_equal_layer();
                 } else {
-                    setTimeout(show_equal_layer, 1000);
+                    show_equal_layer();
                 }
 
                 // cpuの勝ち
             } else if (CARD_sum_cpu > CARD_sum_ply2) {
                 if (INSURANCE_splitting2 == true) {
-                    setTimeout(show_inshranceLOSE_lose_layer, 1000);
+                    show_inshranceLOSE_lose_layer();
                 } else {
-                    setTimeout(show_lose_layer, 1000);
+                    show_lose_layer();
                 }
 
                 // cpuの負け
             } else if (CARD_sum_cpu < CARD_sum_ply2) {
                 if (INSURANCE_splitting2 == true) {
-                    setTimeout(show_inshranceLOSE_win_layer, 1000);
+                    show_inshranceLOSE_win_layer();
                 } else {
-                    setTimeout(show_win_layer, 1000);
+                    show_win_layer();
                 }
 
             } else {
@@ -2050,17 +2089,15 @@
             }
 
             // 一枚目がブラックジャックかバーストなら一枚目判定をスキップ
-            if (BJ_1 == true) {
-                reset_game();
-                return
-            } else if (BUST_check1 == true) {
-                reset_game();
+            if (BJ_1 == true || BUST_check1 == true) {
+                setTimeout(reset_game, 900);
                 return
             }
 
             setTimeout(move_battle_to_f1, 900);
 
         }
+
         // 結果判定を二枚目から一枚目に飛ぶ
         function move_battle_to_f1() {
             //おそらく意味ないSPLITTING_count = 1;
@@ -2084,18 +2121,56 @@
             document.getElementById("surrender_layer").style.display = "none";
 
             SPLITTING_count = 3;
-            if (BJ_2 == true || BUST_check2 == true) {
-                stand();
-                // 一枚目の勝敗判定を文字列に格納
-                isBattleStatus();
+
+            // 一枚目でカードを引く必要があれば、引く
+            if (CHACK_open_card1 == true) {
+                // けど、もう引いてあれば引く必要はない(T,Fミスってるかも)
+                if (CHACK_open_card2 == true) {
+                    // 一枚目の勝敗判定を文字列に格納するだけ
+                    isBattleStatus();
+                } else {
+                    // cpuのカードをオープンし、一枚目の勝敗判定を文字列に格納する
+                    stand();
+                    isBattleStatus();
+                }
             }
-            setTimeout(splitting_card1_isBattleStatus, 500);
+
+            // 一枚目の勝敗レイヤー表示
+            setTimeout(splitting_card1_isBattleStatus, 800);
 
         }
 
         // スプリット一枚目の処理
         function splitting_card1_isBattleStatus() {
-            eval(SPLITTING_battle1+ "()");
+            switch (SPLITTING_battle1) {
+                case "1":
+                    show_inshranceWin_lose_layer();
+                    break;
+
+                case "2":
+                    show_lose_layer();
+                    break;
+
+                case "3":
+                    show_inshranceLOSE_win_layer();
+                    break;
+
+                case "4":
+                    show_win_layer();
+                    break;
+
+                case "5":
+                    show_inshranceLOSE_equal_layerz();
+                    break;
+
+                case "6":
+                    show_equal_layer();
+                    break;
+
+                case "7":
+                    show_inshranceLOSE_lose_layer();
+                    break;
+            }
             //
         }
     </script>
@@ -2155,7 +2230,7 @@
             </div>
 
             <div id="card_ply" style="display: none;">
-                <div id="ply_f">
+                <div id="cpu_f">
                     <p>トランプの合計</p>
                     <input id="card_sum_ply" type="text" value="0" readonly><br>
 
@@ -2211,7 +2286,7 @@
 
     <div id="result_layer" style="display: none;">
         <h1 id="contact-ttl">総合結果</h1>
-        <input id="text_result" type="text">
+        <input id="text_result" type="text" value="0$">
     </div>
 </body>
 <!--メモ
