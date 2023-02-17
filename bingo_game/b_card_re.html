@@ -943,6 +943,7 @@
             margin-top: 0;
             margin-bottom: 0;
         }
+
         li {
             margin-bottom: -8px;
         }
@@ -1095,6 +1096,7 @@
             z-index: 10;
             position: relative;
         }
+
         #chack_layer {
             margin-top: -640px;
             height: 640px;
@@ -1124,23 +1126,28 @@
         }
 
         #gif {
-            height: 80%;
+            height: 460px;
             width: 100%;
             /*background-color: rgba(0, 0, 0, 0.348);*/
         }
+
         #chack_table {
             height: 640px;
             width: 360px;
         }
+
         #chack_td_img {
             width: 100%;
         }
+
         #chack_tr1 {
             height: 70%;
         }
+
         #chack_td_left {
             width: 20%;
         }
+
         #chack_td_right {
             width: 20%;
         }
@@ -1258,17 +1265,17 @@
 
     <!--レイヤー2　ビンゴカードstyle="POSITION:absolute;LEFT: 30px;TOP:0;"-->
     <center>
-    <img id="img" style="DISPLAY:none;position: relative;z-index: 0;" src="S__none.jpg">
+        <img id="img" style="DISPLAY:none;position: relative;z-index: 0;" src="S__none.jpg">
         <div id="bingo_layer" style="DISPLAY:none;" class="bingo_close">
-        <!--<img id="img" style="DISPLAY:none;" src="S__S24027146.jpg">-->
+            <!--<img id="img" style="DISPLAY:none;" src="S__S24027146.jpg">-->
             <table class="tabel_bingo"><!--bgcolor="#ff8731" ココのテーブルがずれている-->
 
                 <!--<input id="name_out" type="text" style="text-align: right;">-->
 
                 <!--<h1 style="text-align: center;"></h1>-->
-                
-                    <tr id="bingo" class="tabel_bingo">
-                        <!--<td>
+
+                <tr id="bingo" class="tabel_bingo">
+                    <!--<td>
                             <h2 class="bingo_h2">B</h2>
                         </td>
                         <td>
@@ -1283,44 +1290,45 @@
                         <td>
                             <h2 class="bingo_h2">O</h2>
                         </td>-->
-                    </tr>
-                    <tr id="num1" class="tabel_bingo"><!-- style="background: linear-gradient(#7BE690, #87E99B)"-->
-                        <td class="tabel_bingo"><input id="00" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="10" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="20" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="30" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="40" class="c_in" type="button" onclick="change(this)"></td>
-                    </tr>
+                </tr>
+                <tr id="num1" class="tabel_bingo"><!-- style="background: linear-gradient(#7BE690, #87E99B)"-->
+                    <td class="tabel_bingo"><input id="00" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="10" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="20" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="30" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="40" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
 
-                    <tr id="num2"><!-- style="background: linear-gradient(#70E49A, #79E6AD)"-->
-                        <td class="tabel_bingo"><input id="01" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="11" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="21" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="31" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="41" class="c_in" type="button" onclick="change(this)"></td>
-                    </tr>
-                    <tr id="num3">
-                        <td class="tabel_bingo"><input id="02" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="12" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="22" class="mid_in" type="button" onclick="change(this)" value="☆"></td>
-                        <td class="tabel_bingo"><input id="32" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="42" class="c_in" type="button" onclick="change(this)"></td>
-                    </tr>
-                    <tr id="num4">
-                        <td class="tabel_bingo"><input id="03" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="13" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="23" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="33" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="43" class="c_in" type="button" onclick="change(this)"></td>
-                    </tr>
-                    <tr id="num5"> <!--background: linear-gradient(#75DDE5, #74D7E5)-->
-                        <td class="tabel_bingo"><input id="04" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="14" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="24" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="34" class="c_in" type="button" onclick="change(this)"></td>
-                        <td class="tabel_bingo"><input id="44" class="c_in" type="button" onclick="change(this)"></td>
-                    </tr>
-                
+                <tr id="num2"><!-- style="background: linear-gradient(#70E49A, #79E6AD)"-->
+                    <td class="tabel_bingo"><input id="01" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="11" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="21" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="31" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="41" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+                <tr id="num3">
+                    <td class="tabel_bingo"><input id="02" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="12" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="22" class="mid_in" type="button" onclick="change(this)"
+                            value="☆"></td>
+                    <td class="tabel_bingo"><input id="32" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="42" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+                <tr id="num4">
+                    <td class="tabel_bingo"><input id="03" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="13" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="23" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="33" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="43" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+                <tr id="num5"> <!--background: linear-gradient(#75DDE5, #74D7E5)-->
+                    <td class="tabel_bingo"><input id="04" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="14" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="24" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="34" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="44" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+
             </table>
         </div>
 
@@ -1328,28 +1336,30 @@
 
 
     <!--レイヤー3　確認フォーム POSITION:absolute;LEFT: 0px;TOP:0; bgcolor="#80E0E0" style="background-color: rgba(0, 0, 0, 0.348);"-->
-    <center id="chack_center">
-        <div id="chack_layer" style="DISPLAY: none;" bgcolor="#80E0E0" class="cheack_close">
-            <table id="chack_table">
-                <tr id="chack_tr1">
-                    <td id="chack_td_img" colspan="3">
-                        <img id="gif" src="S__bingo.gif">
-                        <!--<h2 class="chack_h2">BINGO!!<br>おめでとうございます！</h2>-->
-                    </td>
-                </tr>
-                <tr id="chack_tr2">
-                    <td id="chack_td_left">
-                        <input type="button" id="btn_back" value="戻る" class="" onclick="cheack_show()">
+    <div id="check_div">
+        <center id="chack_center">
+            <div id="chack_layer" style="DISPLAY: none;" bgcolor="#80E0E0" class="cheack_close">
+                <table id="chack_table">
+                    <tr id="chack_tr1">
+                        <td id="chack_td_img" colspan="3">
+                            <img id="gif" src="S__bingo.gif">
+                            <!--<h2 class="chack_h2">BINGO!!<br>おめでとうございます！</h2>-->
+                        </td>
+                    </tr>
+                    <tr id="chack_tr2">
+                        <td id="chack_td_left">
+                            <input type="button" id="btn_back" value="戻る" class="" onclick="cheack_show()">
 
-                    </td>
-                    <td id="chack_td"></td>
-                    <td id="chack_td_right">
-                        <input type="button" id="btn_next" value="QR" class="" onclick="qr_show()">
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </center>
+                        </td>
+                        <td id="chack_td"></td>
+                        <td id="chack_td_right">
+                            <input type="button" id="btn_next" value="QR" class="" onclick="qr_show()">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </center>
+    </div>
 
     <!--レイヤー4　QRフォーム POSITION:absolute;LEFT: 0px;TOP:0;-->
 
@@ -1374,7 +1384,7 @@
             </table>
         </div>
     </center>
-<!--メモ
+    <!--メモ
     スマホでタップすると毎回反応してから数秒おいて変化する
     divの中に画像を入力すると変な風になるんだけどナニコレ？
     安全性大丈夫か
