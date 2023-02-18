@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ビーンゴカードre</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script type="text/JavaScript">
+
+        // ビンゴカードに数を割り振る関数
+        function makebin() {
+
+            //1行目の配列を生成
+            bingo1 = [0, 0, 0, 0, 0];
+            var letu = 0;
+            var count = 0;
+
+            while (letu <= 4) {
+                while (bingo1[letu] == 0) {
+                    var random = Math.floor(Math.random() * 15 + 1);
+                    if (bingo1[0] != random & bingo1[1] != random & bingo1[2] != random & bingo1[3] != random & bingo1[4] != random) {
+                        bingo1[count] = random;
+                        count++;
+                    }
+                }
+                letu++;
+            }
+            // ボタンに値を格納
+            document.getElementById("00").value = bingo1[0];
+            document.getElementById("01").value = bingo1[1];
+            document.getElementById("02").value = bingo1[2];
+            document.getElementById("03").value = bingo1[3];
+            document.getElementById("04").value = bingo1[4];
+
+
+            //2行目の配列を生成
+            bingo2 = [0, 0, 0, 0, 0];
+            var letu = 0;
+            var count = 0;
+
+            while (letu <= 4) {
+                while (bingo2[letu] == 0) {
+                    var random = Math.floor(Math.random() * 15 + 16);
+                    if (bingo2[0] != random & bingo2[1] != random & bingo2[2] != random & bingo2[3] != random & bingo2[4] != random) {
+                        bingo2[count] = random;
+                        count++;
+                    }
+                }
+                letu++;
+            }
+            // ボタンに値を格納
+            document.getElementById("10").value = bingo2[0];
+            document.getElementById("11").value = bingo2[1];
+            document.getElementById("12").value = bingo2[2];
+            document.getElementById("13").value = bingo2[3];
+            document.getElementById("14").value = bingo2[4];
+
+
+            //3行目の配列を生成
+            bingo3 = [0, 0, 0, 0];
+            var letu = 0;
+            var count = 0;
+
+            while (letu <= 3) {
+                while (bingo3[letu] == 0) {
+                    var random = Math.floor(Math.random() * 15 + 31);
+                    if (bingo3[0] != random & bingo3[1] != random & bingo3[2] != random & bingo3[3] != random & bingo3[4] != random) {
+                        bingo3[count] = random;
+                        count++;
+                    }
+                }
+                letu++;
+            }
+            //ボタンに値を格納
+            document.getElementById("20").value = bingo3[0];
+            document.getElementById("21").value = bingo3[1];
+            document.getElementById("23").value = bingo3[2];
+            document.getElementById("24").value = bingo3[3];
+
+
+
+            //4行目の配列を生成
+            bingo4 = [0, 0, 0, 0, 0];
+            var letu = 0;
+            var count = 0;
+
+            while (letu <= 4) {
+                while (bingo4[letu] == 0) {
+                    var random = Math.floor(Math.random() * 15 + 46);
+                    if (bingo4[0] != random & bingo4[1] != random & bingo4[2] != random & bingo4[3] != random & bingo4[4] != random) {
+                        bingo4[count] = random;
+                        count++;
+                    }
+                }
+                letu++;
+            }
+            //ボタンに値を格納
+            document.getElementById("30").value = bingo4[0];
+            document.getElementById("31").value = bingo4[1];
+            document.getElementById("32").value = bingo4[2];
+            document.getElementById("33").value = bingo4[3];
+            document.getElementById("34").value = bingo4[4];
+
+
+
+            //5行目の配列を生成
+            bingo5 = [0, 0, 0, 0, 0];
+            var letu = 0;
+            var count = 0;
+
+            while (letu <= 4) {
+                while (bingo5[letu] == 0) {
+                    var random = Math.floor(Math.random() * 15 + 61);
+                    if (bingo5[0] != random & bingo5[1] != random & bingo5[2] != random & bingo5[3] != random & bingo5[4] != random) {
+                        bingo5[count] = random;
+                        count++;
+                    }
+                }
+                letu++;
+            }
+            //ボタンに値を格納
+            document.getElementById("40").value = bingo5[0];
+            document.getElementById("41").value = bingo5[1];
+            document.getElementById("42").value = bingo5[2];
+            document.getElementById("43").value = bingo5[3];
+            document.getElementById("44").value = bingo5[4];
+
+            /*要らなくなった
+            // CSSをリセット
+            document.getElementById("00").className = "c_in";
+            document.getElementById("01").className = "c_in";
+            document.getElementById("02").className = "c_in";
+            document.getElementById("03").className = "c_in";
+            document.getElementById("04").className = "c_in";
+            document.getElementById("10").className = "c_in";
+            document.getElementById("11").className = "c_in";
+            document.getElementById("12").className = "c_in";
+            document.getElementById("13").className = "c_in";
+            document.getElementById("14").className = "c_in";
+            document.getElementById("20").className = "c_in";
+            document.getElementById("21").className = "c_in";
+            document.getElementById("22").className = "mid_in";
+            document.getElementById("23").className = "c_in";
+            document.getElementById("24").className = "c_in";
+            document.getElementById("30").className = "c_in";
+            document.getElementById("31").className = "c_in";
+            document.getElementById("32").className = "c_in";
+            document.getElementById("33").className = "c_in";
+            document.getElementById("34").className = "c_in";
+            document.getElementById("40").className = "c_in";
+            document.getElementById("41").className = "c_in";
+            document.getElementById("42").className = "c_in";
+            document.getElementById("43").className = "c_in";
+            document.getElementById("44").className = "c_in";*/
+
+            //更新日時
+            var date = new Date();
+            document.getElementById("date_out").value = date.toLocaleString("ja");
+        }
+
+        // クリックされたボタンの情報を記憶するグローバル変数
+        var CLS; var ID;
+        // ビンゴが重複しないためのやつ
+        SAVE_BINGO = false;
+
+        // クリックされたら色が変わる関数
+        function change(aObject) {
+            
+            // ビンゴになったいなかったら、実行する
+            if (SAVE_BINGO == false) {
+                // 引数に.idでIDが取れる
+                var id = aObject.id;
+                ID = aObject.id;
+
+                // 引数に.classNameでクラス名が取れる
+                var cls = aObject.className;
+
+                if (cls == "c_in" ) {
+                    document.getElementById(id).className = "c_out";
+                    CLS = "c_out";
+                }
+                else if (cls == "c_out") {
+                    document.getElementById(id).className = "c_in";
+
+                }
+                else if (cls == "mid_in") {
+                    document.getElementById(id).className = "mid_out";
+                    document.getElementById(id).style = "backgroundcolor: #000000";
+                    CLS = "mid_out";
+                }
+
+
+                // ビンゴかどうかの判断をする関数を呼び出す
+                cheack_bingo(id);
+            }
+            /*if (SAVE_BINGO == ture) {
+                return
+            }
+            にして、*/
+            
+        }
+
+        // 入力フォームを閉じる関数
+        function input_close() {
+            var objID = document.getElementById('input_layer');
+            objID.style.display = 'none';
+            objID.className = 'cheack_close';
+            //var name_value = document.getElementById('name_in').value;
+
+            // ビンゴカードを表示
+            objID = document.getElementById('bingo_layer');
+            objID.style.display = 'block';// blockを当てることで出力している
+            objID.className = 'bingo_open';
+            // 画像表示
+            var imgID = document.getElementById('img');
+            imgID.style.display = 'block';// blockを当てることで出力している
+            //imgID.className = 'bingo_open';
+
+            //document.getElementById('name_out').value = name_value
+        }
+
+
+
+        // 確認レイヤー表示を表示する関数
+        function cheack_show() {
+            // chack_layerのＩＤを取得
+            var objID = document.getElementById('chack_layer');
+
+            // layerのクラス名がcheack_closeなら表示
+            if (objID.className == 'cheack_close') {
+            objID.style.display = 'block';// blockを当てることで出力している
+            objID.className = 'cheack_open';
+    
+            //img_close(); // 画像を閉じる
+            //bingo_close(); // ビンゴカードを閉じる
+
+            }else if (objID.className == 'cheack_open') {
+            // 確認レイヤーを閉じる
+            cheack_close();
+            // ビンゴカードを表示する
+            bingo_open();
+            // 画像を表示する
+            img_open();
+            SAVE_BINGO = false
+            }
+            
+        }
+
+        // ビンゴレイヤーを表示する関数
+        function bingo_open() {
+            var objID = document.getElementById('bingo_layer');
+
+            objID.style.display = 'block';
+            objID.className = 'bingo_open';
+
+        }
+        // 画像を表示する関数
+        function img_open() {
+            var imgID = document.getElementById('img');
+            imgID.style.display = 'block';
+            //imgID.className = 'bingo_close';
+        }
+
+        // ビンゴレイヤーを閉じる関数
+        function bingo_close() {
+            var objID = document.getElementById('bingo_layer');
+
+            objID.style.display = 'none';
+            objID.className = 'bingo_close';
+        }
+        // 画像を閉じる関数
+        function img_close() {
+            var imgID = document.getElementById('img');
+            imgID.style.display = 'none';
+            //imgID.className = 'bingo_close';
+        }
+
+
+        //　確認レイヤーを閉じる関数
+        function cheack_close() {
+            var objID = document.getElementById('chack_layer');
+
+            // 戻った時に押したボタンが戻っている
+            if (CLS == "c_out") {
+                document.getElementById(ID).className = "c_in";
+            }
+            else if (CLS == "mid_out") {
+                document.getElementById(ID).className = "mid_in";
+            }
+            objID.style.display = 'none';
+            objID.className = 'cheack_close';
+        }
+
+
+        // QRレイヤー表示を表示する関数
+        function qr_show() {
+            // 確認レイヤーを閉じる
+            var objID = document.getElementById('chack_layer');
+            objID.style.display = 'none';
+            objID.className = 'cheack_close';
+
+            // qr_layerとボタンのＩＤを取得
+            var objID = document.getElementById('qr_layer');
+
+            // layerのクラス名がcheack_closeなら表示
+            if (objID.className == 'qr_close') {
+                objID.style.display = 'block';// blockを当てることで出力している
+                img_close(); // 画像を閉じる
+                bingo_close(); // ビンゴカードを閉じる
+                objID.className = 'qr_open';
+            } else {
+                qr_close();
+            }
+
+            // QRコード生成
+            make_qr();
+        }
+
+        //　QRレイヤーを閉じる関数
+        function qr_close() {
+            var objID = document.getElementById('qr_layer');
+
+            objID.style.display = 'none';
+            objID.className = 'qr_close';
+            SAVE_BINGO = false;
+
+
+            bingo_open();
+            img_open();
+        }
+
+
+        Bingo = [0, 0, 0, 0, 0];
+        // bingoナンバーを格納する関数一覧
+        function input_bingo0004() {
+            Bingo[0] = document.getElementById("00").value;
+            Bingo[1] = document.getElementById("01").value;
+            Bingo[2] = document.getElementById("02").value;
+            Bingo[3] = document.getElementById("03").value;
+            Bingo[4] = document.getElementById("04").value;
+        }
+
+        function input_bingo0040() {
+            Bingo[0] = document.getElementById("00").value;
+            Bingo[1] = document.getElementById("10").value;
+            Bingo[2] = document.getElementById("20").value;
+            Bingo[3] = document.getElementById("30").value;
+            Bingo[4] = document.getElementById("40").value;
+        }
+
+        function input_bingo0141() {
+            Bingo[0] = document.getElementById("01").value;
+            Bingo[1] = document.getElementById("11").value;
+            Bingo[2] = document.getElementById("21").value;
+            Bingo[3] = document.getElementById("31").value;
+            Bingo[4] = document.getElementById("41").value;
+        }
+
+        function input_bingo0242() {
+            Bingo[0] = document.getElementById("02").value;
+            Bingo[1] = document.getElementById("12").value;
+            Bingo[2] = document.getElementById("22").value;
+            Bingo[3] = document.getElementById("32").value;
+            Bingo[4] = document.getElementById("42").value;
+        }
+
+        function input_bingo0343() {
+            Bingo[0] = document.getElementById("03").value;
+            Bingo[1] = document.getElementById("13").value;
+            Bingo[2] = document.getElementById("23").value;
+            Bingo[3] = document.getElementById("33").value;
+            Bingo[4] = document.getElementById("43").value;
+        }
+
+        function input_bingo0444() {
+            Bingo[0] = document.getElementById("04").value;
+            Bingo[1] = document.getElementById("14").value;
+            Bingo[2] = document.getElementById("24").value;
+            Bingo[3] = document.getElementById("34").value;
+            Bingo[4] = document.getElementById("44").value;
+        }
+
+        function input_bingo1014() {
+            Bingo[0] = document.getElementById("10").value;
+            Bingo[1] = document.getElementById("11").value;
+            Bingo[2] = document.getElementById("12").value;
+            Bingo[3] = document.getElementById("13").value;
+            Bingo[4] = document.getElementById("14").value;
+        }
+
+        function input_bingo2024() {
+            Bingo[0] = document.getElementById("20").value;
+            Bingo[1] = document.getElementById("21").value;
+            Bingo[2] = document.getElementById("22").value;
+            Bingo[3] = document.getElementById("23").value;
+            Bingo[4] = document.getElementById("24").value;
+        }
+
+        function input_bingo3034() {
+            Bingo[0] = document.getElementById("30").value;
+            Bingo[1] = document.getElementById("31").value;
+            Bingo[2] = document.getElementById("32").value;
+            Bingo[3] = document.getElementById("33").value;
+            Bingo[4] = document.getElementById("34").value;
+        }
+
+        function input_bingo4044() {
+            Bingo[0] = document.getElementById("40").value;
+            Bingo[1] = document.getElementById("41").value;
+            Bingo[2] = document.getElementById("42").value;
+            Bingo[3] = document.getElementById("43").value;
+            Bingo[4] = document.getElementById("44").value;
+        }
+
+        function input_bingo0044() {
+            Bingo[0] = document.getElementById("00").value;
+            Bingo[1] = document.getElementById("11").value;
+            Bingo[2] = document.getElementById("22").value;
+            Bingo[3] = document.getElementById("33").value;
+            Bingo[4] = document.getElementById("44").value;
+        }
+
+        function input_bingo0441() {
+            Bingo[0] = document.getElementById("04").value;
+            Bingo[1] = document.getElementById("13").value;
+            Bingo[2] = document.getElementById("22").value;
+            Bingo[3] = document.getElementById("31").value;
+            Bingo[4] = document.getElementById("40").value;
+        }
+
+        // ビンゴナンバー初期化、要らなくね？
+        function reset_Bingo() {
+            Bingo = [0, 0, 0, 0, 0];
+        }
+
+
+        // QRコード生成
+        var Result = "";
+        function make_qr(){
+            // 初期化
+            Result = "";
+            // QRコードで値を渡す下準備
+            for (let i = 0; i < Bingo.length; i++) {
+                if (i == 0) {
+                    Result += Bingo[i];
+                } else {
+                    Result += ", " + Bingo[i];
+                }
+            }
+        let utf8qrtext = unescape(encodeURIComponent(Result));
+        // QRの大きさ
+        let size = 200;
+        $("#img-qr").html("");
+        $("#img-qr").qrcode({width:size,height:size,text:utf8qrtext}); 
+        };
+ 
+
+        
+        // ビンゴかどうかの判断をする関数
+        function cheack_bingo(aId) {
+            switch (aId) {
+                // 1行目
+                case "00":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
+                        document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
+                        setTimeout(cheack_show, 500);// レイヤー表示を表示する関数を呼び出す
+                        input_bingo0004(); // bingoになった数字を格納する関数を呼び出す
+                        SAVE_BINGO = true;
+                        
+
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
+                        document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0040();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0044();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "01":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
+                        document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0004();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0141();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "02":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
+                        document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0004();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0242();
+                        SAVE_BINGO = true;
+
+                    }
+                    break;
+
+                case "03":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
+                        document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
+                            setTimeout(cheack_show, 500);
+                        input_bingo0004();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                            setTimeout(cheack_show, 500);
+                            input_bingo0343();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "04":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("01").className == "c_out" && document.getElementById("02").className == "c_out" &&
+                        document.getElementById("03").className == "c_out" && document.getElementById("04").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0004();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
+                        document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0444();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0441();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                // 2行目
+                case "10":
+                    if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
+                        document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo1014()
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
+                        document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0004();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "11":
+                    if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
+                        document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo1014();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0141();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0044();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "12":
+                    if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
+                        document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo1014();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0242();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "13":
+                    if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
+                        document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo1014();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0343();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0441();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "14":
+                    if (document.getElementById("10").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("12").className == "c_out" &&
+                        document.getElementById("13").className == "c_out" && document.getElementById("14").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo1014();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
+                        document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0444();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                // 3行目
+                case "20":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
+                        document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0040();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo2024();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "21":
+                    if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo2024();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0141();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "22":
+                    if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo2024();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0242();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0044();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0441();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "23":
+                    if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo2024();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0343();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "24":
+                    if (document.getElementById("20").className == "c_out" && document.getElementById("21").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("23").className == "c_out" && document.getElementById("24").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo2024();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
+                        document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0444();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                // 4行目
+                case "30":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
+                        document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0040();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo3034();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "31":
+                    if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo3034();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0141();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0441();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "32":
+                    if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo3034();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0242();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "33":
+                    if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo3034();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0343();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0044();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "34":
+                    if (document.getElementById("30").className == "c_out" && document.getElementById("31").className == "c_out" && document.getElementById("32").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("34").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo3034();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
+                        document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0444();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                // 5行目
+                case "40":
+                    if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
+                        document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0040();
+                        SAVE_BINGO = true;
+                        }
+                    else if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
+                        document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo4044();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("40").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0441();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "41":
+                    if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
+                        document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo4044();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("01").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("21").className == "c_out" &&
+                        document.getElementById("31").className == "c_out" && document.getElementById("41").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0141();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "42":
+                    if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
+                        document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo4044();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("02").className == "c_out" && document.getElementById("12").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("32").className == "c_out" && document.getElementById("42").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0242();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "43":
+                    if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
+                        document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo4044();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("03").className == "c_out" && document.getElementById("13").className == "c_out" && document.getElementById("23").className == "c_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("43").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0343();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+
+                case "44":
+                    if (document.getElementById("40").className == "c_out" && document.getElementById("41").className == "c_out" && document.getElementById("42").className == "c_out" &&
+                        document.getElementById("43").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo4044();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("04").className == "c_out" && document.getElementById("14").className == "c_out" && document.getElementById("24").className == "c_out" &&
+                        document.getElementById("34").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0444();
+                        SAVE_BINGO = true;
+                    }
+                    else if (document.getElementById("00").className == "c_out" && document.getElementById("11").className == "c_out" && document.getElementById("22").className == "mid_out" &&
+                        document.getElementById("33").className == "c_out" && document.getElementById("44").className == "c_out") {
+                        setTimeout(cheack_show, 500);
+                        input_bingo0044();
+                        SAVE_BINGO = true;
+                    }
+                    break;
+            }
+        }
+
+
+    </script>
+    <style>
+        body {
+            margin: 0ch;
+        }
+
+        /*入力フォームCSS*/
+        #input {
+            height: 640px;
+            width: 360px;
+            text-align: center;
+        }
+
+
+        .input_p {
+            font-size: 60px;
+            font-weight: bold;
+            color: rgb(24, 78, 255);
+            text-align: center;
+            top: 40px;
+
+        }
+
+        .input_h4 {
+            color: rgb(255, 255, 255);
+            text-align: center;
+        }
+
+        .input_h5 {
+            border-radius: 20px;
+            text-align: left;
+            font-size: 70%;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: -8px;
+        }
+
+        .input_button {
+            width: 5px;
+        }
+
+
+        /*ビンゴカードCSS*/
+        .tabel_bingo {
+            border: 1px solid #595959;
+            border-collapse: collapse;
+
+            height: 95px;
+            width: 360px;
+
+            border-top: none;
+            border-bottom: none;
+            border-right: none;
+            border-left: none;
+            text-align: center;
+        }
+
+        .bingo_h2 {
+            font-size: 28px;
+        }
+
+        /*td,
+        th {
+            padding: 3px;
+            width: 30px;
+            height: 30px;
+        }*/
+
+        /*th {
+            background: #f355e1;
+            height:100px;
+            width:100px;
+        }*/
+
+        .even {
+            background: #fbf8f0;
+        }
+
+        .odd {
+            background: #fefcf9
+        }
+
+        .cin {
+            background-color: #ffffff;
+        }
+
+
+
+        #bingo {
+            background-color: #fff;
+            text-align: center;
+        }
+
+
+        .c_in {
+            color: #000;
+            background-color: #b9b9b9;
+
+            border-radius: 50%;
+            line-height: 44px;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border: none
+        }
+
+        /*hoverとは、指定したHTML要素にカーソルが乗ったときにCSSを実行できる擬似クラス
+        .c_in:hover {
+            color: rgb(0, 0, 0);
+            background: #dfdfdf;
+        }*/
+
+        /*CSSで影をつけるための一番基本的なプロパティーが box-shadow です。
+        .c_in:shadow {
+            -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        }*/
+
+        .c_out {
+            background-color: rgb(0, 0, 0);
+            background-color: #ffffff;
+
+            border-radius: 50%;
+            line-height: 44px;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+
+            border: none
+        }
+
+        .mid_in {
+            color: #000;
+            background-color: #b9b9b9;
+
+            border-radius: 50%;
+            line-height: 44px;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+
+            border: none
+        }
+
+        /*
+        .mid_in:hover {
+            color: rgb(0, 0, 0);
+            background: #dfdfdf;
+        }
+
+        .mid_in::shadow {
+            -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        }*/
+
+        .mid_out {
+            background-color: rgb(255, 255, 255);
+
+            border-radius: 50%;
+            line-height: 44px;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+
+            border: none
+        }
+
+        #num {
+            text-align: center;
+        }
+
+        .bingo_open {
+            /*background: url(イラスト12　正規版２.png) no-repeat;*/
+            margin-top: -579px;
+            /*margin-left: 25px;*/
+            position: relative;
+            z-index: 5;
+        }
+
+
+        /*確認フォームCSS*/
+        #chack_center {
+            background-color: rgba(0, 0, 0, 0.556);
+            z-index: 10;
+            position: relative;
+        }
+
+        #chack_layer {
+            margin-top: -640px;
+            height: 640px;
+            width: 360px;
+            z-index: 10;
+            position: relative;
+
+            /* ビンゴカードだけ透過させたいとき
+            background-color: rgba(0, 0, 0, 0.556);
+            z-index: 10;
+            position: relative;*/
+        }
+
+
+        .chack_h2 {
+            text-align: center;
+        }
+
+        #btn_next {
+            height: 40px;
+            width: 60px;
+            border-radius: 10%;
+        }
+
+        #btn_back {
+            height: 40px;
+            width: 60px;
+            border-radius: 10%;
+        }
+
+        #gif {
+            height: 460px;
+            width: 100%;
+            /*background-color: rgba(0, 0, 0, 0.348);*/
+        }
+
+        #chack_table {
+            height: 640px;
+            width: 360px;
+        }
+
+        #chack_td_img {
+            width: 100%;
+        }
+
+        #chack_tr1 {
+            height: 70%;
+        }
+
+        #chack_td_left {
+            width: 20%;
+        }
+
+        #chack_td_right {
+            width: 20%;
+        }
+
+
+
+        /*QRフォーム*/
+        #qr {
+            width: 360px;
+            height: 640px;
+
+            text-align: center;
+        }
+
+        .img-qr {
+            color: #fff;
+        }
+
+        #td_qr {
+            background-color: #fff;
+            width: 90%;
+            height: 90%;
+        }
+
+        #td_time {
+            width: 10%;
+            height: 10%;
+            text-align: left;
+            background-color: #fff;
+        }
+
+
+        /* 基本スタイル（PC向けスタイル） */
+        @media screen and (max-width:1024px) {
+            /* タブレット向けスタイル　*/
+        }
+
+        @media screen and (max-width: 540px) {
+            /* モバイル向けスタイル */
+            /*pcファースト*/
+        }
+    </style>
+</head>
+
+<body onload="makebin()">
+
+    <!--レスポンシブ対応
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0, user-scalable=no”>-->
+
+    <!--レイヤー１　入力フォームstyle="DISPLAY: block;POSITION:absolute;LEFT: 0px;TOP:0;-->
+    <center>
+        <div id="input_layer" class="input_open" style="DISPLAY:block;">
+            <table id="input" border="1" bgcolor=#89b4fa cellspacing=0 cellpadding=4>
+                <tr>
+                    <td>
+                        <center>
+                            <p class="input_p" style="margin-bottom: 10px; margin-top: 10px;">B I N G O</p>
+
+                            <!--<h3 class="input_h3">ニックネームを入力してね！</h3>-->
+                            <!--枠の中に透かしで｛ニックネーム｝って入れたらかわいいかも-->
+                            <!--<input id="name_in" type="text" valuse="ニックネーム">-->
+
+                            <br>
+                            <br>
+                            <br>
+                            <h4 class="input_h4">※注意事項※</h4>
+
+                            <ul class="input_h5">
+                                <!--左寄せにしたいね-->
+                                <li>画面の更新はしないでね！</li><br>
+                                <li>ダブルビンゴなどは無効だよ！</li><br>
+                                <li>間違えても、もう一度押せば取り消せるよ</li><br>
+                                <li>注意事項守らない場合、ビンゴが取り消しになります</li>
+                                <br>
+                            </ul>
+                            <br>
+                            <br>
+
+                            <input type="button" id="input_button" value="確認しました" onclick="input_close()">
+                        </center>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
+
+    <!--透かし文字-->
+    <script type="text/javascript">
+
+        /*var textbox = document.getElementById('name_in');
+ 
+        // 入力フォーカスを得たときの処理
+        textbox.onfocus = function () {
+            if (this.value == this.defaultValue) {
+                this.value = '';
+                this.style.color = '';
+            }
+        }
+ 
+        // 入力フォーカスを失ったときの処理
+        textbox.onblur = function () {
+            if (this.value == '') {
+                this.value = this.defaultValue;
+                this.style.color = 'gray';
+            }
+        }
+ 
+        // 透かし文字をdefaultValueプロパティで保持する
+        textbox.defaultValue = textbox.value;
+        textbox.value = '';
+ 
+        textbox.onblur();*/
+
+    </script>
+
+    <!--レイヤー2　ビンゴカードstyle="POSITION:absolute;LEFT: 30px;TOP:0;"-->
+    <center>
+        <img id="img" style="DISPLAY:none;position: relative;z-index: 0;" src="remake01.png">
+        <div id="bingo_layer" style="DISPLAY:none;" class="bingo_close">
+            <!--<img id="img" style="DISPLAY:none;" src="S__S24027146.jpg">-->
+            <table class="tabel_bingo"><!--bgcolor="#ff8731" ココのテーブルがずれている-->
+
+                <!--<input id="name_out" type="text" style="text-align: right;">-->
+
+                <!--<h1 style="text-align: center;"></h1>-->
+
+                <tr id="bingo" class="tabel_bingo">
+                    <!--<td>
+                            <h2 class="bingo_h2">B</h2>
+                        </td>
+                        <td>
+                            <h2 class="bingo_h2">I</h2>
+                        </td>
+                        <td>
+                            <h2 class="bingo_h2">N</h2>
+                        </td>
+                        <td>
+                            <h2 class="bingo_h2">G</h2>
+                        </td>
+                        <td>
+                            <h2 class="bingo_h2">O</h2>
+                        </td>-->
+                </tr>
+                <tr id="num1" class="tabel_bingo"><!-- style="background: linear-gradient(#7BE690, #87E99B)"-->
+                    <td class="tabel_bingo"><input id="00" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="10" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="20" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="30" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="40" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+
+                <tr id="num2"><!-- style="background: linear-gradient(#70E49A, #79E6AD)"-->
+                    <td class="tabel_bingo"><input id="01" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="11" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="21" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="31" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="41" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+                <tr id="num3">
+                    <td class="tabel_bingo"><input id="02" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="12" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="22" class="mid_in" type="button" onclick="change(this)"
+                            value="☆"></td>
+                    <td class="tabel_bingo"><input id="32" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="42" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+                <tr id="num4">
+                    <td class="tabel_bingo"><input id="03" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="13" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="23" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="33" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="43" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+                <tr id="num5"> <!--background: linear-gradient(#75DDE5, #74D7E5)-->
+                    <td class="tabel_bingo"><input id="04" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="14" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="24" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="34" class="c_in" type="button" onclick="change(this)"></td>
+                    <td class="tabel_bingo"><input id="44" class="c_in" type="button" onclick="change(this)"></td>
+                </tr>
+
+            </table>
+        </div>
+
+    </center>
+
+
+    <!--レイヤー3　確認フォーム POSITION:absolute;LEFT: 0px;TOP:0; bgcolor="#80E0E0" style="background-color: rgba(0, 0, 0, 0.348);"-->
+    <div id="check_div">
+        <center id="chack_center">
+            <div id="chack_layer" style="DISPLAY: none;" bgcolor="#80E0E0" class="cheack_close">
+                <table id="chack_table">
+                    <tr id="chack_tr1">
+                        <td id="chack_td_img" colspan="3">
+                            <img id="gif" src="S__bingo.gif">
+                            <!--<h2 class="chack_h2">BINGO!!<br>おめでとうございます！</h2>-->
+                        </td>
+                    </tr>
+                    <tr id="chack_tr2" style="text-align: center;">
+                        <td id="chack_td_left">
+                            <input type="button" id="btn_back" value="戻る" class="" onclick="cheack_show()">
+
+                        </td>
+                        <td id="chack_td"></td>
+                        <td id="chack_td_right">
+                            <input type="button" id="btn_next" value="QR" class="" onclick="qr_show()">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </center>
+    </div>
+
+    <!--レイヤー4　QRフォーム POSITION:absolute;LEFT: 0px;TOP:0;-->
+
+    <center>
+        <div id="qr_layer" style="DISPLAY: none;" class="qr_close">
+            <table id="qr" border="1" bgcolor="#80E0E0" cellspacing=0 cellpadding=4>
+                <tr>
+                    <td id="td_time">
+                        <input id="date_out" type="text" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="td_qr">
+                        <div id="img-qr"></div>
+                        <br>
+                        <br>
+                        <p><input type="button" id="btn_back" value="戻る" class="" onclick="qr_close()">←戻るならこちら</p>
+
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
+    <!--メモ
+    スマホでタップすると毎回反応してから数秒おいて変化する
+    divの中に画像を入力すると変な風になるんだけどナニコレ？
+    安全性大丈夫か
+    タップしたときの形
+    ぎふがくそでか
+-->
+</body>
