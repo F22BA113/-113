@@ -907,6 +907,13 @@
             }
         }
 
+        
+
+        $(window).on('beforeunload', function(e){
+            var message = '本当に更新してよろしいですか？';
+            e.returnValue = message;
+            return message;
+        });
 
     </script>
     <style>
