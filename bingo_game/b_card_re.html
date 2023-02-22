@@ -909,11 +909,15 @@
 
         
 
-        $(window).on('beforeunload', function(e){
+        /*$(window).on('beforeunload', function(e){
             var message = '本当に更新してよろしいですか？';
             e.returnValue = message;
             return message;
-        });
+        });*/
+        window.addEventListener('beforeunload', function (event) {
+            event.preventDefault() // (1)
+            event.returnValue = '' // (2)
+        })
 
     </script>
     <style>
