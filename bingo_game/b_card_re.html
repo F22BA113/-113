@@ -169,7 +169,7 @@
         // クリックされたら色が変わる関数
         function change(aObject) {
             
-            // ビンゴになったいなかったら、実行する
+            // ビンゴになっていなかったら、実行する
             if (SAVE_BINGO == false) {
                 // 引数に.idでIDが取れる
                 var id = aObject.id;
@@ -341,6 +341,7 @@
             Bingo[2] = document.getElementById("02").value;
             Bingo[3] = document.getElementById("03").value;
             Bingo[4] = document.getElementById("04").value;
+            alert(Bingo);
         }
 
         function input_bingo0040() {
@@ -349,6 +350,7 @@
             Bingo[2] = document.getElementById("20").value;
             Bingo[3] = document.getElementById("30").value;
             Bingo[4] = document.getElementById("40").value;
+            alert(Bingo);
         }
 
         function input_bingo0141() {
@@ -357,6 +359,7 @@
             Bingo[2] = document.getElementById("21").value;
             Bingo[3] = document.getElementById("31").value;
             Bingo[4] = document.getElementById("41").value;
+            alert(Bingo);
         }
 
         function input_bingo0242() {
@@ -365,6 +368,7 @@
             Bingo[2] = document.getElementById("22").value;
             Bingo[3] = document.getElementById("32").value;
             Bingo[4] = document.getElementById("42").value;
+            alert(Bingo);
         }
 
         function input_bingo0343() {
@@ -373,6 +377,7 @@
             Bingo[2] = document.getElementById("23").value;
             Bingo[3] = document.getElementById("33").value;
             Bingo[4] = document.getElementById("43").value;
+            alert(Bingo);
         }
 
         function input_bingo0444() {
@@ -381,6 +386,7 @@
             Bingo[2] = document.getElementById("24").value;
             Bingo[3] = document.getElementById("34").value;
             Bingo[4] = document.getElementById("44").value;
+            alert(Bingo);
         }
 
         function input_bingo1014() {
@@ -389,6 +395,7 @@
             Bingo[2] = document.getElementById("12").value;
             Bingo[3] = document.getElementById("13").value;
             Bingo[4] = document.getElementById("14").value;
+            alert(Bingo);
         }
 
         function input_bingo2024() {
@@ -397,6 +404,7 @@
             Bingo[2] = document.getElementById("22").value;
             Bingo[3] = document.getElementById("23").value;
             Bingo[4] = document.getElementById("24").value;
+            alert(Bingo);
         }
 
         function input_bingo3034() {
@@ -405,6 +413,7 @@
             Bingo[2] = document.getElementById("32").value;
             Bingo[3] = document.getElementById("33").value;
             Bingo[4] = document.getElementById("34").value;
+            alert(Bingo);
         }
 
         function input_bingo4044() {
@@ -413,6 +422,7 @@
             Bingo[2] = document.getElementById("42").value;
             Bingo[3] = document.getElementById("43").value;
             Bingo[4] = document.getElementById("44").value;
+            alert(Bingo);
         }
 
         function input_bingo0044() {
@@ -421,6 +431,7 @@
             Bingo[2] = document.getElementById("22").value;
             Bingo[3] = document.getElementById("33").value;
             Bingo[4] = document.getElementById("44").value;
+            alert(Bingo);
         }
 
         function input_bingo0441() {
@@ -429,6 +440,7 @@
             Bingo[2] = document.getElementById("22").value;
             Bingo[3] = document.getElementById("31").value;
             Bingo[4] = document.getElementById("40").value;
+            alert(Bingo);
         }
 
         // ビンゴナンバー初期化、要らなくね？
@@ -564,7 +576,7 @@
                     else if (document.getElementById("00").className == "c_out" && document.getElementById("10").className == "c_out" && document.getElementById("20").className == "c_out" &&
                         document.getElementById("30").className == "c_out" && document.getElementById("40").className == "c_out") {
                         setTimeout(cheack_show, 500);
-                        input_bingo0004();
+                        input_bingo0040();
                         SAVE_BINGO = true;
                     }
                     break;
@@ -906,6 +918,10 @@
                     break;
             }
         }
+        window.addEventListener('beforeunload', function (event) {
+            event.preventDefault() // (1)
+            event.returnValue = '' // (2)
+        })
 
         
 
@@ -914,10 +930,6 @@
             e.returnValue = message;
             return message;
         });*/
-        window.addEventListener('beforeunload', function (event) {
-            event.preventDefault() // (1)
-            event.returnValue = '' // (2)
-        })
 
     </script>
     <style>
