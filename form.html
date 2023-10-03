@@ -125,6 +125,7 @@
         width: 80%;
         top: 20%;
         left: 10%;
+        border-radius: 10px;
     }
 
     .div_L {
@@ -195,6 +196,11 @@
         }
     }
 
+    .error_text {
+        text-align: center;
+        margin-top: 50%;
+    }
+
 
     .num_text {
         text-align: left;
@@ -239,11 +245,40 @@
 
     .name_label {
         /*margin-bottom: 5%;*/
-        color: #333333;
+        color: #ffffff;
     }
 
     .form_btn {
         margin-top: 5%;
+    }
+
+    .batsu {
+        display: block;
+        position: relative;
+        width: 30px;
+        height: 30px;
+    }
+
+    .batsu::before,
+    .batsu::after {
+        /* 共通設定 */
+        content: "";
+        position: absolute;
+        top: 90%;
+    left: 910%;
+        width: 5px;
+        /* 棒の幅（太さ） */
+        height: 30px;
+        /* 棒の高さ */
+        background:#957b7b;
+    }
+
+    .batsu::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .batsu::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
     }
 </style>
 
@@ -253,7 +288,8 @@
 
 <body>
     <div id="error_all" class="error_all" onclick="off_error_div()">
-        <p>入力内容に誤りがあります</p>
+        <span class="batsu"></span>
+        <h3 class="error_text">入力内容に誤りがあります</h3>
     </div>
     <div class="content_div">
         <!--<div class="div_L"></div>-->
