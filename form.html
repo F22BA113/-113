@@ -7,13 +7,6 @@
     <title>Document</title>
 </head>
 <style>
-    .cp_ipradio {
-        /*width: 90%;*/
-        /*margin: 2em auto;*/
-        text-align: left;
-        margin-bottom: 15%;
-    }
-
     @keyframes click-wave {
         0% {
             position: relative;
@@ -123,6 +116,17 @@
         background-color: #333333;
     }
 
+    .error_all {
+        z-index: 1;
+        position: absolute;
+        background-color: #ff3961;
+        display: block;
+        height: 60%;
+        width: 80%;
+        top: 20%;
+        left: 10%;
+    }
+
     .div_L {
         width: 20%;
 
@@ -143,17 +147,51 @@
         color: white;
     }
 
-    @media screen {
-        .h3_text {
+    .h3_text {
         border-bottom: 1px solid #BFE0D6;
-        margin-bottom: 75px;
+    }
+
+    @media screen {
+
+        .h3_text {
+            border-bottom: 1px solid #BFE0D6;
+            margin-bottom: 70px;
+        }
+
+        .cp_ipradio {
+            /*width: 90%;*/
+            /*margin: 2em auto;*/
+            text-align: left;
+            margin-bottom: 70px;
+        }
+
+        .input_name {
+            height: 25px;
+            width: 100%;
+            background-color: rgb(198, 255, 245);
+            margin-bottom: 50px;
         }
     }
 
     @media handheld {
+
         .h3_text {
-        border-bottom: 1px solid #BFE0D6;
-        margin-bottom: 20%;
+            border-bottom: 1px solid #BFE0D6;
+            margin-bottom: 20%;
+        }
+
+        .cp_ipradio {
+            /*width: 90%;*/
+            /*margin: 2em auto;*/
+            text-align: left;
+            margin-bottom: 15%;
+        }
+
+        .input_name {
+            height: 25px;
+            width: 100%;
+            background-color: rgb(198, 255, 245);
+            margin-bottom: 15%;
         }
     }
 
@@ -193,12 +231,6 @@
         display: none;
     }
 
-    .input_name {
-        height: 25px;
-        width: 100%;
-        background-color: rgb(198, 255, 245);
-        margin-bottom: 15%;
-    }
 
     .name1_div {
         display: flex;
@@ -207,6 +239,7 @@
 
     .name_label {
         /*margin-bottom: 5%;*/
+        color: #333333;
     }
 
     .form_btn {
@@ -219,6 +252,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 
 <body>
+    <div id="error_all" class="error_all" onclick="off_error_div()">
+        <p>入力内容に誤りがあります</p>
+    </div>
     <div class="content_div">
         <!--<div class="div_L"></div>-->
 
@@ -233,6 +269,8 @@
                         <p class="num_text">予約人数を選択</p>
                         <p class="any_text">必須</p>
                     </div>
+
+
                     <div class="cp_ipradio">
 
                         <label>
@@ -284,6 +322,11 @@
 
     <script>
 
+        function off_error_div() {
+            console.log("error");
+            document.getElementById('error_all').style.display = 'none';
+        }
+
         /*function limitTextLength(inputElement, maxLength) {
             inputElement.addEventListener('input', function() {
                 if (inputElement.value.length > maxLength) {
@@ -294,9 +337,9 @@
 
         function limitTextLength(inputElement, maxLength) {
             console.log("kita");
-                if (inputElement.value.length > maxLength) {
-                    inputElement.value = inputElement.value.slice(0, maxLength);
-                }
+            if (inputElement.value.length > maxLength) {
+                inputElement.value = inputElement.value.slice(0, maxLength);
+            }
         }
 
         // 使用例
@@ -318,7 +361,7 @@
             if (flg) {
                 // 表示処理
                 name2_any.style.display = 'block';
-            }else {
+            } else {
                 // 非表示処理
                 name2_any.style.display = 'none';
             }
@@ -327,10 +370,6 @@
         toggleRequired(false)
 
         document.getElementById("form").addEventListener("submit", function (e) {
-            // 文字数オーバー
-            if (document.getElementById('name1').value.length > 6 || document.getElementById('name2').value.length >) {
-
-            }
 
             e.preventDefault(); // フォームの通常の送信を防ぐ
             var form = document.getElementById("form");
