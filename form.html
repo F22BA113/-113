@@ -116,6 +116,11 @@
         display: flex;
     }
 
+    body {
+        color: white;
+        background-color: #333333;
+    }
+
     .div_L {
         width: 20%;
 
@@ -131,51 +136,96 @@
 
     }
 
+    .h1_text {
+        font-family: 'Fredoka One', cursive;
+        color: white;
+    }
+
     .h3_text {
         border-bottom: 1px solid #BFE0D6;
         margin-bottom: 20%;
     }
 
-    .p_text {
+    .num_text {
         text-align: left;
         margin: 0;
+        text-wrap: nowrap;
+        margin-right: 10px;
+    }
+
+    .name_text {
+        text-align: left;
+        margin: 0;
+        text-wrap: nowrap;
+        margin-right: 10px;
+    }
+
+    .any_text {
+        margin: 0;
+        background-color: red;
+        border-radius: 1rem;
+        color: white;
+        text-align: center;
+        text-wrap: nowrap;
+        padding: 0 10px;
+    }
+
+    .any_text2 {
+        margin: 0;
+        background-color: red;
+        border-radius: 1rem;
+        color: white;
+        text-align: center;
+        text-wrap: nowrap;
+        padding: 0 10px;
+        display: none;
     }
 
     .input_name {
         width: 100%;
         background-color: rgb(198, 255, 245);
+        margin-bottom: 35px;
+    }
+
+    .name1_div {
+        display: flex;
+        margin-bottom: 5px;
     }
 
     .name_label {
-        margin-bottom: 5%;
+        /*margin-bottom: 5%;*/
     }
 </style>
 
 
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 
 <body>
     <div class="content_div">
-        <div class="div_L"></div>
+        <!--<div class="div_L"></div>-->
 
         <div class="div_M">
             <center>
-                <h1>CID EXPO2023</h1>
+                <h1 class="h1_text">CID EXPO2023</h1>
 
                 <h3 class="h3_text">予約フォーム</h3>
 
                 <form action="" method="get" id="form">
-
-                    <p class="p_text">予約人数を選択</p>
-                    <div class="cp_ipradio">
+                    <div style="display: flex;">
+                        <p class="num_text">予約人数を選択</p>
+                        <p class="any_text">必須</p>
+                    </div>
+                    <div class="cp_ipradio" style="margin-bottom: 30px;">
 
                         <label>
                             <input type="radio" class="option-input radio" name="num" value="1人"
-                                onclick="toggleRequired(false)">1人
+                                onclick="toggleRequired(false);">1人
                         </label>
 
                         <label>
                             <input type="radio" class="option-input radio" name="num" value="2人"
-                                onclick="toggleRequired(true)">2人
+                                onclick="toggleRequired(true);">2人
                         </label>
 
                         <input type="radio" name="num" value="blank" checked="checked" style="display:none;" />
@@ -183,43 +233,88 @@
 
 
 
-                    <div class="cp_ipradio">
+                    <!--<div class="cp_ipradio">-->
 
-                        <label class="name_label">
-                            <p class="p_text">名前1を入力してください </p>
-                            <input type="text" name="name1" id="name1" class="input_name"
-                                pattern="^[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}a-zA-Z0-9]{6}$" required>
-                        </label>
+                    <label class="name_label">
+                        <div class="name1_div">
+                            <p class="name_text">名前1を入力してください </p>
+                            <p id="name1_any" class="any_text">必須</p>
+                        </div>
+                        <input type="text" name="name1" id="name1" class="input_name" required>
 
+                    </label>
 
-                        <label>
-                            <p class="p_text">名前2を入力してください </p>
-                            <input type="text" name="name2" id="name2" class="input_name"
-                                pattern="^[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}a-zA-Z0-9]{6}$">
-                        </label>
-
-                </div>
 
                     <label>
-                        <input type="submit" value="送信する" onclick="submitForm()">
+                        <div class="name1_div">
+                            <p class="name_text">名前2を入力してください </p>
+                            <p id="name2_any" class="any_text2">必須</p>
+                        </div>
+                        <input type="text" name="name2" id="name2" class="input_name">
+                    </label>
+
+
+                    <label>
+                        <input type="submit" value="送信する">
                     </label>
 
                 </form>
             </center>
         </div>
 
-        <div class="div_R"></div>
+        <!--<div class="div_R"></div>-->
     </div>
 
     <script>
+
+        /*function limitTextLength(inputElement, maxLength) {
+            inputElement.addEventListener('input', function() {
+                if (inputElement.value.length > maxLength) {
+                    inputElement.value = inputElement.value.slice(0, maxLength);
+                }
+            });
+        }*/
+
+        function limitTextLength(inputElement, maxLength) {
+            console.log("kita");
+                if (inputElement.value.length > maxLength) {
+                    inputElement.value = inputElement.value.slice(0, maxLength);
+                }
+        }
+
+        // 使用例
+        var textarea = document.getElementById('name1'); // 制限したいテキストエリアの要素を取得
+        var maxLength = 5; // 最大文字数を設定
+        //limitTextLength(textarea, maxLength); // 関数を呼び出して制限を適用
+
+        textarea.addEventListener('input', limitTextLength(textarea, maxLength));
+
+
+
+        // ここの読解
         function toggleRequired(flg) {
             const name2 = document.getElementById('name2');
             name2.required = flg;
+
+            const name2_any = document.getElementById('name2_any');
+            // 必須の表示、非表示
+            if (flg) {
+                // 表示処理
+                name2_any.style.display = 'block';
+            }else {
+                // 非表示処理
+                name2_any.style.display = 'none';
+            }
         }
 
         toggleRequired(false)
 
         document.getElementById("form").addEventListener("submit", function (e) {
+            // 文字数オーバー
+            if (document.getElementById('name1').value.length > 6 || document.getElementById('name2').value.length >) {
+
+            }
+
             e.preventDefault(); // フォームの通常の送信を防ぐ
             var form = document.getElementById("form");
             var num = form.querySelector('input[name="num"]:checked').value;

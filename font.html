@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--zen Kurenaido  & Kiwi+Maru-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Train+One&display&family=IBM+Plex+Sans+JP:wght@300&family=Kiwi+Maru:wght@300&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+    @keyframes flicker {
+
+0%,
+19%,
+22%,
+23%,
+26%,
+54%,
+57%,
+100% {
+    text-shadow:
+        0 0 1px	rgb(93,8,181),
+        0 0 7px rgb(143,6,193),
+        0 0 20px rgb(143,11,184);
+}
+
+20%,
+21%,
+24%,
+25%,
+55%,
+56%{
+    text-shadow: none;
+}
+}
+    .content_bracket {
+        background-color: black;
+        flex-direction: column;
+        width: 100%;
+    }
+
+
+    .kiwi_red {
+        font-family: 'Kiwi Maru', serif;
+        color: #fff;
+        text-shadow:
+        0 0 7px rgba(255, 40, 40, 0.814),
+        0 0 10px rgba(255, 40, 40, 0.814),
+        0 0 21px rgba(255, 40, 40, 0.814),
+        0 0 42px rgba(255, 40, 40, 0.814),
+        0 0 82px rgba(255, 40, 40, 0.814),
+        0 0 92px rgba(255, 40, 40, 0.814);
+        /*0 0 102px rgba(255, 40, 40, 0.814),
+        0 0 151px rgba(255, 40, 40, 0.814);*/
+        /*文字の大きさ*/
+        font-size:3vw;
+        /*文字間隔*/
+        /*letter-spacing:2vw;*/
+        width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .kiwi_bule {
+        font-family: 'Kiwi Maru', serif;
+        color: #fff;
+        text-shadow:
+        0 0 7px rgba(54, 64, 255, 0.814),
+        0 0 10px rgba(54, 64, 255, 0.814),
+        0 0 21px rgba(54, 64, 255, 0.814),
+        0 0 42px rgba(54, 64, 255, 0.814),
+        0 0 82px rgba(54, 64, 255, 0.814),
+        0 0 92px rgba(54, 64, 255, 0.814);
+        /*0 0 102px rgba(255, 40, 40, 0.814),
+        0 0 151px rgba(255, 40, 40, 0.814);*/
+        /*文字の大きさ*/
+        font-size:3vw;
+        /*文字間隔*/
+        /*letter-spacing:2vw;*/
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .kiwi_coler {
+        font-family: 'Kiwi Maru', serif;
+        color: #fff;
+        text-shadow:
+        0 0 7px rgba(54, 64, 255, 0.814),
+        0 0 10px rgba(54, 64, 255, 0.814),
+        0 0 21px rgba(54, 64, 255, 0.814),
+        0 0 42px rgba(54, 64, 255, 0.814),
+        0 0 82px rgba(54, 64, 255, 0.814),
+        0 0 92px rgba(54, 64, 255, 0.814);
+        /*0 0 102px rgba(255, 40, 40, 0.814),
+        0 0 151px rgba(255, 40, 40, 0.814);*/
+        /*文字の大きさ*/
+        font-size:3vw;
+        /*文字間隔*/
+        /*letter-spacing:2vw;*/
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    :root {
+            --vs-font: 'Train One', cursive;
+            --vs-text-color: 	rgb(153,45,246);
+        }
+    .vs {
+        font-family: var(--vs-font);
+        /*
+        0 0 42px rgba(54, 64, 255, 0.814),
+        0 0 82px rgba(54, 64, 255, 0.814),
+        0 0 92px rgba(54, 64, 255, 0.814)*/
+        color: var(--vs-text-color);
+        font-size: 50px;
+        text-transform: uppercase;
+        animation: flicker 1.5s infinite alternate;
+        display: flex;
+        width: 20%;
+        justify-content: center;
+        align-items: flex-end;
+
+    }
+
+    .content_waiting_one {
+        display: flex;
+        width: 100%;
+    }
+</style>
+<body>
+    <div class="content_bracket">
+    <div style="display: flex;">
+        <div class="kiwi_red">赤石誠弥</div>
+        <div class="vs">　VS　</div>
+        <div class="kiwi_bule">ひらカタ</div>
+    </div>
+    <br>
+    <div style="display: flex;">
+        <div class="kiwi_red">木村柊</div>
+        <div class="vs">　VS　</div>
+        <div class="kiwi_bule">あいウエ</div>
+    </div>
+    <br>
+    <div style="display: flex;">
+        <div class="kiwi_red">山本和哉</div>
+        <div class="vs">　VS　</div>
+        <div class="kiwi_bule">なにヌネ</div>
+    </div>
+    <br>
+    <div style="display: flex;">
+        <div class="kiwi_coler">待ち時間</div>
+    </div>
+</div>
+</body>
+</html>
