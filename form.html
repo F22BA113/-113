@@ -11,6 +11,7 @@
         /*width: 90%;*/
         /*margin: 2em auto;*/
         text-align: left;
+        margin-bottom: 15%;
     }
 
     @keyframes click-wave {
@@ -114,6 +115,7 @@
     .content_div {
         width: 100%;
         display: flex;
+        justify-content: center;
     }
 
     body {
@@ -143,7 +145,7 @@
 
     .h3_text {
         border-bottom: 1px solid #BFE0D6;
-        margin-bottom: 20%;
+        margin-bottom: 23%;
     }
 
     .num_text {
@@ -182,9 +184,10 @@
     }
 
     .input_name {
+        height: 25px;
         width: 100%;
         background-color: rgb(198, 255, 245);
-        margin-bottom: 35px;
+        margin-bottom: 15%;
     }
 
     .name1_div {
@@ -194,6 +197,10 @@
 
     .name_label {
         /*margin-bottom: 5%;*/
+    }
+
+    .form_btn {
+        margin-top: 5%;
     }
 </style>
 
@@ -216,7 +223,7 @@
                         <p class="num_text">予約人数を選択</p>
                         <p class="any_text">必須</p>
                     </div>
-                    <div class="cp_ipradio" style="margin-bottom: 30px;">
+                    <div class="cp_ipradio">
 
                         <label>
                             <input type="radio" class="option-input radio" name="num" value="1人"
@@ -255,7 +262,7 @@
 
 
                     <label>
-                        <input type="submit" value="送信する">
+                        <input type="submit" class="form_btn" value="送信する">
                     </label>
 
                 </form>
