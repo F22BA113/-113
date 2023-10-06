@@ -119,7 +119,7 @@
     .error_all {
         z-index: 1;
         position: absolute;
-        background-color: #ff3961;
+        background-color: #eb1742;
         display: block;
         height: 60%;
         width: 80%;
@@ -270,7 +270,7 @@
         /* 棒の幅（太さ） */
         height: 30px;
         /* 棒の高さ */
-        background:#957b7b;
+        background:white;
     }
 
     .batsu::before {
@@ -357,6 +357,9 @@
     </div>
 
     <script>
+        function on_error_div() {
+            document.getElementById('error_all').style.display = 'block';
+        }
 
         function off_error_div() {
             console.log("error");
@@ -410,12 +413,34 @@
             e.preventDefault(); // フォームの通常の送信を防ぐ
             var form = document.getElementById("form");
             var num = form.querySelector('input[name="num"]:checked').value;
+            // 予約人数選択してない場合
             if (num == "blank") {
-                alert("予約人数を選択してください")
+                alert("予約人数を選択してください");
+                on_error_div();
                 return;
             }
+
             var name1 = form.querySelector('input[name="name1"]').value;
             var name2 = form.querySelector('input[name="name2"]').value;
+
+            // 文字数がオーバーしている場合
+            if (name1.length > 6) {
+                console.log("文字1");
+                on_error_div();
+            }else if (name2.length > 6) {
+                console.log("文字2");
+                on_error_div();
+            }
+
+            // ひらがな以外の場合
+            const regex1 = /^[\u3040-\u309F]+$/;
+            if (!(regex1.test(name1))) {
+                console.log("ひらがな1");
+                on_error_div();
+            }else if (!(regex1.test(name2))) {
+                console.log("ひらがな2");
+                on_error_div();
+            }
 
             // カスタムURLを構築
             var customURL = "https://script.google.com/macros/s/AKfycbyVV385u615ejA3R9ZGCX5-6XLjhT-uPwl4q8QwVgo/dev?" +
