@@ -11,7 +11,8 @@
         box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
         height: 100%;
     }
 
@@ -178,20 +179,20 @@
     }
 
     .error_sub_name1 {
-            color: red;
-            font-size: smaller;
-            margin-top: 1px;
-    margin-bottom: 0;
-    visibility: hidden;
-        }
+        color: red;
+        font-size: smaller;
+        margin-top: 1px;
+        margin-bottom: 0;
+        visibility: hidden;
+    }
 
-        .error_sub_name2 {
-            color: red;
-            font-size: smaller;
-            margin-top: 1px;
-    margin-bottom: 0;
-    visibility: hidden;
-        }
+    .error_sub_name2 {
+        color: red;
+        font-size: smaller;
+        margin-top: 1px;
+        margin-bottom: 0;
+        visibility: hidden;
+    }
 
 
     @media screen {
@@ -209,10 +210,10 @@
         }
 
         .cp_ipradio {
-        /*width: 90%;*/
-        /*margin: 2em auto;*/
-        text-align: left;
-        margin-bottom: 20px;
+            /*width: 90%;*/
+            /*margin: 2em auto;*/
+            text-align: left;
+            margin-bottom: 20px;
         }
 
 
@@ -234,11 +235,11 @@
         }
 
         .cp_ipradio {
-        /*width: 90%;*/
-        /*margin: 2em auto;*/
-        text-align: left;
-        margin-bottom: 17.5%;
-    }
+            /*width: 90%;*/
+            /*margin: 2em auto;*/
+            text-align: left;
+            margin-bottom: 17.5%;
+        }
 
     }
 
@@ -369,7 +370,7 @@
     </div>
     <div class="content_div">
         <!--<div class="div_L"></div>-->
-        
+
         <div class="div_M">
             <center>
                 <h1 class="h1_text">Cyber Hockey</h1>
@@ -435,7 +436,7 @@
 
 
                     <label>
-                        <input type="submit" class="form_btn" value="送信する">
+                        <input type="submit" id="submit" class="form_btn" value="送信する">
                     </label>
 
                 </form>
@@ -477,7 +478,8 @@
 
         textarea.addEventListener('input', limitTextLength(textarea, maxLength));
 
-
+        // 予約人数
+        var nums = 0;
 
         // ここの読解
         function toggleRequired(flg) {
@@ -492,10 +494,12 @@
                 // 表示処理
                 name2_any.style.display = 'block';
                 div_name2.style.display = 'block';
+                nums = 2;
             } else {
                 // 非表示処理
                 name2_any.style.display = 'none';
                 div_name2.style.display = 'none';
+                nums = 1;
             }
         }
 
@@ -521,32 +525,56 @@
             var name1 = form.querySelector('input[name="name1"]').value;
             var name2 = form.querySelector('input[name="name2"]').value;
 
-            // 文字数がオーバーしている場合
-            if (name1.length > 6) {
-                console.log("文字1");
-                name1_div.style.visibility = "visible";
-                on_error_div();
-                return;
-            } else if (name2.length > 6) {
-                console.log("文字2");
-                name2_div.style.visibility = "visible";
-                on_error_div();
-                return;
+            if (nums == 1) {
+
+                // 文字数がオーバーしている場合
+                if (name1.length > 6) {
+                    console.log("文字1");
+                    name1_div.style.visibility = "visible";
+                    on_error_div();
+                    return;
+                }
+
+                // ひらがな以外の場合
+                const regex1 = /^[\u3040-\u309F]+$/;
+                if (!(regex1.test(name1))) {
+                    console.log("ひらがな1");
+                    name1_div.style.visibility = "visible";
+                    on_error_div();
+                    return;
+                }
+
+
+            } else if (nums == 2) {
+
+                // 文字数がオーバーしている場合
+                if (name1.length > 6) {
+                    console.log("文字1");
+                    name1_div.style.visibility = "visible";
+                    on_error_div();
+                    return;
+                } else if (name2.length > 6) {
+                    console.log("文字2");
+                    name2_div.style.visibility = "visible";
+                    on_error_div();
+                    return;
+                }
+
+                // ひらがな以外の場合
+                const regex1 = /^[\u3040-\u309F]+$/;
+                if (!(regex1.test(name1))) {
+                    console.log("ひらがな1");
+                    name1_div.style.visibility = "visible";
+                    on_error_div();
+                    return;
+                } else if (!(regex1.test(name2))) {
+                    console.log("ひらがな2");
+                    name2_div.style.visibility = "visible";
+                    on_error_div();
+                    return;
+                }
             }
 
-            // ひらがな以外の場合
-            const regex1 = /^[\u3040-\u309F]+$/;
-            if (!(regex1.test(name1))) {
-                console.log("ひらがな1");
-                name1_div.style.visibility = "visible";
-                on_error_div();
-                return;
-            } else if (!(regex1.test(name2))) {
-                console.log("ひらがな2");
-                name2_div.style.visibility = "visible";
-                on_error_div();
-                return;
-            }
 
             // カスタムURLを構築
             var customURL = "https://script.google.com/macros/s/AKfycbyVV385u615ejA3R9ZGCX5-6XLjhT-uPwl4q8QwVgo/dev?" +
@@ -554,6 +582,10 @@
 
             // リダイレクト
             window.location.href = customURL;
+
+            // 成功したら押させなくする
+            document.getElementById('submit').disabled = "disabled";
+
         });
 
     </script>
