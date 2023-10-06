@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <style>
-    @keyframes click-wave {
+    /*@keyframes click-wave {
         0% {
             position: relative;
             width: 30px;
@@ -22,7 +22,7 @@
             margin-left: -80px;
             opacity: 0;
         }
-    }
+    }*/
 
     .cp_ipradio .option-input {
         position: relative;
@@ -39,17 +39,17 @@
         color: #ffffff;
         border: none;
         outline: none;
-        background: #cdeaec;
+        background: #ffffff;
         -webkit-appearance: none;
         appearance: none;
     }
 
     .cp_ipradio .option-input:hover {
-        background: #cdeaec;
+        background: #ffffff;
     }
 
     .cp_ipradio .option-input:checked {
-        background: #84edff;
+        background: #6e6e6e;
     }
 
     .cp_ipradio .option-input:checked::before {
@@ -69,7 +69,7 @@
         content: '';
         -webkit-animation: click-wave 0.65s;
         animation: click-wave 0.65s;
-        background: #84edff;
+        background: #ffffff;
     }
 
     .cp_ipradio .option-input.radio {
@@ -118,16 +118,16 @@
 
     .error_all {
         z-index: 1;
-    position: absolute;
-    background-color: #eb1742;
-    display: block;
-    height: 60%;
-    width: 80%;
-    top: 20%;
-    left: 10%;
-    border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
+        position: absolute;
+        background-color: #eb1742;
+        display: none;
+        height: 60%;
+        width: 80%;
+        top: 20%;
+        left: 10%;
+        border-radius: 10px;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .div_L {
@@ -151,51 +151,86 @@
     }
 
     .h3_text {
-        border-bottom: 1px solid #BFE0D6;
+        border-bottom: 1px solid #ffffff;
     }
+
+
+    .input_name {
+        height: 25px;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .error_sub_num {
+        color: red;
+        font-size: smaller;
+        margin-top: 0;
+        visibility: hidden;
+    }
+
+    .error_sub_name1 {
+            color: red;
+            font-size: smaller;
+            margin-top: 1px;
+    margin-bottom: 0;
+    visibility: hidden;
+        }
+
+        .error_sub_name2 {
+            color: red;
+            font-size: smaller;
+            margin-top: 1px;
+    margin-bottom: 0;
+    visibility: hidden;
+        }
+
 
     @media screen {
 
         .h3_text {
-            border-bottom: 1px solid #BFE0D6;
-            margin-bottom: 70px;
+            margin-bottom: 50px;
+        }
+
+        .div_name1 {
+            margin-bottom: 10px;
+        }
+
+        .div_name2 {
+            margin-bottom: 50px;
         }
 
         .cp_ipradio {
-            /*width: 90%;*/
-            /*margin: 2em auto;*/
-            text-align: left;
-            margin-bottom: 70px;
+        /*width: 90%;*/
+        /*margin: 2em auto;*/
+        text-align: left;
+        margin-bottom: 20px;
         }
 
-        .input_name {
-            height: 25px;
-            width: 100%;
-            background-color: rgb(198, 255, 245);
-            margin-bottom: 50px;
-        }
+
     }
 
     @media handheld {
 
         .h3_text {
-            border-bottom: 1px solid #BFE0D6;
-            margin-bottom: 20%;
+            margin-bottom: 17%;
+        }
+
+        .div_name1 {
+            margin-bottom: 13%;
+        }
+
+        .div_name2 {
+            margin-bottom: 15%;
+            display: none;
         }
 
         .cp_ipradio {
-            /*width: 90%;*/
-            /*margin: 2em auto;*/
-            text-align: left;
-            margin-bottom: 15%;
-        }
+        /*width: 90%;*/
+        /*margin: 2em auto;*/
+        text-align: left;
+        margin-bottom: 17.5%;
+    }
 
-        .input_name {
-            height: 25px;
-            width: 100%;
-            background-color: rgb(198, 255, 245);
-            margin-bottom: 15%;
-        }
     }
 
     .error_text {
@@ -251,15 +286,26 @@
     }
 
     .form_btn {
-        margin-top: 5%;
+        /*box-shadow: 0 0 5px #d0cece; */
+        border: 1px solid #a8a8a8;
+        color: white;
+        line-height: 2.3;
+        /* font-weight: 600; */
+        background-color: #4d4d4d;
+        /* height: 33px; */
+        width: 50%;
+        /* width: 35%; */
+        /* height: 33px; */
+        border-radius: 20px;
+        /* margin-top: 5%;*/
     }
 
     .batsu {
         display: flex;
-    position: relative;
-    width: 100%;
-    height: 30px;
-    justify-content: flex-end;
+        position: relative;
+        width: 100%;
+        height: 30px;
+        justify-content: flex-end;
     }
 
     .batsu::before,
@@ -273,7 +319,7 @@
         /* 棒の幅（太さ） */
         height: 30px;
         /* 棒の高さ */
-        background:white;
+        background: white;
     }
 
     .batsu::before {
@@ -286,10 +332,15 @@
 
     .error_text_div {
         width: 100%;
-    height: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+        height: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .error_sub_div {
+        display: flex;
     }
 </style>
 
@@ -298,11 +349,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 
 <body>
-    <div id="error_all" class="error_all" onclick="off_error_div()">
+    <div id="error_all" class="error_all" style="display: none;" onclick="off_error_div()">
         <span class="batsu"></span>
         <div class="error_text_div">
-        <h3 class="error_text">入力内容に誤りがあります</h3>
-    </div>
+            <h3 class="error_text">入力内容に誤りがあります</h3>
+        </div>
     </div>
     <div class="content_div">
         <!--<div class="div_L"></div>-->
@@ -333,29 +384,42 @@
                         </label>
 
                         <input type="radio" name="num" value="blank" checked="checked" style="display:none;" />
-                    </div>
 
+                        <div class="error_sub_div">
+                            <p id="error_sub_num" class="error_sub_num">※ 必須です</p>
+                        </div>
+
+                    </div>
 
 
                     <!--<div class="cp_ipradio">-->
 
-                    <label class="name_label">
-                        <div class="name1_div">
-                            <p class="name_text">名前1を入力してください </p>
-                            <p id="name1_any" class="any_text">必須</p>
+                    <div class="div_name1">
+                        <label class="name_label">
+                            <div class="name1_div">
+                                <p class="name_text">名前1を入力してください </p>
+                                <p id="name1_any" class="any_text">必須</p>
+                            </div>
+                            <input type="text" name="name1" id="name1" class="input_name" required>
+
+                        </label>
+                        <div class="error_sub_div">
+                            <p id="error_sub_name1" class="error_sub_name1">※ 必須です</p>
                         </div>
-                        <input type="text" name="name1" id="name1" class="input_name" required>
+                    </div>
 
-                    </label>
-
-
-                    <label>
-                        <div class="name1_div">
-                            <p class="name_text">名前2を入力してください </p>
-                            <p id="name2_any" class="any_text2">必須</p>
+                    <div id="div_name2" class="div_name2">
+                        <label>
+                            <div class="name1_div">
+                                <p class="name_text">名前2を入力してください </p>
+                                <p id="name2_any" class="any_text2">必須</p>
+                            </div>
+                            <input type="text" name="name2" id="name2" class="input_name">
+                        </label>
+                        <div class="error_sub_div">
+                            <p id="error_sub_name2" class="error_sub_name2">※ 必須です</p>
                         </div>
-                        <input type="text" name="name2" id="name2" class="input_name">
-                    </label>
+                    </div>
 
 
                     <label>
@@ -388,7 +452,7 @@
         }*/
 
         function limitTextLength(inputElement, maxLength) {
-            console.log("kita");
+            //console.log("kita");
             if (inputElement.value.length > maxLength) {
                 inputElement.value = inputElement.value.slice(0, maxLength);
             }
@@ -409,13 +473,17 @@
             name2.required = flg;
 
             const name2_any = document.getElementById('name2_any');
+            const div_name2 = document.getElementById('div_name2');
+
             // 必須の表示、非表示
             if (flg) {
                 // 表示処理
                 name2_any.style.display = 'block';
+                div_name2.style.display = 'block';
             } else {
                 // 非表示処理
                 name2_any.style.display = 'none';
+                div_name2.style.display = 'none';
             }
         }
 
@@ -423,12 +491,17 @@
 
         document.getElementById("form").addEventListener("submit", function (e) {
 
+            const num_div = document.getElementById('error_sub_num');
+            const name1_div = document.getElementById('error_sub_name1');
+            const name2_div = document.getElementById('error_sub_name2');
+
             e.preventDefault(); // フォームの通常の送信を防ぐ
             var form = document.getElementById("form");
             var num = form.querySelector('input[name="num"]:checked').value;
             // 予約人数選択してない場合
             if (num == "blank") {
-                alert("予約人数を選択してください");
+                console.log("予約人数");
+                num_div.style.visibility = "visible";
                 on_error_div();
                 return;
             }
@@ -439,20 +512,28 @@
             // 文字数がオーバーしている場合
             if (name1.length > 6) {
                 console.log("文字1");
+                name1_div.style.visibility = "visible";
                 on_error_div();
-            }else if (name2.length > 6) {
+                return;
+            } else if (name2.length > 6) {
                 console.log("文字2");
+                name2_div.style.visibility = "visible";
                 on_error_div();
+                return;
             }
 
             // ひらがな以外の場合
             const regex1 = /^[\u3040-\u309F]+$/;
             if (!(regex1.test(name1))) {
                 console.log("ひらがな1");
+                name1_div.style.visibility = "visible";
                 on_error_div();
-            }else if (!(regex1.test(name2))) {
+                return;
+            } else if (!(regex1.test(name2))) {
                 console.log("ひらがな2");
+                name2_div.style.visibility = "visible";
                 on_error_div();
+                return;
             }
 
             // カスタムURLを構築
