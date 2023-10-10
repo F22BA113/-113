@@ -362,12 +362,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Iceland&display=swap" rel="stylesheet">
 
 <body>
+    <!--説明-->
+    <div id="error_all" class="error_all" style="display: none;" onclick="off_error_div()">
+        <span class="batsu"></span>
+        <div class="error_text_div">
+            <h3 class="error_text"></h3>
+        </div>
+    </div>
+    <!--エラーメッセージ-->
     <div id="error_all" class="error_all" style="display: none;" onclick="off_error_div()">
         <span class="batsu"></span>
         <div class="error_text_div">
             <h3 class="error_text">入力内容に誤りがあります</h3>
         </div>
     </div>
+    
     <div class="content_div">
         <!--<div class="div_L"></div>-->
 
@@ -577,7 +586,7 @@
 
 
             // カスタムURLを構築
-            var customURL = "https://script.google.com/macros/s/AKfycbyVV385u615ejA3R9ZGCX5-6XLjhT-uPwl4q8QwVgo/dev?" +
+            var customURL = "https://script.google.com/macros/s/AKfycbwFLvFL1IUynPi4xVWanZV4fQN-AqgPhbnPzNmbYIvG2qK0QueLjWgdzTflM1zS6Ozi/exec?" +
                 "form=" + num + "," + encodeURIComponent(name1) + "," + encodeURIComponent(name2);
 
             // リダイレクト
