@@ -377,9 +377,41 @@
     }
 
     .explain_text_div {
-        width: 80%;
-
         padding-top: 30px;
+    }
+
+    @media screen and (min-width: 311px) {
+
+        /* 横幅が311px以上の場合に適用するスタイル */
+        .explain_text_div {
+            width: 80%;
+        }
+        .h4_explain {
+            font-size: 17px;
+        }
+    }
+
+    @media screen and (max-width: 310px) {
+
+        /* 横幅が310px以下の場合に適用するスタイル */
+        .explain_text_div {
+            width: 95%;
+        }
+        .h4_explain {
+            font-size: 17px;
+        }
+    }
+
+    @media screen and (max-width: 286px) {
+        /* 横幅が286px以下の場合に適用するスタイル */
+        .explain_text_div {
+            width: 95%;
+
+        }
+
+        .h4_explain {
+            font-size: 15px;
+        }
     }
 
     .h3_explain {
@@ -398,8 +430,9 @@
     .h4_explain {
         margin-top: 0px;
         margin-bottom: 5px;
-        font-size: 17px;
-        white-space:nowrap;
+        white-space: nowrap;
+        font-weight: bold;
+        text-align: center;
     }
 
 
@@ -450,7 +483,6 @@
     }
 </style>
 
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -476,13 +508,13 @@
         <h2 class="h3_explain">お願い</h2>
         <div class="explain_text_div">
 
-            <h3 class="h4_explain">お名前の入力はひらかなのみ、
+            <p class="h4_explain">お名前の入力はひらかなのみ
                 <br>
                 ６文字以内でお願いします
                 <br>
                 <br>
                 <span class="h5_explain">※ 不適切な名前はご遠慮ください</span>
-            </h3>
+            </p>
             <!-- <h5 class="h5_explain">※ 不適切な名前はご遠慮ください</h5> -->
         </div>
         <button class="explain_okButton" onclick="off_error_div('explain_div')">OK</button>
@@ -503,8 +535,8 @@
     <div id="thankyou_div" class="thankyou">
 
         <div class="div_M">
-                <h1 class="h1_text">Cyber Hockey</h1>
-                <h3 class="thankyou_text">予約完了しました</h3>
+            <h1 class="h1_text">Cyber Hockey</h1>
+            <h3 class="thankyou_text">予約完了しました</h3>
         </div>
     </div>
 
@@ -739,16 +771,16 @@
         /* カスタムURLを構築
         var customURL = "https://script.google.com/macros/s/AKfycbwFLvFL1IUynPi4xVWanZV4fQN-AqgPhbnPzNmbYIvG2qK0QueLjWgdzTflM1zS6Ozi/exec?" +
             "form=" + num + "," + encodeURIComponent(name1) + "," + encodeURIComponent(name2);
-
+ 
         //リダイレクト
         window.location.href = customURL;
-
+ 
         callApi(customURL);
-
-
-
+ 
+ 
+ 
     });
-
+ 
     // api 情報送信
     async function callApi(url) {
         try {
@@ -756,11 +788,11 @@
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
+ 
             /*json受け取り
             const data = await response.json();
             console.log(data);
-
+ 
         } catch (error) {
             console.error(error);
             return null; // エラー時のデフォルト値を設定するか、エラーを再スローするか、適切なエラーハンドリングを行うことができます
