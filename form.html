@@ -251,8 +251,9 @@
 
     }
 
-    @media handheld {
+    @media screen and (min-width: 600px) {
 
+        /* 横幅が400px以上の場合に適用するスタイル (スマホ画面用) */
         .h3_text {
             margin-bottom: 17%;
         }
@@ -276,7 +277,6 @@
         .explain {
             left: 10%;
         }
-
     }
 
     .error_text {
