@@ -545,7 +545,7 @@
     </div>
 
     <!--エラーメッセージ-->
-    <div id="error_all" class="error_all" style="display: none;" onclick="off_error_div(this)">
+    <div id="error_all" class="error_all" style="display: none;">
         <span class="batsu"></span>
         <div class="error_text_div">
             <h3 class="error_text">入力内容に誤りがあります</h3>
@@ -750,37 +750,69 @@
 
 
             } else if (nums == 2) {
+                // フラグ変数
+                var name1_flg = false;
+                var name2_flg = false;
 
-                // 文字数がオーバーしている場合
-                if (name1.length > 6) {
-                    console.log("文字1");
+                    // 文字数がオーバーしている場合
+                    if ((name1.length) > 6 && (name2.length > 6)) {
+                        console.log("文字1");
+                        console.log("文字2");
+                        name1_flg = true;
+                        name2_flg = true;
+
+                    } else if (name1.length > 6) {
+                        console.log("文字1");
+                        name1_flg = true;
+                    }else if (name2.length > 6) {
+                        console.log("文字2");
+                        name2_flg = true;
+                    }
+
+                    // ひらがな以外の場合
+                    const regex1 = /^[\u3040-\u309F]+$/;
+                    if (!(regex1.test(name1)) && !(regex1.test(name2))) {
+                        console.log("ひらがな1");
+                        console.log("ひらがな2");
+                        name1_flg = true;
+                        name2_flg = true;
+
+                    } else if (!(regex1.test(name1))) {
+                        console.log("ひらがな1");
+                        name1_flg = true;
+
+                    } else if (!(regex1.test(name2))) {
+                        console.log("ひらがな2");
+                        name2_flg = true;
+                    }
+
+                // 両方とも間違えている場合
+                if (name1_flg & name2_flg) {
                     name1_div.style.visibility = "visible";
-                    on_error_div();
-                    e.preventDefault();
-                    return false;
-                } else if (name2.length > 6) {
-                    console.log("文字2");
                     name2_div.style.visibility = "visible";
                     on_error_div();
                     e.preventDefault();
                     return false;
-                }
 
-                // ひらがな以外の場合
-                const regex1 = /^[\u3040-\u309F]+$/;
-                if (!(regex1.test(name1))) {
-                    console.log("ひらがな1");
+                } else if (name1_flg) {
                     name1_div.style.visibility = "visible";
                     on_error_div();
                     e.preventDefault();
                     return false;
-                } else if (!(regex1.test(name2))) {
-                    console.log("ひらがな2");
+
+                } else if (name2_flg) {
                     name2_div.style.visibility = "visible";
                     on_error_div();
                     e.preventDefault();
                     return false;
+
+                } else {
+                    console.log("else");
                 }
+
+                // 変数のリセット
+                name1_flg = false;
+                name2_flg = false;
             }
             // 成功したらthankyouページ表示、予約フォーム削除
             document.getElementById("thankyou_div").style.display = "flex";
