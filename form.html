@@ -193,8 +193,9 @@
 
 
     .input_name {
-        height: 25px;
+        height: 34px;
         width: 100%;
+        font-size: 20px;
         background-color: rgb(255, 255, 255);
         outline: none;
     }
@@ -758,37 +759,37 @@
                 var name1_flg = false;
                 var name2_flg = false;
 
-                    // 文字数がオーバーしている場合
-                    if ((name1.length) > 6 && (name2.length > 6)) {
-                        console.log("文字1");
-                        console.log("文字2");
-                        name1_flg = true;
-                        name2_flg = true;
+                // 文字数がオーバーしている場合
+                if ((name1.length) > 6 && (name2.length > 6)) {
+                    console.log("文字1");
+                    console.log("文字2");
+                    name1_flg = true;
+                    name2_flg = true;
 
-                    } else if (name1.length > 6) {
-                        console.log("文字1");
-                        name1_flg = true;
-                    }else if (name2.length > 6) {
-                        console.log("文字2");
-                        name2_flg = true;
-                    }
+                } else if (name1.length > 6) {
+                    console.log("文字1");
+                    name1_flg = true;
+                } else if (name2.length > 6) {
+                    console.log("文字2");
+                    name2_flg = true;
+                }
 
-                    // ひらがな以外の場合
-                    const regex1 = /^[\u3040-\u309F]+$/;
-                    if (!(regex1.test(name1)) && !(regex1.test(name2))) {
-                        console.log("ひらがな1");
-                        console.log("ひらがな2");
-                        name1_flg = true;
-                        name2_flg = true;
+                // ひらがな以外の場合
+                const regex1 = /^[\u3040-\u309F]+$/;
+                if (!(regex1.test(name1)) && !(regex1.test(name2))) {
+                    console.log("ひらがな1");
+                    console.log("ひらがな2");
+                    name1_flg = true;
+                    name2_flg = true;
 
-                    } else if (!(regex1.test(name1))) {
-                        console.log("ひらがな1");
-                        name1_flg = true;
+                } else if (!(regex1.test(name1))) {
+                    console.log("ひらがな1");
+                    name1_flg = true;
 
-                    } else if (!(regex1.test(name2))) {
-                        console.log("ひらがな2");
-                        name2_flg = true;
-                    }
+                } else if (!(regex1.test(name2))) {
+                    console.log("ひらがな2");
+                    name2_flg = true;
+                }
 
                 // 両方とも間違えている場合
                 if (name1_flg & name2_flg) {
