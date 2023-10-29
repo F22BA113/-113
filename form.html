@@ -673,6 +673,44 @@
             }
         }
 
+        // NGワードの配列作成
+        var NG_array = "あなる,あこぎ,あほ,あま,いんらん,いんわい,いんじゃ,いんぎんぶれい,いくじなし,いやみ,いんぽ,うぜえ,うんこ,うんち,うせろ,うざい,えろ 暴力,えごいずむ,えこひいき,おな,おなにー,おぶつ,おめこ,かんとんほうけい,かまちょ,かす,かれいしゅう,きじょうい,きしょい,きんたま,きえろ,きもい,くそ,くそみそてくにっく,くそくらえ,くそったれ,くんに,くたばれ,くず,けなし,けしずみ,けだもの,こしゃく,ころす,ころし,しね,しぬ,しな,しばく,しっこ,しんで,しりがる,すまた,すけべ,せくろす,せくはら,せふれ,ちんぽ,ちんちん,ちつ,ちんぷ,ちじょ,ちんかす,ちんげ,ちんこ,ちしょう,てこき,とんま,なかだし,はなくそ,はめ,ひゃくがい,ふけつ,へんたい,ほうけい,まんぽ,ましょう,ませ,ませがき,まざーこんぷれっくす,まぞ,みずしょうばい,みみくそ,むっつり,めくそ,めざわり,もらはら,やくちゅう,やにかす,やくたたず,ゆうがい,よすてびと,らんぼうもの,りょな,りんしょく,れいしすと,ろんぱり,ろうがい,ろりーたこんぷれっくす,わきが,わいざつ,がんこ,がき,がいじ,がんくび,ぐぐれかす,ぐず,げろ,げせわ,げどう,げす,げば,げばひょう,ごみ,ざこ,ざつ,じいしきかじょう,じこちゅうしんてき,じしんかじょう,じゃま,じじー,じゅくじょ,じこちゅう,じじい,ずんぐり,ぞんざい,だっちわいふ,どれい,ばか,ばかやろう,ばーか,ばばあ,ばけもの,ばばぁ,びっち,びじれいく,びっこ,びょうき,ぶさいく,ぶす,ぶらく,べんとうもち,ぼけ,ぼんくら,ぱいぱい,ぷりけつ,ぷっしー,ぺーぺー,ぺにす".split(",");
+
+        // NGwordのTrue or False
+        var NG_flg = false;
+
+        // NGwordチェック関数
+        // @param 予約人数、名前1，名前2
+        function NGword_check(Anums, Aname1, Aname2) {
+            if (Anums == 1) {
+                // NGwordじゃないかチェック
+                for (var i = 0; i < NG_array.length; i++) {
+                    if (Aname1 == NG_array[i]) {
+                        // 含まれていたらエラーを表示
+                        on_error_div();
+                        name1_div.style.visibility = "visible";
+                        e.preventDefault();
+                    }
+                }
+
+            }else if (Anums == 2) {
+                for (var i = 0; i < NG_array.length; i++) {
+                    if (Aname1 == NG_array[i]) {
+                        on_error_div();
+                        name1_div.style.visibility = "visible";
+                        e.preventDefault();
+                    }
+                }
+                for (var i = 0; i < NG_array.length; i++) {
+                    if (Aname2 == NG_array[i]) {
+                        on_error_div();
+                        name2_div.style.visibility = "visible";
+                        e.preventDefault();
+                    }
+                }
+            }
+
+        }
         // 使用例
         var textarea = document.getElementById('name1'); // 制限したいテキストエリアの要素を取得
         var maxLength = 5; // 最大文字数を設定
@@ -681,7 +719,7 @@
         textarea.addEventListener('input', limitTextLength(textarea, maxLength));
 
         // 予約人数
-        var nums = 0;
+        var nums = 1;
 
         // ここの読解
         function toggleRequired(flg) {
@@ -819,6 +857,10 @@
                 name1_flg = false;
                 name2_flg = false;
             }
+
+            // NGwordのチェック
+            NGword_check(nums, name1, name2);
+
             // 成功したらthankyouページ表示、予約フォーム削除
             document.getElementById("thankyou_div").style.display = "flex";
             document.getElementById("main_div").style.display = "none";
