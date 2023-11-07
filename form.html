@@ -678,7 +678,8 @@
         const name2_div = document.getElementById('error_sub_name2');
 
         // NGワードの配列作成
-        var NG_array = "あなる,あこぎ,あほ,あま,いんらん,いんわい,いんじゃ,いんぎんぶれい,いくじなし,いやみ,いんぽ,うぜえ,うんこ,うんち,うせろ,うざい,えろ 暴力,えごいずむ,えこひいき,おな,おなにー,おぶつ,おめこ,かんとんほうけい,かまちょ,かす,かれいしゅう,きじょうい,きしょい,きんたま,きえろ,きもい,くそ,くそみそてくにっく,くそくらえ,くそったれ,くんに,くたばれ,くず,けなし,けしずみ,けだもの,こしゃく,ころす,ころし,しね,しぬ,しな,しばく,しっこ,しんで,しりがる,すまた,すけべ,せくろす,せくはら,せふれ,ちんぽ,ちんちん,ちつ,ちんぷ,ちじょ,ちんかす,ちんげ,ちんこ,ちしょう,てこき,とんま,なかだし,はなくそ,はめ,ひゃくがい,ふけつ,へんたい,ほうけい,まんぽ,ましょう,ませ,ませがき,まざーこんぷれっくす,まぞ,みずしょうばい,みみくそ,むっつり,めくそ,めざわり,もらはら,やくちゅう,やにかす,やくたたず,ゆうがい,よすてびと,らんぼうもの,りょな,りんしょく,れいしすと,ろんぱり,ろうがい,ろりーたこんぷれっくす,わきが,わいざつ,がんこ,がき,がいじ,がんくび,ぐぐれかす,ぐず,げろ,げせわ,げどう,げす,げば,げばひょう,ごみ,ざこ,ざつ,じいしきかじょう,じこちゅうしんてき,じしんかじょう,じゃま,じじー,じゅくじょ,じこちゅう,じじい,ずんぐり,ぞんざい,だっちわいふ,どれい,ばか,ばかやろう,ばーか,ばばあ,ばけもの,ばばぁ,びっち,びじれいく,びっこ,びょうき,ぶさいく,ぶす,ぶらく,べんとうもち,ぼけ,ぼんくら,ぱいぱい,ぷりけつ,ぷっしー,ぺーぺー,ぺにす".split(",");
+        var NG_array = "ちんちん,せっくす,ちんこ,まんまん,まんこ,おっぱい,いらまちお,イラマチオ,ちくび,セックス,アナル,ふぇらちお,ちんぽ,ふぁっく,えきべん,あなる,てんあんもん,えっち,くりとりす,たけしま,おちんぽ,おめこ,おちんこ,きとう,べらそに,どくと,ぽこちん」,かり,おまんこ,しゃせい,ふぁっきん,じゃっぷ,おまんぽ,にがー,にくかべ,かぶとあわせ,にくべんき,だうんしょう,あな,きじょうい,ぺにす,ちろう,くんに,しね,うんこ,そうろう,だいべん,うんち,きんたま,らぶほ,こんどーむ,おきんたま,でぃるど,おなにー,じい,せんかく,うよく,さよく,てまん,オウム,さりん,でいるど,ぽあ,ばいぶ,いんむ,でんま,てんが,ちつ,なかだし,きゃんたま,なまはめ,しょうがい,ばか,きりすと,ざこ,ころす,そくしゃく,がんしゃ,まりふぁな,かくせいざい,すかとろ,おしっこ,うんぽ,にゅうりん,ばいしゅん,えとろふ,ソビエト,ところてん,たねづけ,なちす,おせっくす,そびえと,こだね,れいぷ,なかいき,おせちんこ,ぶらく,えた,かにばりずむ,ひにん,したちち,がいじ,しな,ちょん,じょうじゃく,かいあわせ,しょうとくしゃ,しきもう,ほうけい,どうあり,ぽるの,ふぁんざ,へんたい".split(",");
+        const mySet = new Set(NG_array);
 
         // NGwordのTrue or False
         var NG_flg = false;
@@ -688,32 +689,28 @@
         function NGword_check(Anums, Aname1, Aname2) {
             if (Anums == 1) {
                 // NGwordじゃないかチェック
-                for (var i = 0; i < NG_array.length; i++) {
-                    if (Aname1 == NG_array[i]) {
-                        // 含まれていたらエラーを表示
-                        on_error_div();
-                        name1_div.style.visibility = "visible";
-                        e.preventDefault();
-                        return false;
-                    }
+                if (mySet.has(Aname1)) {
+                    // 含まれていたらエラーを表示
+                    on_error_div();
+                    name1_div.style.visibility = "visible";
+                    e.preventDefault();
+                    return false;
                 }
 
-            }else if (Anums == 2) {
-                for (var i = 0; i < NG_array.length; i++) {
-                    if (Aname1 == NG_array[i]) {
-                        on_error_div();
-                        name1_div.style.visibility = "visible";
-                        e.preventDefault();
-                        return false;
-                    }
+            } else if (Anums == 2) {
+
+                if (mySet.has(Aname1)) {
+                    on_error_div();
+                    name1_div.style.visibility = "visible";
+                    e.preventDefault();
+                    return false;
                 }
-                for (var i = 0; i < NG_array.length; i++) {
-                    if (Aname2 == NG_array[i]) {
-                        on_error_div();
-                        name2_div.style.visibility = "visible";
-                        e.preventDefault();
-                        return false;
-                    }
+
+                if (mySet.has(Aname2)) {
+                    on_error_div();
+                    name2_div.style.visibility = "visible";
+                    e.preventDefault();
+                    return false;
                 }
             }
 
