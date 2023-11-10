@@ -563,6 +563,9 @@
             <h1 class="h1_text">Cyber Hockey</h1>
             <h3 class="thankyou_text">予約完了しました</h3>
         </div>
+        <div>
+            <h4 id="time"></h4>
+        </div>
     </div>
 
     <div id="main_div" class="content_div">
@@ -866,6 +869,7 @@
             // 成功したらthankyouページ表示、予約フォーム削除
             document.getElementById("thankyou_div").style.display = "flex";
             document.getElementById("main_div").style.display = "none";
+            Waiting_time_display();
             return true;
 
             // 成功したら押させなくする
@@ -873,37 +877,30 @@
         });
 
 
-        /* カスタムURLを構築
-        var customURL = "https://script.google.com/macros/s/AKfycbwFLvFL1IUynPi4xVWanZV4fQN-AqgPhbnPzNmbYIvG2qK0QueLjWgdzTflM1zS6Ozi/exec?" +
-            "form=" + num + "," + encodeURIComponent(name1) + "," + encodeURIComponent(name2);
- 
-        //リダイレクト
-        window.location.href = customURL;
- 
-        callApi(customURL);
- 
- 
- 
-    });
- 
-    // api 情報送信
-    async function callApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+        function Waiting_time_display() {
+            try {
+                // 追記　デプロイ後に更新
+                const response = fetch('https://script.google.com/macros/s/AKfycbwh5T41UHDhRFURKqeCtkbfpFeKw1FPGWnYVkucaspEBj_xG-1DOrcmFNcpgo5CKqKN/exec?text=time');
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                //json受け取り
+                const data = response.json();
+                console.log(data);
+
+                // 待ち時間表示
+                const wait_num = data["Num"];
+                document.getElementById("time").innerHTML = wait_num * playTime;
+            } catch (error) {
+                console.error(error);
+                return null; // エラー時のデフォルト値を設定するか、エラーを再スローするか、適切なエラーハンドリングを行うことができます
             }
- 
-            /*json受け取り
-            const data = await response.json();
-            console.log(data);
- 
-        } catch (error) {
-            console.error(error);
-            return null; // エラー時のデフォルト値を設定するか、エラーを再スローするか、適切なエラーハンドリングを行うことができます
         }
-    }
-    */
+
+        // 待ち時間表示
+
 
     </script>
 
