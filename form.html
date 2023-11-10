@@ -880,7 +880,7 @@
         async function Waiting_time_display() {
             try {
                 // 追記　デプロイ後に更新
-                const response = await fetch('https://script.google.com/macros/s/AKfycbwh5T41UHDhRFURKqeCtkbfpFeKw1FPGWnYVkucaspEBj_xG-1DOrcmFNcpgo5CKqKN/exec?text=time');
+                const response = await fetch('Access-Control-Allow-Origin: https://script.google.com/macros/s/AKfycbwh5T41UHDhRFURKqeCtkbfpFeKw1FPGWnYVkucaspEBj_xG-1DOrcmFNcpgo5CKqKN/exec?text=time');
 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
