@@ -919,7 +919,33 @@
             }
 
             // NGwordのチェック
-            NGword_check(nums, name1, name2, e);
+            if (nums == 1) {
+                // NGwordじゃないかチェック
+                if (mySet.has(name1)) {
+                    // 含まれていたらエラーを表示
+                    on_error_div();
+                    name1_div.style.visibility = "visible";
+                    e.preventDefault();
+                    return false;
+                }
+
+            } else if (nums == 2) {
+
+                if (mySet.has(name1)) {
+                    on_error_div();
+                    name1_div.style.visibility = "visible";
+                    e.preventDefault();
+                    return false;
+                }
+
+                if (mySet.has(name2)) {
+                    on_error_div();
+                    name2_div.style.visibility = "visible";
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            // NGword_check(nums, name1, name2, e);
 
             // 成功したらthankyouページ表示、予約フォーム削除
             document.getElementById("thankyou_div").style.display = "flex";
