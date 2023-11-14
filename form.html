@@ -144,7 +144,7 @@
     .explain {
         z-index: 1;
         /*position: absolute;*/
-        background-color: #4f58b5;
+        background: linear-gradient(159deg, rgb(12 111 190) 40%, rgba(0, 53, 143, 1) 100%);
         display: none;
         height: 329px;
         width: 80%;
@@ -252,7 +252,7 @@
     @media screen {
 
         .h3_text {
-            margin-bottom: 50px;
+            margin-bottom: 20px;
         }
 
         .div_name1 {
@@ -280,13 +280,13 @@
     @media screen and (max-width: 600px) {
 
         /* 横幅が400px以下の場合に適用するスタイル (スマホ画面用) */
-        .h3_text {
+        /*.h3_text {
             margin-bottom: 17%;
-        }
+        }*/
 
-        .div_name1 {
+        /*.div_name1 {
             margin-bottom: 13%;
-        }
+        }*/
 
         .div_name2 {
             margin-bottom: 15%;
@@ -294,10 +294,7 @@
         }
 
         .cp_ipradio {
-            /*width: 90%;*/
-            /*margin: 2em auto;*/
             text-align: left;
-            margin-bottom: 17.5%;
         }
 
         .explain {
@@ -358,18 +355,20 @@
     }
 
     .form_btn {
-        /*box-shadow: 0 0 5px #d0cece; */
-        border: 1px solid #a8a8a8;
-        color: white;
+        border: none;
+        color: #ffffff;
+        font-weight: bold;
         line-height: 2.3;
         /* font-weight: 600; */
-        background-color: #4d4d4d;
+        background: linear-gradient(90deg, rgb(76 12 144) 0%, rgb(6 32 179) 100%);
         /* height: 33px; */
-        width: 50%;
-        /* width: 35%; */
+        width: 95%;
+        /* width: 39%; */
         /* height: 33px; */
-        border-radius: 20px;
-        /* margin-top: 5%;*/
+        border-radius: 999px;
+        margin-top: 13px;
+        font-size: 15px;
+        box-shadow: 2px 5px 9px 0px #23052c;
     }
 
     .batsu {
@@ -432,7 +431,7 @@
 
     @media screen and (max-width: 310px) {
 
-        /* 横幅が310px以下の場合に適用するスタイル */
+        /* 横幅が310px以下の場合に適用するスタイル 
         .explain_text_div {
             width: 95%;
         }
@@ -490,6 +489,19 @@
 
     .explain_okButton {
         border-radius: 100vh;
+        width: 120px;
+        height: 40px;
+        border: 3px solid #00d9ff;
+        color: white;
+        /* line-height: 2.3; */
+        font-weight: 600;
+        background-color: #4d4d4d00;
+        margin-top: 12%;
+        margin-bottom: 25px;
+    }
+
+    .error_okButton {
+        border-radius: 100vh;
         border-radius: 100vh;
         width: 120px;
         height: 40px;
@@ -502,7 +514,7 @@
         margin-bottom: 25px;
     }
 
-    .error_okButton {
+    /*.error_okButton {
         border-radius: 100vh;
         border-radius: 100vh;
         width: 35%;
@@ -510,9 +522,9 @@
         border: 1px solid #a8a8a8;
         color: white;
         line-height: 2.3;
-        /* font-weight: 600; */
+        /* font-weight: 600; 
         background-color: #4d4d4d;
-    }
+    }*/
 
     .thankyou_okButton {
         border-radius: 100vh;
@@ -578,11 +590,11 @@
                 <h3 class="error_text">入力内容に誤りがあります</h3>
             </div>
             <div style="text-align: center;">
-                <button class="explain_okButton" onclick="off_error_div('error_all')">OK</button>
+                <button class="error_okButton" onclick="off_error_div('error_all')">OK</button>
             </div>
         </div>
     </div>
-    
+
     <!-- <div id="error_all" class="parent_error">
         <div class="error_all" style="display: none;">
             <span class="batsu"></span>
