@@ -14,7 +14,8 @@
     html,
     body {
         height: 100%;
-
+        margin: 0;
+        padding: 0px;
     }
 
     /*@keyframes click-wave {
@@ -128,9 +129,21 @@
         background-color: #333333;
     }
 
+    .parent_explain {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        /* background: #fff; */
+        display: flex;
+        justify-content: center;
+        /*align-items: center;*/
+        z-index: 999;
+        margin-top: 143px;
+    }
+
     .explain {
         z-index: 1;
-        position: absolute;
+        /*position: absolute;*/
         background-color: #4f58b5;
         display: none;
         height: 329px;
@@ -144,18 +157,30 @@
         /* justify-content: flex-start; */
     }
 
+    .parent_error {
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        /* background: #fff; */
+        /*display: flex;*/
+        justify-content: center;
+        /*align-items: center;*/
+        z-index: 999;
+        margin-top: 143px;
+    }
+
     .error_all {
         z-index: 1;
         position: absolute;
         background-color: #eb1742;
         display: none;
-        height: 60%;
-        width: 80%;
-        top: 20%;
-        left: 10%;
+        height: 329px;
+        width: 60%;
         border-radius: 10px;
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
 
     .thankyou {
@@ -526,8 +551,8 @@
         <button class="explain_okButton" onclick="off_error_div('explain_div')">OK</button>
     </div>-->
 
-    <div>
-        <div id="explain_div" class="explain">
+    <div id="explain_div" class="parent_explain">
+        <div class="explain">
             <span class="batsu"></span>
             <h2 class="h3_explain">お願い</h2>
             <div class="explain_text_div">
@@ -546,15 +571,29 @@
     </div>
 
     <!--エラーメッセージ-->
-    <div id="error_all" class="error_all" style="display: none;">
-        <span class="batsu"></span>
-        <div class="error_text_div">
-            <h3 class="error_text">入力内容に誤りがあります</h3>
-        </div>
-        <div style="text-align: center;">
-            <button class="error_okButton" onclick="off_error_div('error_all')">OK</button>
+    <div id="error_all" class="parent_error" style="display: none">
+        <div class="error_all">
+            <span class="batsu"></span>
+            <div class="error_text_div">
+                <h3 class="error_text">入力内容に誤りがあります</h3>
+            </div>
+            <div style="text-align: center;">
+                <button class="explain_okButton" onclick="off_error_div('error_all')">OK</button>
+            </div>
         </div>
     </div>
+    
+    <!-- <div id="error_all" class="parent_error">
+        <div class="error_all" style="display: none;">
+            <span class="batsu"></span>
+            <div class="error_text_div">
+                <h3 class="error_text">入力内容に誤りがあります</h3>
+            </div>
+            <div style="text-align: center;">
+                <button class="error_okButton" onclick="off_error_div('error_all')">OK</button>
+            </div>
+        </div>
+    </div> -->
 
     <!--thankyou ページ-->
     <div id="thankyou_div" class="thankyou">
@@ -653,7 +692,7 @@
 
     <script>
         function on_error_div() {
-            document.getElementById('error_all').style.display = 'block';
+            document.getElementById('error_all').style.display = 'flex';
         }
 
         function off_error_div(id) {
@@ -880,7 +919,7 @@
         async function Waiting_time_display() {
             try {
                 // 追記　デプロイ後に更新
-                const response = await fetch('Access-Control-Allow-Origin: https://script.google.com/macros/s/AKfycbwh5T41UHDhRFURKqeCtkbfpFeKw1FPGWnYVkucaspEBj_xG-1DOrcmFNcpgo5CKqKN/exec?text=time');
+                const response = await fetch(' https://script.google.com/macros/s/AKfycbwh5T41UHDhRFURKqeCtkbfpFeKw1FPGWnYVkucaspEBj_xG-1DOrcmFNcpgo5CKqKN/exec?text=time');
 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
