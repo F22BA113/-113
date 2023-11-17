@@ -554,19 +554,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Iceland&display=swap" rel="stylesheet">
 
 <body>
-    <!--説明
-    <div id="explain_div" class="explain">
-        <span class="batsu"></span>
-        <div class="explain_text_div">
-            <h2 class="h3_explain">お願い</h2>
-            <h3 class="h4_explain">名前</h3>
-            <h5 class="h5_explain">・ひらかなのみ</h5>
-            <h5 class="h5_explain">・６文字以内</h5>
-            <h5 class="h5_explain">※ 不適切な名前はご遠慮ください</h5>
-        </div>
-        <button class="explain_okButton" onclick="off_error_div('explain_div')">OK</button>
-    </div>-->
-
+    <!--説明-->
     <div id="explain_div" class="parent_explain">
         <div class="explain">
             <span class="batsu"></span>
@@ -599,17 +587,6 @@
         </div>
     </div>
 
-    <!-- <div id="error_all" class="parent_error">
-        <div class="error_all" style="display: none;">
-            <span class="batsu"></span>
-            <div class="error_text_div">
-                <h3 class="error_text">入力内容に誤りがあります</h3>
-            </div>
-            <div style="text-align: center;">
-                <button class="error_okButton" onclick="off_error_div('error_all')">OK</button>
-            </div>
-        </div>
-    </div> -->
 
     <!--thankyou ページ-->
     <div id="thankyou_div" class="thankyou">
@@ -707,10 +684,11 @@
     <iframe name="hidden-iframe" style="display: none;"></iframe>
 
     <script>
+        // エラーの表示
         function on_error_div() {
             document.getElementById('error_all').style.display = 'flex';
         }
-
+        // エラーの削除
         function off_error_div(id) {
             console.log("error");
             document.getElementById(id).style.display = 'none';
@@ -724,6 +702,7 @@
             });
         }*/
 
+        // 文字数チェック
         function limitTextLength(inputElement, maxLength) {
             //console.log("kita");
             if (inputElement.value.length > maxLength) {
@@ -743,7 +722,7 @@
         var NG_flg = false;
 
         // NGwordチェック関数
-        // @param 予約人数、名前1，名前2
+        /* @param 予約人数、名前1，名前2
         function NGword_check(Anums, Aname1, Aname2) {
             if (Anums == 1) {
                 // NGwordじゃないかチェック
@@ -772,12 +751,13 @@
                 }
             }
 
-        }
-        // 使用例
-        var textarea = document.getElementById('name1'); // 制限したいテキストエリアの要素を取得
-        var maxLength = 5; // 最大文字数を設定
-        //limitTextLength(textarea, maxLength); // 関数を呼び出して制限を適用
+        }*/
 
+        // 制限したいテキストエリアの要素を取得
+        var textarea = document.getElementById('name1'); 
+        // 最大文字数を設定
+        var maxLength = 5;
+        // 値が入力されたら関数を呼び出して制限を適用
         textarea.addEventListener('input', limitTextLength(textarea, maxLength));
 
         // 予約人数
@@ -807,6 +787,7 @@
 
         toggleRequired(false)
 
+        // 送信ボタンが押されたら
         document.getElementById("form").addEventListener("submit", function (e) {
 
             const num_div = document.getElementById('error_sub_num');
@@ -827,7 +808,43 @@
 
             // divのリセット
             name1_div.style.visibility = "hidden";
-            name1_div.style.visibility = "hidden";
+            name1_div.innerText = "※ ひらがなで6文字以下で入力してください";
+            name2_div.style.visibility = "hidden";
+            name2_div.innerText = "※ ひらがなで6文字以下で入力してください";
+
+            /* NGwordのチェック
+            if (nums == 1) {
+                // NGwordじゃないかチェック
+                if (mySet.has(name1)) {
+                    // 含まれていたらエラーを表示
+                    on_error_div();
+                    name1_div.style.visibility = "visible";
+                    e.preventDefault();
+                    // エラーメッセージも変更
+                    name1_div.innerText = "※ 名前が適切ではありません";
+                    return false;
+                }
+
+            } else if (nums == 2) {
+
+                if (mySet.has(name1)) {
+                    on_error_div();
+                    name1_div.style.visibility = "visible";
+                    e.preventDefault();
+                    // エラーメッセージも変更
+                    name1_div.innerText = "※ 名前が適切ではありません";
+                    return false;
+                }
+
+                if (mySet.has(name2)) {
+                    on_error_div();
+                    name2_div.style.visibility = "visible";
+                    e.preventDefault();
+                    // エラーメッセージも変更
+                    name1_div.innerText = "※ 名前が適切ではありません";
+                    return false;
+                }
+            }*/
 
             if (nums == 1) {
 
@@ -848,6 +865,17 @@
                     name1_div.style.visibility = "visible";
                     on_error_div();
                     e.preventDefault();
+                    return false;
+                }
+
+                // NGwordじゃないかチェック
+                if (mySet.has(name1)) {
+                    // 含まれていたらエラーを表示
+                    on_error_div();
+                    name1_div.style.visibility = "visible";
+                    e.preventDefault();
+                    // エラーメッセージも変更
+                    name1_div.innerText = "※ 名前が適切ではありません";
                     return false;
                 }
 
@@ -889,8 +917,34 @@
                     name2_flg = true;
                 }
 
+                var ng_word_flg1 = false;
+                var ng_word_flg2 = false;
+                // NGwordじゃないかチェック
+                if (mySet.has(name1) && mySet.has(name2)) {
+                    name1_flg = true;
+                    name2_flg = true;
+                    ng_word_flg1 = true;
+                    ng_word_flg2 = true;
+                } else if(mySet.has(name1)) {
+                    name1_flg = true;
+                    ng_word_flg1 = true;
+
+                } else if(mySet.has(name2)) {
+                    name2_flg = true;
+                    ng_word_flg2 = true;
+                }
+
                 // 両方とも間違えている場合
                 if (name1_flg & name2_flg) {
+                    // NGワードの場合、エラーメッセージ変更
+                    if (ng_word_flg1 & ng_word_flg2) {
+                        name1_div.innerText = "※ 名前が適切ではありません";
+                        name2_div.innerText = "※ 名前が適切ではありません";
+                    }else if(ng_word_flg1) {
+                        name1_div.innerText = "※ 名前が適切ではありません";
+                    }else if(ng_word_flg2) {
+                        name2_div.innerText = "※ 名前が適切ではありません";
+                    }
                     name1_div.style.visibility = "visible";
                     name2_div.style.visibility = "visible";
                     on_error_div();
@@ -898,12 +952,20 @@
                     return false;
 
                 } else if (name1_flg) {
+                    // NGワードの場合、エラーメッセージ変更
+                    if (ng_word_flg1) {
+                        name1_div.innerText = "※ 名前が適切ではありません";
+                    }
                     name1_div.style.visibility = "visible";
                     on_error_div();
                     e.preventDefault();
                     return false;
 
                 } else if (name2_flg) {
+                    // NGワードの場合、エラーメッセージ変更
+                    if (ng_word_flg2) {
+                        name2_div.innerText = "※ 名前が適切ではありません";
+                    }
                     name2_div.style.visibility = "visible";
                     on_error_div();
                     e.preventDefault();
@@ -918,33 +980,6 @@
                 name2_flg = false;
             }
 
-            // NGwordのチェック
-            if (nums == 1) {
-                // NGwordじゃないかチェック
-                if (mySet.has(name1)) {
-                    // 含まれていたらエラーを表示
-                    on_error_div();
-                    name1_div.style.visibility = "visible";
-                    e.preventDefault();
-                    return false;
-                }
-
-            } else if (nums == 2) {
-
-                if (mySet.has(name1)) {
-                    on_error_div();
-                    name1_div.style.visibility = "visible";
-                    e.preventDefault();
-                    return false;
-                }
-
-                if (mySet.has(name2)) {
-                    on_error_div();
-                    name2_div.style.visibility = "visible";
-                    e.preventDefault();
-                    return false;
-                }
-            }
             // NGword_check(nums, name1, name2, e);
 
             // 成功したらthankyouページ表示、予約フォーム削除
@@ -954,10 +989,11 @@
             return true;
 
             // 成功したら押させなくする
-            //document.getElementById('submit').disabled = "disabled";
+            document.getElementById('submit').disabled = "disabled";
         });
 
 
+        // 待ち時間表示
         async function Waiting_time_display() {
             try {
                 // 追記　デプロイ後に更新
